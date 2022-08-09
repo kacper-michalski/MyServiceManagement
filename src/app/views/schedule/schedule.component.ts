@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-schedule',
@@ -11,5 +12,7 @@ export class ScheduleComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  returnDate() {
+    return dayjs();
+  }
 }
