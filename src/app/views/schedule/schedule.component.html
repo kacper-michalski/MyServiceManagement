@@ -1,2 +1,16 @@
-<p>schedule works!</p>
-<p>{{returnDate()}}</p>
+<button (click)="addMonth()" class="w-[50px] h-[100px] bg-red-500 mr-5">
+    "+"
+</button>
+
+<button (click)="subtractMonth()" class="w-[50px] h-[100px] bg-red-500">
+    "-"
+</button>
+<div class="flex justify-between max-w-[1848px] m-auto mt-[5%]">
+    <a class="w-[50px] h-[100px] bg-red-500" *ngFor="let n of numSequence(days); let i = index;">
+        <p>{{getNameDayOfWeek(dayOfWeek(i+1))}}</p>
+        <p>{{ i+1 }}</p>
+    </a>
+</div>
+
+
+<!-- <p>{{returnDaysInMonth()}}</p> -->

@@ -10,6 +10,7 @@ import { ScheduleComponent } from './views/schedule/schedule.component';
     AppComponent,
     AccountComponent,
     ScheduleComponent
+    
   ],
   imports: [
     BrowserModule
