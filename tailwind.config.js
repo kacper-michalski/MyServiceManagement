@@ -5,6 +5,11 @@ module.exports = {
   ],
   theme: {
     extend: {},
+    colors: {
+      'KeyLime': '#EAEC76',
+      'Gainsboro': '#D9D9D9',
+      
+    },
   },
   plugins: [],
 }
