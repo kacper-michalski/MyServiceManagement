@@ -8,7 +8,7 @@ module.exports = {
     colors: {
       'KeyLime': '#EAEC76',
       'Gainsboro': '#D9D9D9',
-      
+      'DarkSeaGreen': '#97C085',
     },
   },
   plugins: [],
