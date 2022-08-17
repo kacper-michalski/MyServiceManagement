@@ -1,7 +1,7 @@
 <div class="max-w-[700px] w-full mx-auto mt-[5%]">
     <p class="bg-Gainsboro ml-4 px-5 py-[6px] w-max rounded-t-[10px] text-2xl">Dodaj nowego serwisanta</p>
     <div class=" rounded-2xl border-l-[10px] border-b-[10px] border-t border-r border-Gainsboro relative">
-        <form class="flex flex-col gap-8 items-center" [formGroup]="servicemanForm">
+        <form class="flex flex-col gap-8 items-center" [formGroup]="servicemanForm" (ngSubmit)="onSubmit()">
             <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
                 class="absolute right-0 cursor-pointer mt-5 mr-5">
             <div class="mt-[84px]">
@@ -9,9 +9,10 @@
                 <input
                     type="text"
                     id="name"
-                    class="bg-Gainsboro w-[320px] h-[45px] border-l-[5px] border-b-[5px] border-KeyLime rounded-[15px] focus:outline-none pl-2 text-2xl text-center"
+                    class="bg-Gainsboro w-[320px] h-[45px] border-l-[5px] border-b-[5px] border-KeyLime rounded-[15px] focus:outline-none pl-2 text-2xl text-center "
                     formControlName="name"
                 >
+                <!-- <p class="text-Gainsboro" (click)="changeColor()" >test</p> -->
             </div>
             <div class="">
                 <p class="bg-KeyLime ml-[15px] px-3 w-max rounded-t-[10px]">Numer telefonu</p>
