@@ -4,12 +4,14 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
-    colors: {
-      'KeyLime': '#EAEC76',
-      'Gainsboro': '#D9D9D9',
-      'DarkSeaGreen': '#97C085',
+    extend: {
+      colors: {
+        'KeyLime': '#EAEC76',
+        'Gainsboro': '#D9D9D9',
+        'DarkSeaGreen': '#97C085',
+      },
     },
+    
   },
   plugins: [],
 }
