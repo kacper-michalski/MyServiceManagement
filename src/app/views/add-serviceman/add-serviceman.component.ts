@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
-import { AddServicemanService } from './add-serviceman.service';
+import { AddServicemanService } from '../../services/add-serviceman.service';
 import { FormBuilder } from '@angular/forms';
 import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
 import {take} from "rxjs";
