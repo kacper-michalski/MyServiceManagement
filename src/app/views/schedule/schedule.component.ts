@@ -72,4 +72,9 @@ export class ScheduleComponent {
   chooseMonth(){
     return this.currentDate.format('MM');
   }
+  display: boolean = false;
+
+    showDialog() {
+        this.display = true;
+    }
 }

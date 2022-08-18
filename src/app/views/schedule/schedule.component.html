@@ -5,12 +5,13 @@
 <button (click)="subtractMonth()" class="w-[50px] h-[100px] bg-red-500">
     "-"
 </button>
-<div class="bg-Gainsboro h-[200px]  rounded-t-[25px]">
-    <div class="max-w-[1848px] mx-auto">
-        <div class="text-5xl pt-3 pb-[30px]">{{selectedDay}}&nbsp;{{getNameMonthOfYear()}}</div>
+<p class="bg-red-500">{{display}}</p>
+<div class="bg-Gainsboro h-52  rounded-t-3xl">
+    <div class="px-9">
+        <div class="text-5xl pt-3 pb-8">{{selectedDay}}&nbsp;{{getNameMonthOfYear()}}</div>
         <div class="flex justify-between">
             <button
-                class="w-[50px] h-[100px] bg-red-500 grid grid-cols-1 grid-rows-2 place-items-center rounded-[15px] hover:bg-KeyLime"
+                class="w-12 h-24 grid grid-cols-1 grid-rows-2 place-items-center rounded-xl hover:bg-KeyLime"
                 *ngFor="let n of numSequence(days); let i = index;" (click)="chooseDay(i+1)">
                 <p class="text-xl">{{getNameDayOfWeek(dayOfWeek(i+1))}}</p>
                 <p class="text-2xl">{{ i+1 }}</p>
@@ -20,18 +21,23 @@
 </div>
 <div class="flex">
     
-    <div class="w-[72px] bg-Gainsboro text-center">
-        <div class="h-[56px] grid grid-cols-1 grid-rows-1 place-items-center border-b-[1px]">
+    <div class="w-20 bg-Gainsboro text-center">
+        <div class="h-14 grid grid-cols-1 grid-rows-1 place-items-center border-b-1 border-BlackChocolate">
             godziny
         </div>
-        <div class="h-[159px] grid grid-cols-1 grid-rows-1 place-items-center border-b-[1px]" *ngFor="let n of numSequence(24); let i = index;">
+        <div class="h-40 grid grid-cols-1 grid-rows-1 place-items-center border-b-1 border-BlackChocolate" *ngFor="let n of numSequence(24); let i = index;">
             {{i}}
         </div>
     </div>
-    <button class="h-[45px] w-[240px] text-start bg-Gainsboro rounded-[51px] pl-[19px] mt-[2px] ml-[2px] font-light text-xl">
+    <button class="h-11 w-60 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
+    (click)="showDialog()"
+    >
         Dodaj serwisanta
-        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline pl-[1px]">
+        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline">
     </button>
+    <p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '50vw'}" class="bg-lime">
+        <app-add-serviceman [display]="display" (toggle)="display=$event"></app-add-serviceman>
+    </p-dialog>
 </div>
 
 
