@@ -1,45 +1,16 @@
-
-<!-- <p class="bg-red-500">{{display}}</p> -->
-<div class="bg-Gainsboro h-52  rounded-t-3xl">
-    <div class="px-9">
-        <div class="flex">
-            <div class="text-5xl pt-3 pb-8">{{selectedDay}}&nbsp;{{getNameMonthOfYear()}}</div>
-            <div class="flex absolute right-3">
-                <img src="../../../assets/icons/arrow-circle-left.svg" alt="strzałka w lewo" (click)="subtractMonth()" class="cursor-pointer hover:bg-KeyLime rounded-full mr-2">
-                <img src="../../../assets/icons/arrow-circle-right.svg" alt="strzałka w prawo" (click)="addMonth()" class="cursor-pointer hover:bg-KeyLime rounded-full">
-            </div>
-        </div>
-        
-        <div class="flex justify-between">
-            <button
-                class="w-12 h-24 grid grid-cols-1 grid-rows-2 place-items-center rounded-xl hover:bg-KeyLime"
-                *ngFor="let n of numSequence(days); let i = index;" (click)="chooseDay(i+1)">
-                <p class="text-xl">{{getNameDayOfWeek(dayOfWeek(i+1))}}</p>
-                <p class="text-2xl">{{ i+1 }}</p>
-            </button>
-        </div>
-    </div>
-</div>
 <div class="flex">
-    
-    <div class="w-20 bg-Gainsboro text-center">
-        <div class="h-14 grid grid-cols-1 grid-rows-1 place-items-center border-b-1 border-BlackChocolate">
-            godziny
-        </div>
-        <div class="h-40 grid grid-cols-1 grid-rows-1 place-items-center border-b-1 border-BlackChocolate" *ngFor="let n of numSequence(24); let i = index;">
-            {{i}}
-        </div>
+    <div class="w-32 bg-Gainsboro text-center border-l-1 border-BlackChocolate"
+    *ngFor="let n of numSequence(2); let i = index;">
+    <div
+        class="h-14 grid grid-cols-1 grid-rows-1 place-items-center border-b-1 border-BlackChocolate bg-KeyLime max-h-max">
+        Serwisant
     </div>
-    <button class="h-11 w-60 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
-    (click)="showDialog()"
-    >
-        Dodaj serwisanta
-        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline">
-    </button>
-    <p-dialog [(visible)]="display" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '50vw'}" class="bg-lime">
-        <app-add-serviceman [display]="display" (toggle)="display=$event"></app-add-serviceman>
-    </p-dialog>
+    <div class="h-40 grid grid-cols-1 grid-rows-4 place-items-center border-b-1 border-BlackChocolate py-2"
+        *ngFor="let n of numSequence(24); let i = index;">
+        <button class="w-24 h-8 rounded-2xl text-xl bg-red-500 hover:bg-KeyLime">+</button>
+        <button class="w-24 h-8 rounded-2xl text-xl bg-red-500 hover:bg-KeyLime">+</button>
+        <button class="w-24 h-8 rounded-2xl text-xl bg-red-500 hover:bg-KeyLime">+</button>
+        <button class="w-24 h-8 rounded-2xl text-xl bg-red-500 hover:bg-KeyLime">+</button>
+    </div>
 </div>
-
-
-<!-- <p>{{returnDaysInMonth()}}</p> -->
+</div>

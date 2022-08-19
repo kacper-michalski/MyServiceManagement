@@ -6,6 +6,7 @@ import { AccountComponent } from './views/account/account.component';
 import { AddServicemanModule } from './views/add-serviceman/add-serviceman.module';
 import { ScheduleModule } from './views/schedule/schedule.module';
 import { AddClientModule } from './views/add-client/add-client.module';
+import { CalendarModule } from './views/calendar/calendar.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AddClientModule } from './views/add-client/add-client.module';
     BrowserModule,
     AddServicemanModule,
     ScheduleModule,
-    AddClientModule
+    AddClientModule,
+    CalendarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
