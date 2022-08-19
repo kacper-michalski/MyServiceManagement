@@ -1,15 +1,15 @@
-export interface ServicemanDetails {
+export interface ClientDetails {
     name: string;
     phoneNumber: string;
     companyName: string;
     TIN: string;
     email: string;
-    addresses: [
-        address: [
-            streetNumber: string,
-            zip: string,
-            town: string,
-            devices: string[],
-        ]
-    ]
+    // addresses: [
+    //     address: [
+    //         streetNumber: string,
+    //         zip: string,
+    //         town: string,
+    //         devices: string[],
+    //     ]
+    // ]
 }

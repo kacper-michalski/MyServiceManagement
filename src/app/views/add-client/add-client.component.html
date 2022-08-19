@@ -1,7 +1,7 @@
 <div class="max-w-2xl w-full mx-auto">
     <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nowego klienta</p>
     <div class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
-        <form class="flex flex-col gap-8 items-center" >
+        <form class="flex flex-col gap-8 items-center" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
             <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
                 class="absolute right-0 cursor-pointer mt-5 mr-5"
                 >
@@ -25,21 +25,30 @@
                 >
             </div>
             <div class="">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">E-mail</p>
+                <input
+                    type="email"
+                    id="email"
+                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                    formControlName="email"
+                >
+            </div>
+            <div class="">
                 <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Nazwa firmy</p>
                 <input
                     type="text"
-                    id="phoneNumber"
+                    id="companyName"
                     class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="phoneNumber"
+                    formControlName="companyName"
                 >
             </div>
             <div class="">
                 <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">NIP</p>
                 <input
                     type="text"
-                    id="phoneNumber"
+                    id="TIN"
                     class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="phoneNumber"
+                    formControlName="TIN"
                 >
             </div>
             <button

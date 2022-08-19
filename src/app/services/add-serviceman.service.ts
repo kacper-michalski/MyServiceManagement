@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddServicemanService {
   public servicemanDetails: ServicemanDetails;
+  
   constructor(private http: HttpClient) {
     this.servicemanDetails = {
       name: "",
