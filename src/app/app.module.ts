@@ -2,16 +2,15 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { AccountComponent } from './views/account/account.component';
 import { AddServicemanModule } from './views/add-serviceman/add-serviceman.module';
 import { ScheduleModule } from './views/schedule/schedule.module';
 import { AddClientModule } from './views/add-client/add-client.module';
 import { CalendarModule } from './views/calendar/calendar.module';
+import { AddAddressModule } from './views/add-address/add-address.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    AccountComponent,
+    AppComponent
     
   ],
   imports: [
@@ -19,7 +18,9 @@ import { CalendarModule } from './views/calendar/calendar.module';
     AddServicemanModule,
     ScheduleModule,
     AddClientModule,
-    CalendarModule
+    CalendarModule,
+    AddClientModule,
+    AddAddressModule
   ],
   providers: [],
   bootstrap: [AppComponent]

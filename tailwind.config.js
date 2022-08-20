@@ -29,7 +29,10 @@ module.exports = {
       },
       borderWidth:{
         '1': '1px',
-      }
+      },
+      width:{
+        '70': '272px',
+      },
     },
     
   },

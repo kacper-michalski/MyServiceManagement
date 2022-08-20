@@ -1,0 +1,63 @@
+<div class="max-w-4xl w-full mx-auto">
+    <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nowy adres</p>
+    <div class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+
+        <form class="flex flex-col gap-8 items-center">
+            
+            <div class="">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Klient</p>
+                <select class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
+                    <option *ngFor="let client of this.clients">{{client.name}}</option>
+                </select>
+            </div>
+            <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
+                class="absolute right-0 cursor-pointer mt-5 mr-5">
+            <div class="max-w-4xl w-full px-5">
+                <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Adres 1</p>
+                <div
+                    class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700 p-5">
+
+                    <form class="grid grid-cols-2 gap-36">
+                        <div class="flex flex-col gap-2">
+                            <div class="">
+                                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie</p>
+                                <input type="text" id="device"
+                                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl ">
+                            </div>
+                            <button class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl">
+                                Dodaj kolejne urządzenie
+                                <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-2">
+                            </button>
+                        </div>
+                        <div class="flex flex-col gap-8">
+                            <div class="">
+                                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Ulica i numer</p>
+                                <input type="text" id="streetNumber"
+                                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl ">
+                            </div>
+                            <div class="">
+                                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Kod pocztowy</p>
+                                <input type="text" id="zip"
+                                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl ">
+                            </div>
+                            <div class="">
+                                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Miejscowość</p>
+                                <input type="text" id="town"
+                                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl ">
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+                <button class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl">
+                    Dodaj kolejny adres
+                    <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
+                </button>
+            </div>
+            
+            <button class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
+                <span class="font-bold text-2xl">DODAJ</span>
+            </button>
+        </form>
+    </div>
+</div>
