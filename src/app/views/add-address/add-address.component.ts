@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientDetails } from 'src/app/models/client-details.model';
 import { AddClientService } from 'src/app/services/add-client.service';
-
+import { FormBuilder, Validators } from '@angular/forms';
+import { AddAddressService } from 'src/app/services/add-address.service';
+import { take } from 'rxjs';
+import { Address } from 'src/app/models/address.model';
 @Component({
   selector: 'app-add-address',
   templateUrl: './add-address.component.html',
@@ -13,8 +16,15 @@ import { AddClientService } from 'src/app/services/add-client.service';
 export class AddAddressComponent implements OnInit {
   clients: ClientDetails[];
   selectedClient: ClientDetails[];
-
-  constructor(private addClientService: AddClientService) {
+  addressNumber: number = 1;
+  deviceNumber: number = 1;
+  addressForm = this.fb.group({
+    device: [this.getAddress().device, [Validators.required,]],
+    streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
+    town: [this.getAddress().town, [Validators.required, Validators.email]],
+    zip: [this.getAddress().zip, [Validators.required]],
+  });
+  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService) {
 
     this.clients = [
       { name: 'Stachu Johnes', phoneNumber: '997 997 997', companyName: 'FIRMA INKO', TIN: '429 111 59 09', email: 'staszek@wp.pl' },
@@ -23,12 +33,41 @@ export class AddAddressComponent implements OnInit {
       { name: 'Wojciech Suchodolski', phoneNumber: '544 997 997', companyName: 'RUSZTOWANIE&SZKLANA', TIN: '129 111 59 09', email: 'wojtuś@wp.pl' },
     ]
   }
-
   ngOnInit(): void {
   }
 
   private getClientDetails() {
     return this.addClientService.clientDetails;
   }
+  private getAddress() {
+    return this.addAddressService.address;
+  }
+  public onSubmit() {
+    const formData = this.createFormData();
+    this.addAddressService.addAddress(formData).pipe(take(1)).subscribe();
+  }
+
+  private createFormData() {
+    const address = this.addressForm.value as Address;
+    const formData = new FormData();
+    // for (let device of address.devices) {
+    //   formData.append('devices', device);
+    // }
+    console.log(address.zip)
+    formData.append('streetNumber', address.streetNumber);
+    formData.append('town', address.town);
+    formData.append('zip', address.zip);
+    return formData;
+  }
+  numSequence(n: number): Array<number> {
+    return Array(n);
+  }
+  addAddress() {
+    return this.addressNumber += 1;
+  }
+  addDevice() {
+    return this.deviceNumber += 1;
+  }
+
 }
 

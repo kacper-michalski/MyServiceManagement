@@ -25,7 +25,7 @@ export class AddClientComponent {
 
   public onSubmit() {
     const formData = this.createFormData();
-    this.addClientService.addClient(formData).subscribe();
+    this.addClientService.addClient(formData).pipe(take(1)).subscribe();
   }
 
   private createFormData() {

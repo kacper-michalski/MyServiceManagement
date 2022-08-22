@@ -11,9 +11,10 @@ export class AddClientService {
     this.clientDetails = {
       name: "",
       phoneNumber: "",
+      email: "",
       companyName: "",
       TIN: "",
-      email: ""
+      
     }
   }
 
