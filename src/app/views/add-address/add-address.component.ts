@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientDetails } from 'src/app/models/client-details.model';
 import { AddClientService } from 'src/app/services/add-client.service';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, Validators } from '@angular/forms';
+import { FormControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { AddAddressService } from 'src/app/services/add-address.service';
 import { take } from 'rxjs';
 import { Address } from 'src/app/models/address.model';
@@ -17,9 +19,9 @@ export class AddAddressComponent implements OnInit {
   clients: ClientDetails[];
   selectedClient: ClientDetails[];
   addressNumber: number = 1;
-  deviceNumber: number = 1;
   addressForm = this.fb.group({
-    device: [this.getAddress().device, [Validators.required,]],
+    devices: this.fb.array([]),
+    // device: [this.getAddress().device, [Validators.required,]],
     streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
     town: [this.getAddress().town, [Validators.required, Validators.email]],
     zip: [this.getAddress().zip, [Validators.required]],
@@ -35,25 +37,31 @@ export class AddAddressComponent implements OnInit {
   }
   ngOnInit(): void {
   }
-
+  newDevice(): FormGroup {
+    return this.fb.group({
+      name: '',
+    })
+  }
   private getClientDetails() {
     return this.addClientService.clientDetails;
   }
   private getAddress() {
     return this.addAddressService.address;
   }
+  public get devices(): FormArray {
+    return this.addressForm.get("devices") as FormArray;
+  }
   public onSubmit() {
     const formData = this.createFormData();
+    console.log(this.addressForm.value);
     this.addAddressService.addAddress(formData).pipe(take(1)).subscribe();
   }
 
   private createFormData() {
     const address = this.addressForm.value as Address;
     const formData = new FormData();
-    // for (let device of address.devices) {
-    //   formData.append('devices', device);
-    // }
-    console.log(address.zip)
+    formData.append('devices', JSON.stringify(address.devices));
+    //... and, correspondingly, using json_decode on server to deparse it. See, the second value of FormData.append can be...
     formData.append('streetNumber', address.streetNumber);
     formData.append('town', address.town);
     formData.append('zip', address.zip);
@@ -66,7 +74,7 @@ export class AddAddressComponent implements OnInit {
     return this.addressNumber += 1;
   }
   addDevice() {
-    return this.deviceNumber += 1;
+    this.devices.push(this.newDevice());
   }
 
 }

@@ -11,7 +11,7 @@ export class AddAddressService {
       streetNumber: "",
       zip: "",
       town: "",
-      device: "",
+      devices: [],
     }
   }
   public addAddress(address: FormData) {
