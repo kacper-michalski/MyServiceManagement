@@ -1,86 +1,87 @@
 <div class="max-w-4xl w-full mx-auto">
     <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nowy adres</p>
-    <div class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+    <div class="rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+        <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
 
-        <div class="flex flex-col gap-8 items-center">
-
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Klient</p>
-                <select
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                    <option *ngFor="let client of this.clients">
-                        {{client.name}}
-                    </option>
-                </select>
-                <!-- <p-multiSelect [options]="clients" [(ngModel)]="selectedClient" optionLabel="name"></p-multiSelect> -->
-            </div>
-            <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
-                class="absolute right-0 cursor-pointer mt-5 mr-5">
-            <div class="flex flex-col gap-2  max-w-4xl w-full px-5">
-                <div class="" *ngFor="let n of numSequence(addressNumber); let i = index;">
-                    <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Adres {{i+1}}</p>
-                    <div
-                        class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700 p-5">
-
-                        <form class="grid grid-cols-2 gap-36" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-                            <div class="flex flex-col gap-2">
-                                <div formArrayName="devices" class="flex flex-col gap-2">
-                                    <div *ngFor="let device of devices.controls; let i = index;">
-                                        <div [formGroupName]="i">
-                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie {{i+1}}</p>
-                                            <input type="text" id="device"
+        <form class="" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+            <div class="flex flex-col gap-8 items-center">
+                <div class="">
+                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Klient</p>
+                    <select formControlName="client"
+                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
+                        <option *ngFor="let client of this.clients" [ngValue]="client">
+                            {{client.name}}
+                        </option>
+                    </select>
+                    <!-- <p-multiSelect [options]="clients" [(ngModel)]="selectedClient" optionLabel="name"></p-multiSelect> -->
+                </div>
+                <div class="max-w-4xl w-full px-5">
+                    <div formArrayName="addresses" class="flex flex-col gap-3">
+                        <div *ngFor="let address of addresses; index as iAddress;">
+                            <div [formGroupName]="iAddress">
+                                <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Adres {{iAddress+1}}
+                                </p>
+                                <div
+                                    class="grid grid-cols-2 gap-36 rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700 p-5">
+                                    <div class="flex flex-col gap-2">
+                                        <div formArrayName="devices" class="flex flex-col gap-2">
+                                            <div *ngFor="let device of getDevices(address); index as iDevice;">
+                                                <div [formGroupName]="iDevice">
+                                                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie
+                                                        {{iDevice+1}}</p>
+                                                    <input type="text" id="device"
+                                                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                                                        formControlName="name">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button"
+                                            class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
+                                            (click)="addField('addresses.'+iAddress+'.devices', defaultDevice)">
+                                            Dodaj kolejne urządzenie
+                                            <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa"
+                                                class="inline ml-2">
+                                        </button>
+                                    </div>
+                                    <div class="flex flex-col gap-8">
+                                        <div class="">
+                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Ulica i numer</p>
+                                            <input type="text" id="streetNumber"
                                                 class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                                                formControlName="name">
+                                                formControlName="streetNumber">
+                                        </div>
+                                        <div class="">
+                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Kod pocztowy</p>
+                                            <input type="text" id="zip"
+                                                class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                                                formControlName="zip">
+                                        </div>
+                                        <div class="">
+                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Miejscowość</p>
+                                            <input type="text" id="town"
+                                                class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                                                formControlName="town">
                                         </div>
                                     </div>
                                 </div>
-                                <button type="button"
-                                    class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
-                                    (click)="addDevice()">
-                                    Dodaj kolejne urządzenie
-                                    <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa"
-                                        class="inline ml-2">
-                                </button>
                             </div>
-                            <div class="flex flex-col gap-8">
-                                <div class="">
-                                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Ulica i numer</p>
-                                    <input type="text" id="streetNumber"
-                                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                                        formControlName="streetNumber">
-                                </div>
-                                <div class="">
-                                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Kod pocztowy</p>
-                                    <input type="text" id="zip"
-                                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                                        formControlName="zip">
-                                </div>
-                                <div class="">
-                                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Miejscowość</p>
-                                    <input type="text" id="town"
-                                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                                        formControlName="town">
-                                </div>
-                            </div>
-
-                        </form>
+                        </div>
                     </div>
-
+                    <button type="button"
+                        class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
+                        (click)="addField('addresses', defaultAddress)">
+                        Dodaj kolejny adres
+                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
+                    </button>
                 </div>
-                <button type="button"
-                    class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
-                    (click)="addAddress()">
-                    Dodaj kolejny adres
-                    <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
+                <button type="submit"
+                    class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
+                    <span class="font-bold text-2xl">DODAJ</span>
                 </button>
             </div>
+        </form>
 
 
-            <button type="submit"
-                class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32"
-                (click)="onSubmit()">
-                <span class="font-bold text-2xl">DODAJ</span>
-            </button>
-        </div>
     </div>
+
 </div>

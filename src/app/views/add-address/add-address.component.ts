@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientDetails } from 'src/app/models/client-details.model';
 import { AddClientService } from 'src/app/services/add-client.service';
-import { FormArray, FormBuilder, Validators } from '@angular/forms';
-import { FormControl } from '@angular/forms';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';
 import { AddAddressService } from 'src/app/services/add-address.service';
 import { take } from 'rxjs';
@@ -15,16 +14,27 @@ import { Address } from 'src/app/models/address.model';
 })
 
 
-export class AddAddressComponent implements OnInit {
+export class AddAddressComponent{
+  defaultDevice={
+    name : [""],
+  };
+  defaultAddress={
+    devices: this.fb.array([this.fb.group(this.defaultDevice)]),
+    streetNumber: [""],
+    town: [""],
+    zip: [""]
+  };
   clients: ClientDetails[];
   selectedClient: ClientDetails[];
-  addressNumber: number = 1;
   addressForm = this.fb.group({
-    devices: this.fb.array([]),
-    // device: [this.getAddress().device, [Validators.required,]],
-    streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
-    town: [this.getAddress().town, [Validators.required, Validators.email]],
-    zip: [this.getAddress().zip, [Validators.required]],
+    client: [this.addClientService.clientDetails.name, Validators.required],
+    addresses: this.fb.array([this.fb.group({
+      devices: this.fb.array([this.fb.group(this.defaultDevice)]),
+      streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
+      town: [this.getAddress().town, [Validators.required, Validators.email]],
+      zip: [this.getAddress().zip, [Validators.required]],
+    })])
+
   });
   constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService) {
 
@@ -35,47 +45,23 @@ export class AddAddressComponent implements OnInit {
       { name: 'Wojciech Suchodolski', phoneNumber: '544 997 997', companyName: 'RUSZTOWANIE&SZKLANA', TIN: '129 111 59 09', email: 'wojtuś@wp.pl' },
     ]
   }
-  ngOnInit(): void {
-  }
-  newDevice(): FormGroup {
-    return this.fb.group({
-      name: '',
-    })
-  }
-  private getClientDetails() {
-    return this.addClientService.clientDetails;
-  }
   private getAddress() {
     return this.addAddressService.address;
   }
-  public get devices(): FormArray {
-    return this.addressForm.get("devices") as FormArray;
+  public getDevices(address: any) {
+    return (address.get('devices')! as FormArray).controls;
+  }
+  public get addresses() {
+    return (this.addressForm.get('addresses')! as FormArray<FormGroup>).controls;
   }
   public onSubmit() {
-    const formData = this.createFormData();
+    const address=this.addressForm.value as Address;
     console.log(this.addressForm.value);
-    this.addAddressService.addAddress(formData).pipe(take(1)).subscribe();
+    this.addAddressService.addAddress(address).pipe(take(1)).subscribe();
   }
-
-  private createFormData() {
-    const address = this.addressForm.value as Address;
-    const formData = new FormData();
-    formData.append('devices', JSON.stringify(address.devices));
-    //... and, correspondingly, using json_decode on server to deparse it. See, the second value of FormData.append can be...
-    formData.append('streetNumber', address.streetNumber);
-    formData.append('town', address.town);
-    formData.append('zip', address.zip);
-    return formData;
+  addField(path : string, group : any){
+    const fb = this.addressForm.get(path);
+    (fb as FormArray).push(this.fb.group(group));
   }
-  numSequence(n: number): Array<number> {
-    return Array(n);
-  }
-  addAddress() {
-    return this.addressNumber += 1;
-  }
-  addDevice() {
-    this.devices.push(this.newDevice());
-  }
-
 }
 

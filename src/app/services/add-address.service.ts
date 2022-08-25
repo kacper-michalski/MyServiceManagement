@@ -14,7 +14,7 @@ export class AddAddressService {
       devices: [],
     }
   }
-  public addAddress(address: FormData) {
+  public addAddress(address: Address) {
     return this.http.post<Address>('http://localhost:3000/address', address);
   }
 }
