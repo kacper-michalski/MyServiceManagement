@@ -13,7 +13,7 @@ export class AddServicemanService {
       phoneNumber: "",
     }
   }
-  public addServiceman(serviceman: FormData) {
+  public addServiceman(serviceman: ServicemanDetails) {
     return this.http.post<ServicemanDetails>('http://localhost:3000/serviceman', serviceman);
   }
 }

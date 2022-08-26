@@ -18,7 +18,7 @@ export class AddClientService {
     }
   }
 
-  public addClient(client: FormData) {
+  public addClient(client: ClientDetails) {
     return this.http.post<ClientDetails>('http://localhost:3000/client', client);
   }
 }

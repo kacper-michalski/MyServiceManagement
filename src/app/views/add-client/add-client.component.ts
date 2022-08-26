@@ -24,18 +24,7 @@ export class AddClientComponent {
 
 
   public onSubmit() {
-    const formData = this.createFormData();
-    this.addClientService.addClient(formData).pipe(take(1)).subscribe();
-  }
-
-  private createFormData() {
     const client = this.clientForm.value as ClientDetails;
-    const formData = new FormData();
-    formData.append('name', client.name);
-    formData.append('phoneNumber', client.phoneNumber);
-    formData.append('email', client.email);
-    formData.append('companyName', client.companyName);
-    formData.append('TIN', client.TIN);
-    return formData;
+    this.addClientService.addClient(client).pipe(take(1)).subscribe();
   }
 }
