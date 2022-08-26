@@ -6,8 +6,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./schedule.component.scss']
 })
 
-export class ScheduleComponent{
+export class ScheduleComponent {
+  display: boolean = false;
+
   numSequence(n: number): Array<number> {
     return Array(n);
   }
+
+  showDialog() {
+    this.display = true;
+  }
+
 }

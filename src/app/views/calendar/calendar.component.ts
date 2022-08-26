@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.numberOfDaysInMonth();
+    this.selectedDay= +dayjs(this.currentDate).format('DD');
   }
 
   numberOfDaysInMonth() {
