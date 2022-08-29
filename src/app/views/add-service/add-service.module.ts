@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AddAddressComponent } from './add-address.component';
+import { AddServiceComponent } from './add-service.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [AddAddressComponent],
+  declarations: [AddServiceComponent],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule
   ],
-  exports: [AddAddressComponent]
+  exports: [AddServiceComponent]
 })
-export class AddAddressModule { }
+export class AddServiceModule { }
