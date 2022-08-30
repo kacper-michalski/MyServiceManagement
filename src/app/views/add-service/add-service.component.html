@@ -2,78 +2,96 @@
     <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nową usługę</p>
     <div class="rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
         <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
-        <form class="">
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Klient</p>
-                <select formControlName="client"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                    <option *ngFor="let client of this.clients" [ngValue]="client">
-                        {{client.name}}
-                    </option>
-                </select>
-                <!-- <p-multiSelect [options]="clients" [(ngModel)]="selectedClient" optionLabel="name"></p-multiSelect> -->
-                <div>
-                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Adres</p>
-                    <select formControlName="address"
-                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                        <option *ngFor="let address of this.addresses; index as iAddress" [ngValue]="address">
-                            {{address.streetNumber}}
-                        </option>
-                    </select>
+        <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+            <div class="grid grid-cols-2">
+                <div class="flex flex-col gap-5">
+                    <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl pl-5 max-w-max text-xl">
+                        Dodaj nowego klienta
+                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
+                    </button>
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
+                        <select formControlName="client"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
+                            <option *ngFor="let client of this.clients" [ngValue]="client">
+                                {{client.name}}
+                            </option>
+                        </select>
+                    </div>
+                    <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl max-w-max pl-4 text-xl">
+                        Dodaj nowy adres klienta
+                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
+                    </button>
+                    <!-- <p-multiSelect [options]="clients" [(ngModel)]="selectedClient" optionLabel="name"></p-multiSelect> -->
+                    <div>
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Adres</p>
+                        <select formControlName="address"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
+                            <option *ngFor="let address of this.addresses; index as iAddress" [ngValue]="address">
+                                {{address.streetNumber}}
+                            </option>
+                        </select>
+                    </div>
+                    <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl max-w-max pl-5 text-xl">
+                        Dodaj nowe urządzenie
+                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
+                    </button>
+                    <div>
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg ">Urządzenie</p>
+                        <select formControlName="device"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
+                            <option *ngFor="let device of this.devices" [ngValue]="device">
+                                {{device}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Urządzenie</p>
-                    <select formControlName="devices"
-                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                        <option *ngFor="let device of this.devices" [ngValue]="device">
-                            {{device}}
-                        </option>
-                    </select>
+    
+    
+    
+                <div class="flex flex-col gap-5">
+                    <div>
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Opis</p>
+                        <textarea rows="4" cols="50" id=""
+                            class="bg-Gainsboro w-80 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                            formControlName="description">
+                </textarea>
+                    </div>
+                    <div>
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Data</p>
+                        <input type="date" id=""
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                            formControlName="date">
+                    </div>
+                    <div class="flex">
+                        <div>
+                            <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg">Rozpoczęcie</p>
+                            <input type="time" id=""
+                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                                formControlName="commencement">
+                        </div>
+                        <div>
+                            <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg">Zakończenie</p>
+                            <input type="time" id=""
+                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                                formControlName="termination">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
+                        <select formControlName="status"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
+                            <option *ngFor="let status of this.statuses" [ngValue]="status">
+                                {{status}}
+                            </option>
+                        </select>
+                    </div>
                 </div>
-                <div>
-                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Opis</p>
-                    <textarea rows="4" cols="50" id=""
-                        class="bg-Gainsboro w-80 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                        formControlName="description">
-                    </textarea>
-                </div>
-                <div>
-                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Data</p>
-                    <input
-                    type="date"
-                    id=""
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="date"
-                >
-                </div>
-                <div>
-                    <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg mt-10">Rozpoczęcie</p>
-                    <input
-                    type="time"
-                    id=""
-                    class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="date"
-                >
-                </div>
-                <div>
-                    <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg mt-10">Zakończenie</p>
-                    <input
-                    type="time"
-                    id=""
-                    class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="date"
-                >
-                </div>
-                <div>
-                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Status</p>
-                    <select 
-                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                        <option *ngFor="let status of this.statuses" [ngValue]="status">
-                            {{status}}
-                        </option>
-                    </select>
-                </div>
-                <!-- <button type="button"
+            </div>
+            
+
+            <!-- <button type="button"
                                             class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
                                             (click)="addField('addresses.'+iAddress+'.devices', defaultDevice)">
                                             Dodaj kolejne urządzenie
@@ -81,18 +99,18 @@
                                                 class="inline ml-2">
                                         </button> -->
 
-                <!-- <button type="button"
+            <!-- <button type="button"
                         class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
                         (click)="addField('addresses', defaultAddress)">
                         Dodaj kolejny adres
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
                     </button> -->
 
-                <button type="submit"
-                    class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
-                    <span class="font-bold text-2xl">DODAJ</span>
-                </button>
-            </div>
+            <button type="submit"
+                class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
+                <span class="font-bold text-2xl">DODAJ</span>
+            </button>
+
         </form>
     </div>
 </div>

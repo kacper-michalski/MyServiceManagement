@@ -13,6 +13,7 @@ export class AddServiceService {
       date: new Date(),
       commencement: "",
       termination: "",
+      status: "",
       price: "",
     }
   }

@@ -15,10 +15,10 @@ import { Address } from 'src/app/models/address.model';
 })
 export class AddServiceComponent {
 
-  defaultDevice={
-    name : [""],
+  defaultDevice = {
+    name: [""],
   };
-  defaultAddress={
+  defaultAddress = {
     devices: this.fb.array([this.fb.group(this.defaultDevice)]),
     streetNumber: [""],
     town: [""],
@@ -26,18 +26,19 @@ export class AddServiceComponent {
   };
   clients: ClientDetails[];
   addresses: Address[];
-  devices: string[];
-  statuses: string[];
+  devices = ['farelka', 'pralka', 'spawarka', 'kuchenka gazowa'];
+  statuses = ['Utworzona', 'Przekazana', 'Zamknięta'];
   selectedClient: ClientDetails[];
   serviceForm = this.fb.group({
     client: [this.addClientService.clientDetails.name, Validators.required],
-    address:[this.addAddressService.address.streetNumber, Validators.required],
+    address: [this.addAddressService.address.streetNumber, Validators.required],
     device: [this.fb.array([this.fb.group(this.defaultDevice)])],
-    description:[this.getService().description, [Validators.required]],
-    date:[this.getService().date, [Validators.required]],
-    commencement:[this.getService().commencement, [Validators.required]],
-    termination:[this.getService().termination, [Validators.required]],
-    price:[this.getService().price, [Validators.required]],
+    description: [this.getService().description, [Validators.required]],
+    date: [this.getService().date, [Validators.required]],
+    commencement: [this.getService().commencement, [Validators.required]],
+    termination: [this.getService().termination, [Validators.required]],
+    status: [this.getService().status, [Validators.required]],
+    price: [this.getService().price, [Validators.required]],
     // addresses: this.fb.array([this.fb.group({
     //   devices: this.fb.array([this.fb.group(this.defaultDevice)]),
     //   streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
@@ -46,7 +47,7 @@ export class AddServiceComponent {
     // })])
 
   });
-  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService,private AddServiceService: AddServiceService) {
+  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService, private addServiceService: AddServiceService) {
 
     this.clients = [
       { name: 'Stachu Johnes', phoneNumber: '997 997 997', companyName: 'FIRMA INKO', TIN: '429 111 59 09', email: 'staszek@wp.pl' },
@@ -54,19 +55,22 @@ export class AddServiceComponent {
       { name: 'Krzysztof Kononowicz', phoneNumber: '153 997 997', companyName: 'FIRMA PIWKO', TIN: '559 111 59 09', email: 'krzysiu@wp.pl' },
       { name: 'Wojciech Suchodolski', phoneNumber: '544 997 997', companyName: 'RUSZTOWANIE&SZKLANA', TIN: '129 111 59 09', email: 'wojtuś@wp.pl' },
     ],
-    this.addresses=[
-      { streetNumber: 'Szkolna 17', zip: '69-997', town: 'Białystok', devices: ['farelka','pralka'] },
-      { streetNumber: 'Szkolna 15', zip: '69-997', town: 'Białystok', devices: ['spawarka'] },
-      { streetNumber: 'Boboli 8', zip: '69-997', town: 'Białystok', devices: ['kuchenka gazowa'] },
-      { streetNumber: 'Boboli 10', zip: '69-997', town: 'Białystok', devices: ['skoda'] },
-    ],
-    this.devices=['farelka','pralka','spawarka','kuchenka gazowa'];
-    this.statuses=['Utworzona','Przekazana','Zamknięta'];
+      this.addresses = [
+        { streetNumber: 'Szkolna 17', zip: '69-997', town: 'Białystok', devices: ['farelka', 'pralka'] },
+        { streetNumber: 'Szkolna 15', zip: '69-997', town: 'Białystok', devices: ['spawarka'] },
+        { streetNumber: 'Boboli 8', zip: '69-997', town: 'Białystok', devices: ['kuchenka gazowa'] },
+        { streetNumber: 'Boboli 10', zip: '69-997', town: 'Białystok', devices: ['skoda'] },
+      ]
   }
   private getService() {
-    return this.AddServiceService.service;
+    return this.addServiceService.service;
   }
   public getDevices(address: any) {
     return (address.get('devices')! as FormArray).controls;
+  }
+  public onSubmit() {
+    const service = this.serviceForm.value as Service;
+    console.log(this.serviceForm.value);
+    this.addServiceService.addService(service).pipe(take(1)).subscribe();
   }
 }
