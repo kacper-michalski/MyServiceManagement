@@ -2,9 +2,9 @@
     <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nową usługę</p>
     <div class="rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
         <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
-        <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
-            <div class="grid grid-cols-2">
-                <div class="flex flex-col gap-5">
+        <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="mt-20 ">
+            <div class="grid grid-cols-2 justify-items-center">
+                <div class="flex flex-col gap-5 w-min">
                     <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl pl-5 max-w-max text-xl">
                         Dodaj nowego klienta
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
@@ -17,6 +17,23 @@
                                 {{client.name}}
                             </option>
                         </select>
+                    </div>
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
+                        <div class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                            (click)="onClickDropDown()">
+                            choosen
+                        </div>
+                        <div *ngIf="showDropDown==true">
+                            <div *ngFor="let client of this.clients" class="bg-Gainsboro w-80 h-min pl-3 text-2xl hover:bg-KeyLime py-2 border-y-2 border-BlackChocolate " >
+                                {{client.name}}<br>
+                                {{client.phoneNumber}}<br>
+                                {{client.email}}<br>
+                                {{client.companyName}}<br>
+                                {{client.TIN}}
+                                
+                            </div>
+                        </div>
                     </div>
                     <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl max-w-max pl-4 text-xl">
                         Dodaj nowy adres klienta
@@ -46,10 +63,10 @@
                         </select>
                     </div>
                 </div>
-    
-    
-    
-                <div class="flex flex-col gap-5">
+
+
+
+                <div class="flex flex-col gap-5 w-min">
                     <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Opis</p>
                         <textarea rows="4" cols="50" id=""
@@ -63,7 +80,7 @@
                             class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
                             formControlName="date">
                     </div>
-                    <div class="flex">
+                    <div class="flex justify-between">
                         <div>
                             <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg">Rozpoczęcie</p>
                             <input type="time" id=""
@@ -77,7 +94,7 @@
                                 formControlName="termination">
                         </div>
                     </div>
-                    
+
                     <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
                         <select formControlName="status"
@@ -89,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            
+
 
             <!-- <button type="button"
                                             class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
@@ -105,11 +122,13 @@
                         Dodaj kolejny adres
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
                     </button> -->
+            <div class="min-w-max flex justify-center">
+                <button type="submit"
+                    class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32 mt-10">
+                    <span class="font-bold text-2xl">DODAJ</span>
+                </button>
+            </div>
 
-            <button type="submit"
-                class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
-                <span class="font-bold text-2xl">DODAJ</span>
-            </button>
 
         </form>
     </div>

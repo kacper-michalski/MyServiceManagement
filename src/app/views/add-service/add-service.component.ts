@@ -14,7 +14,7 @@ import { Address } from 'src/app/models/address.model';
   styleUrls: ['./add-service.component.scss']
 })
 export class AddServiceComponent {
-
+  showDropDown: boolean = false;
   defaultDevice = {
     name: [""],
   };
@@ -72,5 +72,13 @@ export class AddServiceComponent {
     const service = this.serviceForm.value as Service;
     console.log(this.serviceForm.value);
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
+  }
+  public onClickDropDown() {
+    if (this.showDropDown==false) {
+      return this.showDropDown = true;
+    }
+    else{
+      return this.showDropDown = false;
+    }
   }
 }
