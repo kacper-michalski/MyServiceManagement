@@ -14,7 +14,6 @@ import { Address } from 'src/app/models/address.model';
   styleUrls: ['./add-service.component.scss']
 })
 export class AddServiceComponent {
-  showDropDown: boolean = false;
   defaultDevice = {
     name: [""],
   };
@@ -24,11 +23,12 @@ export class AddServiceComponent {
     town: [""],
     zip: [""]
   };
+  showDropDown: boolean = false;
   clients: ClientDetails[];
   addresses: Address[];
   devices = ['farelka', 'pralka', 'spawarka', 'kuchenka gazowa'];
   statuses = ['Utworzona', 'Przekazana', 'Zamknięta'];
-  selectedClient: ClientDetails[];
+  selectedClient: string;
   serviceForm = this.fb.group({
     client: [this.addClientService.clientDetails.name, Validators.required],
     address: [this.addAddressService.address.streetNumber, Validators.required],
@@ -74,11 +74,17 @@ export class AddServiceComponent {
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
   }
   public onClickDropDown() {
-    if (this.showDropDown==false) {
+    if (this.showDropDown == false) {
       return this.showDropDown = true;
     }
-    else{
+    else {
       return this.showDropDown = false;
     }
+  }
+  public onSelectClient(client: ClientDetails) {
+    console.log(client.name + '\n' + client.phoneNumber + '\n' + client.email + '\n' + client.companyName + '\n' + client.TIN)
+    this.onClickDropDown();
+    return this.selectedClient = client.name + '\n' + client.phoneNumber + '\n' + client.email + '\n' + client.companyName + '\n' + client.TIN;
+    
   }
 }

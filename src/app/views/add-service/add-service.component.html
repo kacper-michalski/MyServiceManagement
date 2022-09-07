@@ -9,7 +9,7 @@
                         Dodaj nowego klienta
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
                     </button>
-                    <div class="">
+                    <!-- <div class="">
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
                         <select formControlName="client"
                             class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
@@ -17,15 +17,16 @@
                                 {{client.name}}
                             </option>
                         </select>
-                    </div>
+                    </div> -->
                     <div class="">
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
-                        <div class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                        <div class="bg-Gainsboro w-80 h-48 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-3 text-2xl whitespace-pre-line"
                             (click)="onClickDropDown()">
-                            choosen
+                            {{this.selectedClient}}
                         </div>
                         <div *ngIf="showDropDown==true">
-                            <div *ngFor="let client of this.clients" class="bg-Gainsboro w-80 h-min pl-3 text-2xl hover:bg-KeyLime py-2 border-y-2 border-BlackChocolate " >
+                            <div *ngFor="let client of this.clients" class="bg-Gainsboro w-80 h-min pl-3 text-2xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate " 
+                            (click)="onSelectClient(client)">
                                 {{client.name}}<br>
                                 {{client.phoneNumber}}<br>
                                 {{client.email}}<br>
