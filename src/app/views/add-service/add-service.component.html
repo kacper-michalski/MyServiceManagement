@@ -9,30 +9,26 @@
                         Dodaj nowego klienta
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
                     </button>
-                    <!-- <div class="">
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
-                        <select formControlName="client"
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                            <option *ngFor="let client of this.clients" [ngValue]="client">
-                                {{client.name}}
-                            </option>
-                        </select>
-                    </div> -->
                     <div class="">
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
-                        <div class="bg-Gainsboro w-80 h-48 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-3 text-2xl whitespace-pre-line"
-                            (click)="onClickDropDown()">
+                        <div
+                            class="bg-Gainsboro w-80 h-44 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
+                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
+                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('client')">
+                            <img src="../../../assets/icons/pencil.svg" alt="ikona ołówka"
+                                class="absolute right-3 bottom-3 cursor-pointer">
                             {{this.selectedClient}}
                         </div>
-                        <div *ngIf="showDropDown==true">
-                            <div *ngFor="let client of this.clients" class="bg-Gainsboro w-80 h-min pl-3 text-2xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate " 
-                            (click)="onSelectClient(client)">
+                        <div *ngIf="showDropDown.client==true">
+                            <div *ngFor="let client of this.clients"
+                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
+                                (click)="onSelectClient(client)">
                                 {{client.name}}<br>
                                 {{client.phoneNumber}}<br>
                                 {{client.email}}<br>
                                 {{client.companyName}}<br>
                                 {{client.TIN}}
-                                
+
                             </div>
                         </div>
                     </div>
@@ -40,28 +36,45 @@
                         Dodaj nowy adres klienta
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
                     </button>
-                    <!-- <p-multiSelect [options]="clients" [(ngModel)]="selectedClient" optionLabel="name"></p-multiSelect> -->
-                    <div>
+                    <div class="">
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Adres</p>
-                        <select formControlName="address"
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                            <option *ngFor="let address of this.addresses; index as iAddress" [ngValue]="address">
-                                {{address.streetNumber}}
-                            </option>
-                        </select>
+                        <div
+                            class="bg-Gainsboro w-80 h-28 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
+                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
+                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('address')">
+                            <img src="../../../assets/icons/pencil.svg" alt="ikona ołówka"
+                                class="absolute right-3 bottom-3 cursor-pointer">
+                            {{this.selectedAddressString}}
+                        </div>
+                        <div *ngIf="showDropDown.address">
+                            <div *ngFor="let address of this.addresses"
+                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
+                                (click)="onSelectAddress(address)">
+                                {{address.streetNumber}}<br>
+                                {{address.zip}}<br>
+                                {{address.town}}
+                            </div>
+                        </div>
                     </div>
                     <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl max-w-max pl-5 text-xl">
                         Dodaj nowe urządzenie
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
                     </button>
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg ">Urządzenie</p>
-                        <select formControlName="device"
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                            <option *ngFor="let device of this.devices" [ngValue]="device">
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie</p>
+                        <div
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-3 text-xl whitespace-pre-line relative">
+                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
+                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('device')">
+                            {{this.selectedDevice}}
+                        </div>
+                        <div *ngIf="showDropDown.device">
+                            <div *ngFor="let device of this.selectedAddress.devices;index as iDevice;"
+                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
+                                (click)="onSelectDevice(selectedAddress,iDevice)">
                                 {{device}}
-                            </option>
-                        </select>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -70,15 +83,15 @@
                 <div class="flex flex-col gap-5 w-min">
                     <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Opis</p>
-                        <textarea rows="4" cols="50" id=""
-                            class="bg-Gainsboro w-80 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                        <textarea rows="8" cols="50" id=""
+                            class="bg-Gainsboro w-80 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-3 text-xl"
                             formControlName="description">
                 </textarea>
                     </div>
                     <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Data</p>
                         <input type="date" id=""
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-xl"
                             formControlName="date">
                     </div>
                     <div class="flex justify-between">
@@ -95,42 +108,47 @@
                                 formControlName="termination">
                         </div>
                     </div>
-
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
-                        <select formControlName="status"
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                            <option *ngFor="let status of this.statuses" [ngValue]="status">
-                                {{status}}
-                            </option>
-                        </select>
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Serwisant</p>
+                        <div
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-3 text-xl whitespace-pre-line relative">
+                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
+                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('serviceman')">
+                            {{this.selectedServiceman}}
+                        </div>
+                        <div *ngIf="showDropDown.serviceman">
+                            <div *ngFor="let serviceman of this.serviceTechnicians;"
+                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
+                                (click)="onSelectServiceman(serviceman)">
+                                {{serviceman.name}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex justify-between">
+                        <div>
+                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
+                            <select formControlName="status"
+                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-1 text-xl">
+                                <option *ngFor="let status of this.statuses" [ngValue]="status">
+                                    {{status}}
+                                </option>
+                            </select>
+                        </div>
+                        <div>
+                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Cena</p>
+                            <input type="text"
+                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-xl"
+                                formControlName="price">
+                        </div>
                     </div>
                 </div>
             </div>
-
-
-            <!-- <button type="button"
-                                            class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
-                                            (click)="addField('addresses.'+iAddress+'.devices', defaultDevice)">
-                                            Dodaj kolejne urządzenie
-                                            <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa"
-                                                class="inline ml-2">
-                                        </button> -->
-
-            <!-- <button type="button"
-                        class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
-                        (click)="addField('addresses', defaultAddress)">
-                        Dodaj kolejny adres
-                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
-                    </button> -->
             <div class="min-w-max flex justify-center">
                 <button type="submit"
                     class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32 mt-10">
                     <span class="font-bold text-2xl">DODAJ</span>
                 </button>
             </div>
-
-
         </form>
     </div>
 </div>

@@ -8,6 +8,8 @@ import { FormGroup } from '@angular/forms';
 import { AddAddressService } from 'src/app/services/add-address.service';
 import { take } from 'rxjs';
 import { Address } from 'src/app/models/address.model';
+import { AddServicemanService } from 'src/app/services/add-serviceman.service';
+import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -23,12 +25,22 @@ export class AddServiceComponent {
     town: [""],
     zip: [""]
   };
-  showDropDown: boolean = false;
+  showDropDown = {
+    client: false,
+    address: false,
+    device: false,
+    serviceman: false
+  };
   clients: ClientDetails[];
   addresses: Address[];
   devices = ['farelka', 'pralka', 'spawarka', 'kuchenka gazowa'];
   statuses = ['Utworzona', 'Przekazana', 'Zamknięta'];
+  serviceTechnicians: ServicemanDetails[];
   selectedClient: string;
+  selectedAddress: Address;
+  selectedAddressString: string;
+  selectedDevice: string;
+  selectedServiceman: string;
   serviceForm = this.fb.group({
     client: [this.addClientService.clientDetails.name, Validators.required],
     address: [this.addAddressService.address.streetNumber, Validators.required],
@@ -38,16 +50,10 @@ export class AddServiceComponent {
     commencement: [this.getService().commencement, [Validators.required]],
     termination: [this.getService().termination, [Validators.required]],
     status: [this.getService().status, [Validators.required]],
-    price: [this.getService().price, [Validators.required]],
-    // addresses: this.fb.array([this.fb.group({
-    //   devices: this.fb.array([this.fb.group(this.defaultDevice)]),
-    //   streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
-    //   town: [this.getAddress().town, [Validators.required, Validators.email]],
-    //   zip: [this.getAddress().zip, [Validators.required]],
-    // })])
-
+    serviceman: [this.getServiceman().name, [Validators.required]],
+    price: [this.getService().price, [Validators.required]]
   });
-  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService, private addServiceService: AddServiceService) {
+  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService) {
 
     this.clients = [
       { name: 'Stachu Johnes', phoneNumber: '997 997 997', companyName: 'FIRMA INKO', TIN: '429 111 59 09', email: 'staszek@wp.pl' },
@@ -61,30 +67,45 @@ export class AddServiceComponent {
         { streetNumber: 'Boboli 8', zip: '69-997', town: 'Białystok', devices: ['kuchenka gazowa'] },
         { streetNumber: 'Boboli 10', zip: '69-997', town: 'Białystok', devices: ['skoda'] },
       ]
+      ,
+      this.serviceTechnicians = [
+        { name: 'Kacper Michalski', phoneNumber: '997 997 997'},
+        { name: 'Wojciech Sadkowski', phoneNumber: '123 123 123'},
+        { name: 'Andrzej Jaki', phoneNumber: '555 555 555'},
+        { name: 'Ewa Szpytma', phoneNumber: '888 888 888'},
+      ]
   }
   private getService() {
     return this.addServiceService.service;
+  }
+  private getServiceman() {
+    return this.addServicemanService.servicemanDetails;
   }
   public getDevices(address: any) {
     return (address.get('devices')! as FormArray).controls;
   }
   public onSubmit() {
     const service = this.serviceForm.value as Service;
-    console.log(this.serviceForm.value);
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
   }
-  public onClickDropDown() {
-    if (this.showDropDown == false) {
-      return this.showDropDown = true;
-    }
-    else {
-      return this.showDropDown = false;
-    }
+  public onClickDropDown(key: 'address' | 'client' | 'device' | 'serviceman') {
+    this.showDropDown[key] = !this.showDropDown[key];
   }
   public onSelectClient(client: ClientDetails) {
-    console.log(client.name + '\n' + client.phoneNumber + '\n' + client.email + '\n' + client.companyName + '\n' + client.TIN)
-    this.onClickDropDown();
+    this.onClickDropDown('client');
     return this.selectedClient = client.name + '\n' + client.phoneNumber + '\n' + client.email + '\n' + client.companyName + '\n' + client.TIN;
-    
+  }
+  public onSelectAddress(address: Address) {
+    this.onClickDropDown('address');
+    this.selectedAddress = address;
+    return this.selectedAddressString = address.streetNumber + '\n' + address.zip + '\n' + address.town;
+  }
+  public onSelectDevice(selectedAddress: Address, iDevice: number) {
+    this.onClickDropDown('device');
+    return this.selectedDevice = selectedAddress.devices[iDevice];
+  }
+  public onSelectServiceman(serviceman: ServicemanDetails) {
+    this.onClickDropDown('serviceman');
+    return this.selectedServiceman = serviceman.name;
   }
 }
