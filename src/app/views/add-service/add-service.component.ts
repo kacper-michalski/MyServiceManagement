@@ -29,11 +29,11 @@ export class AddServiceComponent {
     client: false,
     address: false,
     device: false,
-    serviceman: false
+    serviceman: false,
+    status: false
   };
   clients: ClientDetails[];
   addresses: Address[];
-  devices = ['farelka', 'pralka', 'spawarka', 'kuchenka gazowa'];
   statuses = ['Utworzona', 'Przekazana', 'Zamknięta'];
   serviceTechnicians: ServicemanDetails[];
   selectedClient: string;
@@ -41,6 +41,7 @@ export class AddServiceComponent {
   selectedAddressString: string;
   selectedDevice: string;
   selectedServiceman: string;
+  selectedStatus: string;
   serviceForm = this.fb.group({
     client: [this.addClientService.clientDetails.name, Validators.required],
     address: [this.addAddressService.address.streetNumber, Validators.required],
@@ -62,17 +63,17 @@ export class AddServiceComponent {
       { name: 'Wojciech Suchodolski', phoneNumber: '544 997 997', companyName: 'RUSZTOWANIE&SZKLANA', TIN: '129 111 59 09', email: 'wojtuś@wp.pl' },
     ],
       this.addresses = [
-        { streetNumber: 'Szkolna 17', zip: '69-997', town: 'Białystok', devices: ['farelka', 'pralka'] },
+        { streetNumber: 'Szkolna 17', zip: '69-997', town: 'Białystok', devices: ['farelka', 'pralka', 'odkurzacz', 'mikrofala'] },
         { streetNumber: 'Szkolna 15', zip: '69-997', town: 'Białystok', devices: ['spawarka'] },
         { streetNumber: 'Boboli 8', zip: '69-997', town: 'Białystok', devices: ['kuchenka gazowa'] },
         { streetNumber: 'Boboli 10', zip: '69-997', town: 'Białystok', devices: ['skoda'] },
       ]
       ,
       this.serviceTechnicians = [
-        { name: 'Kacper Michalski', phoneNumber: '997 997 997'},
-        { name: 'Wojciech Sadkowski', phoneNumber: '123 123 123'},
-        { name: 'Andrzej Jaki', phoneNumber: '555 555 555'},
-        { name: 'Ewa Szpytma', phoneNumber: '888 888 888'},
+        { name: 'Kacper Michalski', phoneNumber: '997 997 997' },
+        { name: 'Wojciech Sadkowski', phoneNumber: '123 123 123' },
+        { name: 'Andrzej Jaki', phoneNumber: '555 555 555' },
+        { name: 'Ewa Szpytma', phoneNumber: '888 888 888' },
       ]
   }
   private getService() {
@@ -88,7 +89,7 @@ export class AddServiceComponent {
     const service = this.serviceForm.value as Service;
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
   }
-  public onClickDropDown(key: 'address' | 'client' | 'device' | 'serviceman') {
+  public onClickDropDown(key: 'address' | 'client' | 'device' | 'serviceman' | 'status') {
     this.showDropDown[key] = !this.showDropDown[key];
   }
   public onSelectClient(client: ClientDetails) {
@@ -107,5 +108,9 @@ export class AddServiceComponent {
   public onSelectServiceman(serviceman: ServicemanDetails) {
     this.onClickDropDown('serviceman');
     return this.selectedServiceman = serviceman.name;
+  }
+  public onSelectStatus(status: string) {
+    this.onClickDropDown('status');
+    return this.selectedStatus = status;
   }
 }
