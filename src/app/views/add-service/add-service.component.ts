@@ -91,6 +91,13 @@ export class AddServiceComponent {
   }
   public onClickDropDown(key: 'address' | 'client' | 'device' | 'serviceman' | 'status') {
     this.showDropDown[key] = !this.showDropDown[key];
+    Object.keys(this.showDropDown).forEach((differentKey, index)=>
+    {
+      const differentKey2 = differentKey as 'address' | 'client' | 'device' | 'serviceman' | 'status';
+      if (key!=differentKey && this.showDropDown[differentKey2] == true) {
+        this.showDropDown[differentKey2]=!this.showDropDown[differentKey2]
+      }
+    });
   }
   public onSelectClient(client: ClientDetails) {
     this.onClickDropDown('client');
