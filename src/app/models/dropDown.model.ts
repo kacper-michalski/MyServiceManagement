@@ -1,4 +1,4 @@
-interface DropDown {
+export interface DropDown {
     client: boolean,
     address: boolean,
     device: boolean,

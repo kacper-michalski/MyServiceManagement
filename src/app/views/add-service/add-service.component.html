@@ -9,7 +9,7 @@
                         Dodaj nowego klienta
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
                     </button>
-                    <div class="">
+                    <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
                         <div
                             class="bg-Gainsboro w-80 h-44 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
@@ -17,9 +17,9 @@
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('client')">
                             <img src="../../../assets/icons/pencil.svg" alt="ikona ołówka"
                                 class="absolute right-3 bottom-3 cursor-pointer">
-                            {{this.selectedClient}}
+                            {{this.showDropDownService.selectedClient}}
                         </div>
-                        <div *ngIf="showDropDown.client==true"
+                        <div *ngIf="showDropDownService.dropDown.client"
                             class="max-h-96 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
                             <div *ngFor="let client of this.clients"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
@@ -45,9 +45,9 @@
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('address')">
                             <img src="../../../assets/icons/pencil.svg" alt="ikona ołówka"
                                 class="absolute right-3 bottom-3 cursor-pointer">
-                            {{this.selectedAddressString}}
+                            {{this.showDropDownService.selectedAddressString}}
                         </div>
-                        <div *ngIf="showDropDown.address"
+                        <div *ngIf="showDropDownService.dropDown.address"
                             class="max-h-80 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
                             <div *ngFor="let address of this.addresses"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
@@ -62,19 +62,19 @@
                         Dodaj nowe urządzenie
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
                     </button>
-                    <div class="">
+                    <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie</p>
                         <div
                             class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-3 text-xl whitespace-pre-line relative">
                             <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('device')">
-                            {{this.selectedDevice}}
+                            {{this.showDropDownService.selectedDevice}}
                         </div>
-                        <div *ngIf="showDropDown.device"
+                        <div *ngIf="showDropDownService.dropDown.device"
                             class="max-h-48 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
-                            <div *ngFor="let device of this.selectedAddress.devices;index as iDevice;"
+                            <div *ngFor="let device of this.showDropDownService.selectedAddress.devices;index as iDevice;"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                (click)="onSelectDevice(selectedAddress,iDevice)">
+                                (click)="onSelectDevice(iDevice)">
                                 {{device}}
                             </div>
                         </div>
@@ -111,15 +111,15 @@
                                 formControlName="termination">
                         </div>
                     </div>
-                    <div class="">
+                    <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Serwisant</p>
                         <div
                             class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-3 text-xl whitespace-pre-line relative">
                             <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('serviceman')">
-                            {{this.selectedServiceman}}
+                            {{this.showDropDownService.selectedServiceman}}
                         </div>
-                        <div *ngIf="showDropDown.serviceman"
+                        <div *ngIf="showDropDownService.dropDown.serviceman"
                             class="max-h-96 w-80 mt-1 border-4 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
                             <div *ngFor="let serviceman of this.serviceTechnicians;"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
@@ -129,34 +129,24 @@
                         </div>
                     </div>
                     <div class="flex justify-between">
-                        <!-- <div>
-                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
-                            <select formControlName="status"
-                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-1 text-xl">
-                                <option *ngFor="let status of this.statuses" [ngValue]="status">
-                                    {{status}}
-                                </option>
-                            </select>
-                        </div> -->
                         <div class="">
                             <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
                             <div
                                 class="bg-Gainsboro w-44 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-2 text-xl relative">
                                 <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
                                     class="absolute right-2 cursor-pointer" (click)="onClickDropDown('status')">
-                                {{this.selectedStatus}}
+                                {{this.showDropDownService.selectedStatus}}
                             </div>
-                            <div *ngIf="showDropDown.status==true"
+                            <div *ngIf="showDropDownService.dropDown.status"
                                 class="w-min border-4 mt-1 border-KeyLime rounded-2xl absolute z-10">
                                 <div *ngFor="let status of this.statuses"
                                     class="bg-Gainsboro w-36 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                    (click)="onSelectStatus(status)">
+                                    (click)="onSelectStatus(status)"
+                                    >
                                     {{status}}
                                 </div>
                             </div>
                         </div>
-
-
                         <div>
                             <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Cena</p>
                             <input type="text"

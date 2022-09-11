@@ -4,12 +4,13 @@ import { ClientDetails } from 'src/app/models/client-details.model';
 import { AddClientService } from 'src/app/services/add-client.service';
 import { AddServiceService } from 'src/app/services/add-service.service';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { FormGroup } from '@angular/forms';
 import { AddAddressService } from 'src/app/services/add-address.service';
 import { take } from 'rxjs';
 import { Address } from 'src/app/models/address.model';
 import { AddServicemanService } from 'src/app/services/add-serviceman.service';
 import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
+import { ShowDropDownService } from 'src/app/services/show-dropdown.service';
+import { DropDown } from 'src/app/models/dropDown.model';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -25,23 +26,10 @@ export class AddServiceComponent {
     town: [""],
     zip: [""]
   };
-  showDropDown = {
-    client: false,
-    address: false,
-    device: false,
-    serviceman: false,
-    status: false
-  };
   clients: ClientDetails[];
   addresses: Address[];
   statuses = ['Utworzona', 'Przekazana', 'Zamknięta'];
   serviceTechnicians: ServicemanDetails[];
-  selectedClient: string;
-  selectedAddress: Address;
-  selectedAddressString: string;
-  selectedDevice: string;
-  selectedServiceman: string;
-  selectedStatus: string;
   serviceForm = this.fb.group({
     client: [this.addClientService.clientDetails.name, Validators.required],
     address: [this.addAddressService.address.streetNumber, Validators.required],
@@ -54,7 +42,7 @@ export class AddServiceComponent {
     serviceman: [this.getServiceman().name, [Validators.required]],
     price: [this.getService().price, [Validators.required]]
   });
-  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService) {
+  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, public showDropDownService: ShowDropDownService) {
 
     this.clients = [
       { name: 'Stachu Johnes', phoneNumber: '997 997 997', companyName: 'FIRMA INKO', TIN: '429 111 59 09', email: 'staszek@wp.pl' },
@@ -89,35 +77,22 @@ export class AddServiceComponent {
     const service = this.serviceForm.value as Service;
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
   }
-  public onClickDropDown(key: 'address' | 'client' | 'device' | 'serviceman' | 'status') {
-    this.showDropDown[key] = !this.showDropDown[key];
-    Object.keys(this.showDropDown).forEach((differentKey, index)=>
-    {
-      const differentKey2 = differentKey as 'address' | 'client' | 'device' | 'serviceman' | 'status';
-      if (key!=differentKey && this.showDropDown[differentKey2] == true) {
-        this.showDropDown[differentKey2]=!this.showDropDown[differentKey2]
-      }
-    });
+  public onClickDropDown(key: keyof DropDown) {
+    this.showDropDownService.onClickDropDown(key);
   }
   public onSelectClient(client: ClientDetails) {
-    this.onClickDropDown('client');
-    return this.selectedClient = client.name + '\n' + client.phoneNumber + '\n' + client.email + '\n' + client.companyName + '\n' + client.TIN;
+    return this.showDropDownService.onSelectClient(client);
   }
   public onSelectAddress(address: Address) {
-    this.onClickDropDown('address');
-    this.selectedAddress = address;
-    return this.selectedAddressString = address.streetNumber + '\n' + address.zip + '\n' + address.town;
+    return this.showDropDownService.onSelectAddress(address);
   }
-  public onSelectDevice(selectedAddress: Address, iDevice: number) {
-    this.onClickDropDown('device');
-    return this.selectedDevice = selectedAddress.devices[iDevice];
+  public onSelectDevice(iDevice: number) {
+    return this.showDropDownService.onSelectDevice(iDevice);
   }
   public onSelectServiceman(serviceman: ServicemanDetails) {
-    this.onClickDropDown('serviceman');
-    return this.selectedServiceman = serviceman.name;
+    return this.showDropDownService.onSelectServiceman(serviceman);
   }
   public onSelectStatus(status: string) {
-    this.onClickDropDown('status');
-    return this.selectedStatus = status;
+    return this.showDropDownService.onSelectStatus(status);
   }
 }
