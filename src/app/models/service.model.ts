@@ -3,6 +3,6 @@ export interface Service{
     date: Date,
     commencement: string,
     termination: string,
-    status: string;
-    price: string,
+    status: string,
+    price: string
 }

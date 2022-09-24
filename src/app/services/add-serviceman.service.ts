@@ -11,9 +11,11 @@ export class AddServicemanService {
     this.servicemanDetails = {
       name: "",
       phoneNumber: "",
+      email: ""
     }
   }
   public addServiceman(serviceman: ServicemanDetails) {
+    console.log(serviceman)
     return this.http.post<ServicemanDetails>('http://localhost:3000/serviceman', serviceman);
   }
 }

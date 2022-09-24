@@ -17,6 +17,7 @@ export class AddServicemanComponent {
   servicemanForm = this.fb.group({
     name: [this.getServicemanDetails().name, [Validators.required,]],
     phoneNumber: [this.getServicemanDetails().phoneNumber, [Validators.required, Validators.minLength(9)]],
+    email: [this.getServicemanDetails().email, [Validators.required]]
   });
 
 

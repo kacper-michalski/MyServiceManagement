@@ -58,10 +58,10 @@ export class AddServiceComponent {
       ]
       ,
       this.serviceTechnicians = [
-        { name: 'Kacper Michalski', phoneNumber: '997 997 997' },
-        { name: 'Wojciech Sadkowski', phoneNumber: '123 123 123' },
-        { name: 'Andrzej Jaki', phoneNumber: '555 555 555' },
-        { name: 'Ewa Szpytma', phoneNumber: '888 888 888' },
+        { name: 'Kacper Michalski', phoneNumber: '997 997 997', email: 'kacper@wp.pl' },
+        { name: 'Wojciech Sadkowski', phoneNumber: '123 123 123', email: 'Wojciech@wp.pl' },
+        { name: 'Andrzej Jaki', phoneNumber: '555 555 555', email: 'Andrzej@wp.pl' },
+        { name: 'Ewa Szpytma', phoneNumber: '888 888 888', email: 'Ewa@wp.pl' },
       ]
   }
   private getService() {

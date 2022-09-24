@@ -1,9 +1,9 @@
 export interface ClientDetails {
-    name: string;
-    phoneNumber: string;
-    companyName: string;
-    TIN: string;
-    email: string;
+    name: string,
+    phoneNumber: string,
+    companyName: string,
+    TIN: string,
+    email: string
     // addresses: [
     //     address: [
     //         streetNumber: string,
