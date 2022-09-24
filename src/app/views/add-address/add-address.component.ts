@@ -30,8 +30,8 @@ export class AddAddressComponent{
     client: [this.addClientService.clientDetails.name, Validators.required],
     addresses: this.fb.array([this.fb.group({
       devices: this.fb.array([this.fb.group(this.defaultDevice)]),
-      streetNumber: [this.getAddress().streetNumber, [Validators.required, Validators.minLength(9)]],
-      town: [this.getAddress().town, [Validators.required, Validators.email]],
+      streetNumber: [this.getAddress().streetNumber, [Validators.required]],
+      town: [this.getAddress().town, [Validators.required]],
       zip: [this.getAddress().zip, [Validators.required]],
     })])
 

@@ -1,0 +1,42 @@
+<div class="max-w-2xl w-full mx-auto">
+    <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nową firmę</p>
+    <div class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+        <form class="flex flex-col gap-8 items-center" [formGroup]="companyForm" (ngSubmit)="onSubmit()">
+            <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
+                class="absolute right-0 cursor-pointer mt-5 mr-5">
+            <div class="mt-20">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Nazwa firmy</p>
+                <input type="text" id="companyName"
+                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                    formControlName="companyName">
+            </div>
+            <div class="">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">NIP</p>
+                <input type="text" id="TIN"
+                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                    formControlName="TIN">
+            </div>
+            <div class="">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Ulica i numer</p>
+                <input type="text" id="streetNumber"
+                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                    formControlName="streetNumber">
+            </div>
+            <div class="">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Kod pocztowy</p>
+                <input type="text" id="zip"
+                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                    formControlName="zip">
+            </div>
+            <div class="">
+                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Miejscowość</p>
+                <input type="text" id="town"
+                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                    formControlName="town">
+            </div>
+            <button class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
+                <span class="font-bold text-2xl">DODAJ</span>
+            </button>
+        </form>
+    </div>
+</div>

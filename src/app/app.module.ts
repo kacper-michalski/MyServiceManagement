@@ -8,6 +8,7 @@ import { AddClientModule } from './views/add-client/add-client.module';
 import { CalendarModule } from './views/calendar/calendar.module';
 import { AddAddressModule } from './views/add-address/add-address.module';
 import { AddServiceModule } from './views/add-service/add-service.module';
+import { AddCompanyModule } from './views/add-company/add-company.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { AddServiceModule } from './views/add-service/add-service.module';
     CalendarModule,
     AddClientModule,
     AddAddressModule,
-    AddServiceModule
+    AddServiceModule,
+    AddCompanyModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -15,7 +15,6 @@ export class AddServicemanService {
     }
   }
   public addServiceman(serviceman: ServicemanDetails) {
-    console.log(serviceman)
-    return this.http.post<ServicemanDetails>('http://localhost:3000/serviceman', serviceman);
+    return this.http.post<ServicemanDetails>('http://localhost:8080/technician', serviceman);
   }
 }
