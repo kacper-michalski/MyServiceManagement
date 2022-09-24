@@ -11,11 +11,11 @@ import { Company } from 'src/app/models/company.model';
 })
 export class AddCompanyComponent {
   companyForm = this.fb.group({
-    companyName: [this.getCompany().companyName, [Validators.required]],
-    TIN: [this.getCompany().TIN, [Validators.required]],
-    streetNumber: [this.getCompany().streetNumber, [Validators.required]],
-    zip: [this.getCompany().zip, [Validators.required]],
-    town: [this.getCompany().town, [Validators.required]]
+    name: [this.getCompany().companyName, [Validators.required]],
+    tin: [this.getCompany().TIN, [Validators.required]],
+    street: [this.getCompany().streetNumber, [Validators.required]],
+    zipCode: [this.getCompany().zip, [Validators.required]],
+    city: [this.getCompany().town, [Validators.required]]
   });
   constructor(private fb: FormBuilder, private addCompanyService: AddCompanyService) { }
 
