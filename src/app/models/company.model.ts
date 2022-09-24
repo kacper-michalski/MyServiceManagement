@@ -1,7 +1,7 @@
 export interface Company {
-    companyName: string,
-    TIN: string,
-    streetNumber: string,
-    zip: string,
-    town: string,
+    name: string,
+    tin: string,
+    street: string,
+    zipCode: string,
+    city: string
 }

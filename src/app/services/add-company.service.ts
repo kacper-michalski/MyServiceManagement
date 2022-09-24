@@ -9,11 +9,11 @@ export class AddCompanyService {
 
     constructor(private http: HttpClient) {
         this.company = {
-            companyName: "",
-            TIN: "",
-            streetNumber: "",
-            zip: "",
-            town: ""
+            name: "",
+            tin: "",
+            street: "",
+            zipCode: "",
+            city: ""
         }
     }
 
