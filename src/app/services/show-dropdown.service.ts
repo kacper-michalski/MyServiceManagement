@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Address } from '../models/address.model';
 import { ClientDetails } from '../models/client-details.model';
+import { Company } from '../models/company.model';
 import { DropDown } from '../models/dropDown.model';
 import { ServicemanDetails } from '../models/serviceman-details.model';
 @Injectable({
@@ -14,13 +15,15 @@ export class ShowDropDownService {
     selectedDevice: string;
     selectedServiceman: string;
     selectedStatus: string;
+    selectedCompany: string;
     constructor() {
         this.dropDown = {
             client: false,
             address: false,
             device: false,
             serviceman: false,
-            status: false
+            status: false,
+            company: false
         }
     }
 
@@ -39,7 +42,7 @@ export class ShowDropDownService {
     public onSelectClient(client: ClientDetails) {
         this.onClickDropDown('client');
         this.selectedAddressString = "";
-        return this.selectedClient = client.name + '\n' + client.phoneNumber + '\n' + client.email + '\n' + client.companyName + '\n' + client.TIN;
+        return this.selectedClient = client.firstName + ' ' + client.lastName + '\n' + client.phoneNumber + '\n' + client.email;
     }
     public onSelectAddress(address: Address) {
         this.onClickDropDown('address');
@@ -58,5 +61,9 @@ export class ShowDropDownService {
     public onSelectStatus(status: string) {
         this.onClickDropDown('status');
         return this.selectedStatus = status;
+    }
+    public onSelectCompany(company: Company) {
+        this.onClickDropDown('company');
+        return this.selectedCompany = company.name + '\n' + company.tin + '\n' + company.street + '\n' + company.zipCode + '\n'+ company.city;
     }
 }

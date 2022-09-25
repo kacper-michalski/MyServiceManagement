@@ -27,7 +27,7 @@ export class AddAddressComponent{
   clients: ClientDetails[];
   selectedClient: ClientDetails[];
   addressForm = this.fb.group({
-    client: [this.addClientService.clientDetails.name, Validators.required],
+    client: [this.addClientService.clientDetails.firstName, Validators.required],
     addresses: this.fb.array([this.fb.group({
       devices: this.fb.array([this.fb.group(this.defaultDevice)]),
       streetNumber: [this.getAddress().streetNumber, [Validators.required]],
@@ -39,10 +39,10 @@ export class AddAddressComponent{
   constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService) {
 
     this.clients = [
-      { name: 'Stachu Johnes', phoneNumber: '997 997 997', companyName: 'FIRMA INKO', TIN: '429 111 59 09', email: 'staszek@wp.pl' },
-      { name: 'Zdzichu Ogórek', phoneNumber: '123 997 997', companyName: 'FIRMA WINKO', TIN: '659 111 59 09', email: 'zdzisiu@wp.pl' },
-      { name: 'Krzysztof Kononowicz', phoneNumber: '153 997 997', companyName: 'FIRMA PIWKO', TIN: '559 111 59 09', email: 'krzysiu@wp.pl' },
-      { name: 'Wojciech Suchodolski', phoneNumber: '544 997 997', companyName: 'RUSZTOWANIE&SZKLANA', TIN: '129 111 59 09', email: 'wojtuś@wp.pl' },
+      { firstName: 'Stachu ', lastName: 'Johnes', phoneNumber: '997 997 997', email: 'staszek@wp.pl' },
+      { firstName: 'Zdzichu ', lastName: 'Ogórek', phoneNumber: '123 997 997', email: 'zdzisiu@wp.pl' },
+      { firstName: 'Krzysztof ', lastName: 'Kononowicz', phoneNumber: '153 997 997', email: 'krzysiu@wp.pl' },
+      { firstName: 'Wojciech ', lastName: 'Suchodolski', phoneNumber: '544 997 997', email: 'wojtuś@wp.pl' },
     ]
   }
   private getAddress() {
@@ -59,7 +59,7 @@ export class AddAddressComponent{
     console.log(this.addressForm.value);
     this.addAddressService.addAddress(address).pipe(take(1)).subscribe();
   }
-  addField(path : string, group : any){
+  public addField(path : string, group : any){
     const fb = this.addressForm.get(path);
     (fb as FormArray).push(this.fb.group(group));
   }

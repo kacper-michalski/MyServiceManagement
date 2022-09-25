@@ -15,8 +15,6 @@
                             class="bg-Gainsboro w-80 h-44 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
                             <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('client')">
-                            <img src="../../../assets/icons/pencil.svg" alt="ikona ołówka"
-                                class="absolute right-3 bottom-3 cursor-pointer">
                             {{this.showDropDownService.selectedClient}}
                         </div>
                         <div *ngIf="showDropDownService.dropDown.client"
@@ -24,12 +22,10 @@
                             <div *ngFor="let client of this.clients"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
                                 (click)="onSelectClient(client)">
-                                {{client.name}}<br>
+                                {{client.firstName}}<br>
+                                {{client.lastName}}<br>
                                 {{client.phoneNumber}}<br>
-                                {{client.email}}<br>
-                                {{client.companyName}}<br>
-                                {{client.TIN}}
-
+                                {{client.email}}
                             </div>
                         </div>
                     </div>
@@ -43,8 +39,6 @@
                             class="bg-Gainsboro w-80 h-28 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
                             <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('address')">
-                            <img src="../../../assets/icons/pencil.svg" alt="ikona ołówka"
-                                class="absolute right-3 bottom-3 cursor-pointer">
                             {{this.showDropDownService.selectedAddressString}}
                         </div>
                         <div *ngIf="showDropDownService.dropDown.address"

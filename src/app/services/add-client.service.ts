@@ -9,16 +9,15 @@ export class AddClientService {
 
   constructor(private http: HttpClient) {
     this.clientDetails = {
-      name: "",
+      firstName: "",
+      lastName: "",
       phoneNumber: "",
-      email: "",
-      companyName: "",
-      TIN: "",
-      
+      email: ""
     }
   }
 
   public addClient(client: ClientDetails) {
-    return this.http.post<ClientDetails>('http://localhost:3000/client', client);
+    console.log(client);
+    return this.http.post<ClientDetails>('http://localhost:8080/customer', client);
   }
 }

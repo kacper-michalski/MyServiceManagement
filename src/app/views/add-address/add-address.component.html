@@ -10,10 +10,10 @@
                     <select formControlName="client"
                         class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
                         <option *ngFor="let client of this.clients" [ngValue]="client">
-                            {{client.name}}
+                            {{client.firstName}}
+                            {{client.lastName}}
                         </option>
                     </select>
-                    <!-- <p-multiSelect [options]="clients" [(ngModel)]="selectedClient" optionLabel="name"></p-multiSelect> -->
                 </div>
                 <div class="max-w-4xl w-full px-5">
                     <div formArrayName="addresses" class="flex flex-col gap-3">

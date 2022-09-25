@@ -1,60 +1,98 @@
-<div class="max-w-2xl w-full mx-auto">
+<div class="max-w-4xl w-full mx-auto">
     <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nowego klienta</p>
-    <div class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
-        <form class="flex flex-col gap-8 items-center" [formGroup]="clientForm" (ngSubmit)="onSubmit()">
-            <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
-                class="absolute right-0 cursor-pointer mt-5 mr-5"
-                >
-            <div class="mt-20">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Imię i nazwisko</p>
-                <input
-                    type="text"
-                    id="name"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                    formControlName="name"
-                >
-                <!-- <p class="text-Gainsboro" (click)="changeColor()" >test</p> -->
+    <div class="rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+        <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
+        <form [formGroup]="clientForm" (ngSubmit)="onSubmit()" class="mt-20">
+            <div class="grid grid-cols-2 justify-items-center">
+                <div class="flex flex-col gap-5 w-min">
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Imię</p>
+                        <input type="text" id="firstName"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                            formControlName="firstName">
+                    </div>
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Nazwisko</p>
+                        <input type="text" id="lastName"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
+                            formControlName="lastName">
+                    </div>
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Numer telefonu</p>
+                        <input type="text" id="phoneNumber"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                            formControlName="phoneNumber">
+                    </div>
+                    <div class="">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">E-mail</p>
+                        <input type="email" id="email"
+                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
+                            formControlName="email">
+                    </div>
+                    <div>
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Firma</p>
+                        <div
+                            class="bg-Gainsboro w-80 h-44 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
+                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
+                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('company')">
+                            {{this.showDropDownService.selectedCompany}}
+                        </div>
+                        <div *ngIf="showDropDownService.dropDown.company"
+                            class="max-h-96 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
+                            <div *ngFor="let company of this.companies"
+                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
+                                (click)="onSelectCompany(company)">
+                                {{company.name}}<br>
+                                {{company.tin}}<br>
+                                {{company.street}}<br>
+                                {{company.zipCode}}<br>
+                                {{company.city}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-col gap-5 w-min">
+                    <div class="" *ngFor="let address of addresses; index as iAddress;">
+                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Adres {{iAddress+1}}</p>
+                        <div
+                            class="bg-Gainsboro w-80 h-28 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
+                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
+                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('address')">
+                            {{this.showDropDownService.selectedAddressString}}
+                        </div>
+                        <div *ngIf="showDropDownService.dropDown.address"
+                            class="max-h-80 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
+                            <div *ngFor="let address of this.addressesMOCK"
+                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
+                                (click)="onSelectAddress(address)">
+                                {{address.streetNumber}}<br>
+                                {{address.zip}}<br>
+                                {{address.town}}
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button"
+                        class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
+                        (click)="addField('addresses', defaultAddress)">
+                        Dodaj kolejny adres
+                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
+                    </button>
+                    <p-dropdown [options]="addressesMOCK" [(ngModel)]="selectedAddress" optionLabel="streetNumber"
+                        [filter]="true" filterBy="zip" [showClear]="true" placeholder="Wybierz adres">>
+                        <ng-template pTemplate="selectedAddress">
+                            <div class="country-item country-item-value" *ngIf="selectedAddress">
+                                <div>{{selectedAddress}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                </div>
             </div>
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Numer telefonu</p>
-                <input
-                    type="text"
-                    id="phoneNumber"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="phoneNumber"
-                >
+            <div class="min-w-max flex justify-center">
+                <button type="submit"
+                    class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32 mt-10">
+                    <span class="font-bold text-2xl">DODAJ</span>
+                </button>
             </div>
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">E-mail</p>
-                <input
-                    type="email"
-                    id="email"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="email"
-                >
-            </div>
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Nazwa firmy</p>
-                <input
-                    type="text"
-                    id="companyName"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="companyName"
-                >
-            </div>
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">NIP</p>
-                <input
-                    type="text"
-                    id="TIN"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="TIN"
-                >
-            </div>
-            <button
-                class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
-                <span class="font-bold text-2xl">DODAJ</span>
-            </button>
         </form>
     </div>
 </div>

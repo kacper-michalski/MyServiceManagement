@@ -3,5 +3,6 @@ export interface DropDown {
     address: boolean,
     device: boolean,
     serviceman: boolean,
-    status: boolean
+    status: boolean,
+    company: boolean
 };
