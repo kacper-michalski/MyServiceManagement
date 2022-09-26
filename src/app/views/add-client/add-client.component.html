@@ -29,7 +29,7 @@
                             class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
                             formControlName="email">
                     </div>
-                    <div>
+                    <!-- <div>
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Firma</p>
                         <div
                             class="bg-Gainsboro w-80 h-44 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
@@ -49,10 +49,24 @@
                                 {{company.city}}
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <p-dropdown [options]="companiesMOCK" [(ngModel)]="selectedCompany" optionLabel="name"
+                        formControlName="tin" optionValue="tin" [filter]="true" filterBy="name" [showClear]="true"
+                        placeholder="Wybierz firmę">>
+                        <ng-template pTemplate="selectedCompany">
+                            <div class="country-item country-item-value" *ngIf="selectedCompany">
+                                <div>{{selectedCompany}}</div>
+                            </div>
+                        </ng-template>
+                        <ng-template let-company pTemplate="item">
+                            <div class="country-item">
+                                <div>{{company.name}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
                 </div>
                 <div class="flex flex-col gap-5 w-min">
-                    <div class="" *ngFor="let address of addresses; index as iAddress;">
+                    <!-- <div class="" *ngFor="let address of addresses; index as iAddress;">
                         <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Adres {{iAddress+1}}</p>
                         <div
                             class="bg-Gainsboro w-80 h-28 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
@@ -70,21 +84,38 @@
                                 {{address.town}}
                             </div>
                         </div>
+                    </div> -->
+                    <div formArrayName="addressesId" class="mt-6">
+                        <div class="" *ngFor="let address of addresses; index as iAddress;">
+                            <div [formGroupName]="iAddress" class="mb-6">
+                                <p-dropdown [options]="addressesMOCK" 
+                                    formControlName="addressId" optionLabel="name" optionValue="id" [filter]="true"
+                                    filterBy="name" [showClear]="true" placeholder="Wybierz adres">>
+                                    <ng-template pTemplate="selectedAddress">
+                                        <div class="country-item country-item-value" *ngIf="selectedAddress">
+                                            <div>{{selectedAddress}}</div>
+                                        </div>
+                                    </ng-template>
+                                    <ng-template let-address pTemplate="item">
+                                        <div class="country-item">
+                                            <div>{{address.name}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                            </div>
+
+                        </div>
                     </div>
+
+
+
                     <button type="button"
-                        class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
-                        (click)="addField('addresses', defaultAddress)">
+                        class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 ml-1 font-light text-xl"
+                        (click)="addField('addressesId', defaultAddress)">
                         Dodaj kolejny adres
                         <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
                     </button>
-                    <p-dropdown [options]="addressesMOCK" [(ngModel)]="selectedAddress" optionLabel="streetNumber"
-                        [filter]="true" filterBy="zip" [showClear]="true" placeholder="Wybierz adres">>
-                        <ng-template pTemplate="selectedAddress">
-                            <div class="country-item country-item-value" *ngIf="selectedAddress">
-                                <div>{{selectedAddress}}</div>
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
+
                 </div>
             </div>
             <div class="min-w-max flex justify-center">
