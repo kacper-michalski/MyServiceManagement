@@ -37,11 +37,6 @@ export class AddClientComponent {
     lastName: [this.getClientDetails().lastName, [Validators.required,]],
     phoneNumber: [this.getClientDetails().phoneNumber, [Validators.required, Validators.minLength(9)]],
     email: [this.getClientDetails().email, [Validators.required, Validators.email]],
-    // addresses: this.fb.array([this.fb.group({
-    //   streetNumber: [this.getAddress().streetNumber, [Validators.required]],
-    //   town: [this.getAddress().town, [Validators.required]],
-    //   zip: [this.getAddress().zip, [Validators.required]]
-    // })])
     addressesId: this.fb.array([this.fb.group({
       addressId: [this.getAddress().streetNumber, [Validators.required]]
     })]),
@@ -49,9 +44,9 @@ export class AddClientComponent {
   });
   constructor(private fb: FormBuilder, private addClientService: AddClientService, public showDropDownService: ShowDropDownService, private addAddressService: AddAddressService, private addCompanyService: AddCompanyService) {
     this.companiesMOCK = [
-      { name: 'optica ' + '\n' + '8378245074' + '\n' + 'Pana Tadeusza 9' + '\n' + '02-964' + '\n' + 'Rzeszów', tin: '1' },
-      { name: 'ukom' + '\n' + '1259726332' + '\n' + 'Europejska 94' + '\n' + '20-609' + '\n' + 'Warszawa', tin: '2' },
-      { name: 'sllegro ' + '\n' + '8114516680' + '\n' + 'Bałtycka 12' + '\n' + '90-215' + '\n' + 'Bydgoszcz', tin: '3' }
+      { name: 'optica ' + '\n' + '8378245074' + '\n' + 'Pana Tadeusza 9' + '\n' + '02-964' + '\n' + 'Rzeszów', tin: '5223130908' },
+      { name: 'ukom' + '\n' + '1259726332' + '\n' + 'Europejska 94' + '\n' + '20-609' + '\n' + 'Warszawa', tin: '9181733595' },
+      { name: 'sllegro ' + '\n' + '8114516680' + '\n' + 'Bałtycka 12' + '\n' + '90-215' + '\n' + 'Bydgoszcz', tin: '9181733595' }
     ],
       this.addressesMOCK = [
         { name: 'Centralna 54' + '\n' + '31-521 Białystok', id: '1' },
