@@ -1,84 +1,29 @@
-<div class="max-w-4xl w-full mx-auto">
-    <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nowy adres</p>
-    <div class="rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+<div class="max-w-2xl w-full mx-auto mt-5">
+    <p
+        class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro">
+        Dodaj nowy adres</p>
+    <div class="rounded-md border border-KeyLime relative bg-BlackChocolate h-52">
         <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
 
-        <form class="" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
-            <div class="flex flex-col gap-8 items-center">
-                <div class="">
-                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg mt-10">Klient</p>
-                    <select formControlName="client"
-                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl">
-                        <option *ngFor="let client of this.clients" [ngValue]="client">
-                            {{client.firstName}}
-                            {{client.lastName}}
-                        </option>
-                    </select>
-                </div>
-                <div class="max-w-4xl w-full px-5">
-                    <div formArrayName="addresses" class="flex flex-col gap-3">
-                        <div *ngFor="let address of addresses; index as iAddress;">
-                            <div [formGroupName]="iAddress">
-                                <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Adres {{iAddress+1}}
-                                </p>
-                                <div
-                                    class="grid grid-cols-2 gap-36 rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700 p-5">
-                                    <div class="flex flex-col gap-2">
-                                        <div formArrayName="devices" class="flex flex-col gap-2">
-                                            <div *ngFor="let device of getDevices(address); index as iDevice;">
-                                                <div [formGroupName]="iDevice">
-                                                    <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie
-                                                        {{iDevice+1}}</p>
-                                                    <input type="text" id="device"
-                                                        class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                                                        formControlName="name">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <button type="button"
-                                            class="h-11 w-80 text-start bg-Gainsboro rounded-3xl pl-5 mt-1 ml-1 font-light text-xl"
-                                            (click)="addField('addresses.'+iAddress+'.devices', defaultDevice)">
-                                            Dodaj kolejne urządzenie
-                                            <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa"
-                                                class="inline ml-2">
-                                        </button>
-                                    </div>
-                                    <div class="flex flex-col gap-8">
-                                        <div class="">
-                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Ulica i numer</p>
-                                            <input type="text" id="streetNumber"
-                                                class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                                                formControlName="streetNumber">
-                                        </div>
-                                        <div class="">
-                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Kod pocztowy</p>
-                                            <input type="text" id="zip"
-                                                class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                                                formControlName="zip">
-                                        </div>
-                                        <div class="">
-                                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Miejscowość</p>
-                                            <input type="text" id="town"
-                                                class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                                                formControlName="town">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button"
-                        class="h-11 w-70 text-start bg-Gainsboro rounded-3xl pl-5 mt-3 ml-1 font-light text-xl"
-                        (click)="addField('addresses', defaultAddress)">
-                        Dodaj kolejny adres
-                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline ml-3">
-                    </button>
-                </div>
-                <button type="submit"
-                    class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
-                    <span class="font-bold text-2xl">DODAJ</span>
-                </button>
+        <form class="" [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="">
+
+            <div class="flex ml-36 mt-16 items-center gap-2">
+                <div
+                    class="w-13 h-13 rounded-full bg-KeyLime text-BlackChocolate text-2xl font-bold flex justify-center items-center">
+                    1</div>
+                <hr class="w-24 h-0.5 bg-KeyLime">
+                <div
+                    class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center">
+                    2</div>
+                <hr class="w-24 h-0.5 bg-KeyLime">
+                <div
+                    class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center">
+                    3</div>
             </div>
+            <span class="p-float-label ml-4 mt-5">
+                <input id="float-input" type="text" pInputText>
+                <label for="float-input">Ulica i numer</label>
+            </span>
         </form>
 
 

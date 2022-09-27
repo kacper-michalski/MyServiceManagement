@@ -23,18 +23,22 @@ module.exports = {
           '900': '#191C17'
         },
       },
-      
+
       maxWidth: {
         '8xl': '1920px'
       },
-      borderWidth:{
+      borderWidth: {
         '1': '1px',
       },
-      width:{
+      width: {
+        '13': '52px',
         '70': '272px',
       },
+      height: {
+        '13': '52px',
+      }
     },
-    
+
   },
   plugins: [],
 }
