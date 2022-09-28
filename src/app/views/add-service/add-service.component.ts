@@ -32,7 +32,7 @@ export class AddServiceComponent {
   serviceTechnicians: ServicemanDetails[];
   serviceForm = this.fb.group({
     client: [this.addClientService.clientDetails.firstName, Validators.required],
-    address: [this.addAddressService.address.streetNumber, Validators.required],
+    address: [this.addAddressService.address.street, Validators.required],
     device: [this.fb.array([this.fb.group(this.defaultDevice)])],
     description: [this.getService().description, [Validators.required]],
     date: [this.getService().date, [Validators.required]],
@@ -51,10 +51,10 @@ export class AddServiceComponent {
       { firstName: 'Wojciech ', lastName: 'Suchodolski', phoneNumber: '544 997 997', email: 'wojtuś@wp.pl' },
     ],
       this.addresses = [
-        { streetNumber: 'Szkolna 17', zip: '69-997', town: 'Białystok', devices: ['farelka', 'pralka', 'odkurzacz', 'mikrofala'] },
-        { streetNumber: 'Szkolna 15', zip: '69-997', town: 'Białystok', devices: ['spawarka'] },
-        { streetNumber: 'Boboli 8', zip: '69-997', town: 'Białystok', devices: ['kuchenka gazowa'] },
-        { streetNumber: 'Boboli 10', zip: '69-997', town: 'Białystok', devices: ['skoda'] },
+        { street: 'Szkolna 17', zipCode: '69-997', city: 'Białystok'},
+        { street: 'Szkolna 15', zipCode: '69-997', city: 'Białystok'},
+        { street: 'Boboli 8', zipCode: '69-997', city: 'Białystok' },
+        { street: 'Boboli 10', zipCode: '69-997', city: 'Białystok' },
       ]
       ,
       this.serviceTechnicians = [

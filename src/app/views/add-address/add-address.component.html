@@ -1,31 +1,145 @@
-<div class="max-w-2xl w-full mx-auto mt-5">
+<div class="max-w-2xl w-full mx-auto mt-4">
     <p
         class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro">
         Dodaj nowy adres</p>
-    <div class="rounded-md border border-KeyLime relative bg-BlackChocolate h-52">
+    <div class="rounded-md border border-KeyLime relative bg-BlackChocolate">
         <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
+        <div class="flex flex-col items-center">
+            <div class="flex mt-16 items-center gap-2">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 1" [ngClass]="{'active': page === 1}"
+                        class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        1</button>
+                    <div class="w-max h-max absolute mt-14">
+                        <p class=" text-Gainsboro text-xs">Adres</p>
+                    </div>
 
-        <form class="" [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="">
+                </div>
 
-            <div class="flex ml-36 mt-16 items-center gap-2">
-                <div
-                    class="w-13 h-13 rounded-full bg-KeyLime text-BlackChocolate text-2xl font-bold flex justify-center items-center">
-                    1</div>
                 <hr class="w-24 h-0.5 bg-KeyLime">
-                <div
-                    class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center">
-                    2</div>
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 2" [ngClass]="{'active': page === 2}"
+                        class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        2</button>
+                    <div class="w-max h-max absolute mt-14">
+                        <p class=" text-Gainsboro text-xs">Urządzenie</p>
+                    </div>
+                </div>
+
                 <hr class="w-24 h-0.5 bg-KeyLime">
-                <div
-                    class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center">
-                    3</div>
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 3" [ngClass]="{'active': page === 3}"
+                        class="w-13 h-13 border border-KeyLime rounded-full bg-BlackChocolate text-Gainsboro text-2xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        3</button>
+                    <div class="w-max h-max absolute mt-14">
+                        <p class=" text-Gainsboro text-xs">Podusmowanie</p>
+                    </div>
+                </div>
+
             </div>
-            <span class="p-float-label ml-4 mt-5">
-                <input id="float-input" type="text" pInputText>
-                <label for="float-input">Ulica i numer</label>
-            </span>
-        </form>
+            <form class="" [formGroup]="addressForm" (ngSubmit)="onSubmit()" class="">
+                <div *ngIf="page ===1">
+                    <div class="mt-20">
+                        <span class="p-float-label mb-8">
+                            <input formControlName="street" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Ulica i numer</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="zipCode" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Kod pocztowy</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="city" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Miejscowość</label>
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="page ===2">
+                    <div class="mt-16">
+                        <span class="p-float-label mb-8">
+                            <input formControlName="idFactory" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer fabryczny</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="serialNumber" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer seryjny</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="idFd" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer FD</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="catalogNumber" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer katalogowy</label>
+                        </span>
+                    </div>
+                </div>
+                <div *ngIf="page === 1 || page === 2" class="flex justify-center mt-10 mb-20">
+                    <p-button label="Dalej" (click)="onClickNextPage()"></p-button>
+                </div>
+                <div *ngIf="page ===3">
+                    <div class="mt-16">
+                        <div class="w-80 relative">
+                            <p
+                                class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro text-sm">
+                                Adres</p>
+                            <div
+                                class="rounded-md border border-KeyLime relative bg-Gainsboro flex flex-col items-center pt-6 pb-3">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs">Ulica i numer</p>
+                                    <p class="">{{this.addressForm.get('street')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Kod pocztowy</p>
+                                    <p class="">{{this.addressForm.get('zipCode')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Miejscowość</p>
+                                    <p class="">{{this.addressForm.get('city')!.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-10">
+                        <div class="w-80 relative">
+                            <p
+                                class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro text-sm">
+                                Urządzenie</p>
+                            <div
+                                class="rounded-md border border-KeyLime relative bg-Gainsboro flex flex-col items-center pt-6 pb-3">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs">Numer fabryczny</p>
+                                    <p class="">{{this.addressForm.get('idFactory')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Numer seryjny</p>
+                                    <p class="">{{this.addressForm.get('serialNumber')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Numer FD</p>
+                                    <p class="">{{this.addressForm.get('idFd')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Numer katalogowy</p>
+                                    <p class="">{{this.addressForm.get('catalogNumber')!.value}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="page === 3" class="flex justify-center mt-8 mb-14">
+                    <button type="submit" pButton label="Zapisz" class="p-button-success"></button>
+                </div>
 
+
+            </form>
+
+        </div>
 
     </div>
 

@@ -6,6 +6,10 @@ import { FormGroup } from '@angular/forms';
 import { AddAddressService } from 'src/app/services/add-address.service';
 import { take } from 'rxjs';
 import { Address } from 'src/app/models/address.model';
+import { Device } from 'src/app/models/device.model';
+import { PrimeNGConfig } from 'primeng/api';
+import { AddDeviceService } from 'src/app/services/add-device.service';
+
 @Component({
   selector: 'app-add-address',
   templateUrl: './add-address.component.html',
@@ -14,54 +18,55 @@ import { Address } from 'src/app/models/address.model';
 })
 
 
-export class AddAddressComponent{
-  defaultDevice={
-    name : [""],
+export class AddAddressComponent {
+  defaultDevice = {
+    name: [""],
   };
-  defaultAddress={
+  defaultAddress = {
     devices: this.fb.array([this.fb.group(this.defaultDevice)]),
     streetNumber: [""],
     town: [""],
     zip: [""]
   };
-  clients: ClientDetails[];
-  selectedClient: ClientDetails[];
+  page: number;
+  
   addressForm = this.fb.group({
-    client: [this.addClientService.clientDetails.firstName, Validators.required],
-    addresses: this.fb.array([this.fb.group({
-      devices: this.fb.array([this.fb.group(this.defaultDevice)]),
-      streetNumber: [this.getAddress().streetNumber, [Validators.required]],
-      town: [this.getAddress().town, [Validators.required]],
-      zip: [this.getAddress().zip, [Validators.required]],
-    })])
-
+    street: [this.getAddress().street, [Validators.required]],
+    zipCode: [this.getAddress().zipCode, [Validators.required]],
+    city: [this.getAddress().city, [Validators.required]],
+    idFactory: [this.getDevice().idFactory, [Validators.required]],
+    idFd: [this.getDevice().idFd, [Validators.required]],
+    serialNumber: [this.getDevice().serialNumber, [Validators.required]],
+    catalogNumber: [this.getDevice().catalogNumber, [Validators.required]]
   });
-  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService) {
-
-    this.clients = [
-      { firstName: 'Stachu ', lastName: 'Johnes', phoneNumber: '997 997 997', email: 'staszek@wp.pl' },
-      { firstName: 'Zdzichu ', lastName: 'Ogórek', phoneNumber: '123 997 997', email: 'zdzisiu@wp.pl' },
-      { firstName: 'Krzysztof ', lastName: 'Kononowicz', phoneNumber: '153 997 997', email: 'krzysiu@wp.pl' },
-      { firstName: 'Wojciech ', lastName: 'Suchodolski', phoneNumber: '544 997 997', email: 'wojtuś@wp.pl' },
-    ]
+  constructor(private addClientService: AddClientService, private fb: FormBuilder, private addAddressService: AddAddressService, private primengConfig: PrimeNGConfig, private addDeviceService: AddDeviceService) {
+  }
+  ngOnInit() {
+    this.primengConfig.ripple = true;
+    this.page = 1;
   }
   private getAddress() {
     return this.addAddressService.address;
   }
-  public getDevices(address: any) {
-    return (address.get('devices')! as FormArray).controls;
+  public getDevice() {
+    return this.addDeviceService.device;
   }
   public get addresses() {
-    return (this.addressForm.get('addresses')! as FormArray<FormGroup>).controls;
+    // return (this.addressForm.get('addresses')! as FormArray<FormGroup>).controls;
+    return
   }
   public onSubmit() {
-    const address=this.addressForm.value as Address;
-    console.log(this.addressForm.value);
+    const address = this.addressForm.value as Address;
+    const device = this.addressForm.value as Device;
     this.addAddressService.addAddress(address).pipe(take(1)).subscribe();
+    this.addDeviceService.addDevice(device).pipe(take(1)).subscribe();
   }
-  public addField(path : string, group : any){
+  public addField(path: string, group: any) {
     const fb = this.addressForm.get(path);
     (fb as FormArray).push(this.fb.group(group));
+  }
+  public onClickNextPage() {
+    this.page += 1;
   }
 }
 

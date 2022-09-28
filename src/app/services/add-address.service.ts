@@ -8,13 +8,15 @@ export class AddAddressService {
   public address: Address;
   constructor(private http: HttpClient) {
     this.address = {
-      streetNumber: "",
-      zip: "",
-      town: "",
-      devices: [],
+      street: "",
+      zipCode: "",
+      city: "",
     }
   }
-  public addAddress(address: Address) {
-    return this.http.post<Address>('http://localhost:3000/address', address);
+  public addAddress(address: any) {
+    
+    const idDevices: string[] = [address.serialNumber + address.catalogNumber];
+    console.log({ ...address, idDevices: idDevices });
+    return this.http.post<Address>('http://localhost:8080/address', { ...address, idDevices: idDevices });
   }
 }

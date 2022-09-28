@@ -48,11 +48,11 @@ export class ShowDropDownService {
         this.onClickDropDown('address');
         this.selectedAddress = address;
         this.selectedDevice = "";
-        return this.selectedAddressString = address.streetNumber + '\n' + address.zip + '\n' + address.town;
+        return this.selectedAddressString = address.street + '\n' + address.zipCode + '\n' + address.city;
     }
     public onSelectDevice(iDevice: number) {
         this.onClickDropDown('device');
-        return this.selectedDevice = this.selectedAddress.devices[iDevice];
+        // return this.selectedDevice = this.selectedAddress.devices[iDevice];
     }
     public onSelectServiceman(serviceman: ServicemanDetails) {
         this.onClickDropDown('serviceman');

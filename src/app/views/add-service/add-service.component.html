@@ -46,9 +46,9 @@
                             <div *ngFor="let address of this.addresses"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
                                 (click)="onSelectAddress(address)">
-                                {{address.streetNumber}}<br>
-                                {{address.zip}}<br>
-                                {{address.town}}
+                                {{address.street}}<br>
+                                {{address.zipCode}}<br>
+                                {{address.city}}
                             </div>
                         </div>
                     </div>
@@ -64,14 +64,14 @@
                                 class="absolute right-3 cursor-pointer" (click)="onClickDropDown('device')">
                             {{this.showDropDownService.selectedDevice}}
                         </div>
-                        <div *ngIf="showDropDownService.dropDown.device"
+                        <!-- <div *ngIf="showDropDownService.dropDown.device"
                             class="max-h-48 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
                             <div *ngFor="let device of this.showDropDownService.selectedAddress.devices;index as iDevice;"
                                 class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
                                 (click)="onSelectDevice(iDevice)">
                                 {{device}}
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 

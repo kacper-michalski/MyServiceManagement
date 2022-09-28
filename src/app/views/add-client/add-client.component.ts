@@ -38,7 +38,7 @@ export class AddClientComponent {
     phoneNumber: [this.getClientDetails().phoneNumber, [Validators.required, Validators.minLength(9)]],
     email: [this.getClientDetails().email, [Validators.required, Validators.email]],
     addressesId: this.fb.array([this.fb.group({
-      addressId: [this.getAddress().streetNumber, [Validators.required]]
+      addressId: [this.getAddress().street, [Validators.required]]
     })]),
     tin: [this.getCompany().tin, [Validators.required]]
   });
