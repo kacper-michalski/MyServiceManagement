@@ -66,6 +66,8 @@ export class AddClientComponent {
   public onSubmit() {
     const client = this.clientForm.value as ClientDetails;
     this.addClientService.addClient(client).pipe(take(1)).subscribe();
+    this.clientForm.reset();
+
   }
   public onClickDropDown(key: keyof DropDown) {
     this.showDropDownService.onClickDropDown(key);

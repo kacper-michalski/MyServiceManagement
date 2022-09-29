@@ -15,8 +15,8 @@ export class AddServicemanComponent {
   @Input() display: boolean;
   @Output() toggle = new EventEmitter();
   servicemanForm = this.fb.group({
-    name: [this.getServicemanDetails().name, [Validators.required,]],
-    phoneNumber: [this.getServicemanDetails().phoneNumber, [Validators.required, Validators.minLength(9)]],
+    name: [this.getServicemanDetails().name, [Validators.required]],
+    phoneNumber: [this.getServicemanDetails().phoneNumber, [Validators.required]],
     email: [this.getServicemanDetails().email, [Validators.required]]
   });
 
@@ -31,17 +31,10 @@ export class AddServicemanComponent {
   public onSubmit() {
     const serviceman = this.servicemanForm.value as ServicemanDetails
     this.addServicemanService.addServiceman(serviceman).pipe(take(1)).subscribe();
+    this.servicemanForm.reset();
   }
 
-  // public changeColor(){
-  //   const field  = document.getElementById('name');
-  //   if (!this.servicemanForm.get('name')?.valid && field!= null) {
-  //     field.style.backgroundColor  = "lime"
-  //   }
-  //   else if(field != null){
-  //     field.style.backgroundColor  = "blue"
-  //   }
-  // }
+
   hideDialog() {
     this.display = false;
     this.toggle.emit(this.display);

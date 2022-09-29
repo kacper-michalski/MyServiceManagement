@@ -76,6 +76,8 @@ export class AddServiceComponent {
   public onSubmit() {
     const service = this.serviceForm.value as Service;
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
+    this.serviceForm.reset();
+
   }
   public onClickDropDown(key: keyof DropDown) {
     this.showDropDownService.onClickDropDown(key);

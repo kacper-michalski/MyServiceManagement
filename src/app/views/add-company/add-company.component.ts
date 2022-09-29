@@ -26,6 +26,7 @@ export class AddCompanyComponent {
   public onSubmit() {
     const company = this.companyForm.value as Company
     this.addCompanyService.addCompany(company).pipe(take(1)).subscribe();
+    this.companyForm.reset();
   }
 
 }

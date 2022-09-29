@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppComponent } from './app.component';
 import { AddServicemanModule } from './views/add-serviceman/add-serviceman.module';
 import { ScheduleModule } from './views/schedule/schedule.module';
@@ -13,7 +12,6 @@ import { AddCompanyModule } from './views/add-company/add-company.module';
 @NgModule({
   declarations: [
     AppComponent
-    
   ],
   imports: [
     BrowserModule,

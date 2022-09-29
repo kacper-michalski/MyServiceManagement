@@ -60,6 +60,7 @@ export class AddAddressComponent {
     const device = this.addressForm.value as Device;
     this.addAddressService.addAddress(address).pipe(take(1)).subscribe();
     this.addDeviceService.addDevice(device).pipe(take(1)).subscribe();
+    this.addressForm.reset();
   }
   public addField(path: string, group: any) {
     const fb = this.addressForm.get(path);

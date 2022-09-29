@@ -1,41 +1,27 @@
-<div class="max-w-2xl w-full mx-auto">
-    <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nowego serwisanta</p>
-    <div class=" rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+<div class="max-w-2xl w-full mx-auto mt-4">
+    <p class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro">Dodaj nowego serwisanta</p>
+    <div class="rounded-md border border-KeyLime relative bg-BlackChocolate">
         <form class="flex flex-col gap-8 items-center" [formGroup]="servicemanForm" (ngSubmit)="onSubmit()">
             <img src="../../../assets/icons/x.svg" alt="ikona zamykania"
                 class="absolute right-0 cursor-pointer mt-5 mr-5"
                 (click)="hideDialog()">
-            <div class="mt-20">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Imię i nazwisko</p>
-                <input
-                    type="text"
-                    id="name"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl "
-                    formControlName="name"
-                >
+                <div class="mt-20">
+                    <span class="p-float-label mb-8">
+                        <input formControlName="name" id="float-input" type="text" pInputText class="w-80">
+                        <label for="float-input">Imię i nazwisko</label>
+                    </span>
+                    <span class="p-float-label mb-8">
+                        <p-inputMask formControlName="phoneNumber" mask="(+48) 999-999-999"></p-inputMask>
+                        <label for="float-input">Numer telefonu</label>
+                    </span>
+                    <span class="p-float-label mb-8">
+                        <input formControlName="email" id="float-input" type="text" pInputText class="w-80">
+                        <label for="float-input">E-mail</label>
+                    </span>
+                </div>
+            <div class="mb-14">
+                <button type="submit" pButton label="Zapisz" class="p-button-success" (click)="hideDialog()"></button>
             </div>
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Numer telefonu</p>
-                <input
-                    type="text"
-                    id="phoneNumber"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="phoneNumber"
-                >
-            </div>
-            <div class="">
-                <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">E-mail</p>
-                <input
-                    type="text"
-                    id="email"
-                    class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                    formControlName="email"
-                >
-            </div>
-            <button
-                class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32">
-                <span class="font-bold text-2xl">DODAJ</span>
-            </button>
         </form>
     </div>
 </div>

@@ -1,3 +1,10 @@
-// .outline{
-//     -webkit-text-stroke: 1px white;
-// }
+:host ::ng-deep .p-button {
+    background-color: #2C3528;
+    color: #D9D9D9;
+    border-color: #EAEC76;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+:host ::ng-deep .p-inputtext{
+    width: 320px;
+}
