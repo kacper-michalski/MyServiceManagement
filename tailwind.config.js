@@ -9,6 +9,7 @@ module.exports = {
         'KeyLime': '#EAEC76',
         'Gainsboro': '#D9D9D9',
         'DarkSeaGreen': '#97C085',
+        'PineTree': '#2C3528',
         'BlackChocolate': {
           DEFAULT: '#191C17',
           '50': '#596352',

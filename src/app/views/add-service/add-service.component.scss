@@ -1,0 +1,31 @@
+:host ::ng-deep .p-button {
+    background-color: #2C3528;
+    color: #D9D9D9;
+    border-color: #EAEC76;
+    padding-left: 40px;
+    padding-right: 40px;
+
+    &:hover {
+        background-color: #EAEC76;
+        color: #191C17;
+    }
+}
+
+.active {
+    @apply bg-KeyLime text-BlackChocolate;
+}
+
+:host ::ng-deep .p-inputtext {
+    @apply border-none bg-PineTree outline-none ring-0 text-white #{!important};
+
+}
+
+:host ::ng-deep .p-float-label label {
+    @apply text-white;
+}
+:host ::ng-deep .p-checkbox .p-checkbox-box {
+    @apply w-6 h-6 #{!important};
+}
+:host ::ng-deep .p-checkbox {
+    @apply w-6 h-6 #{!important};
+}

@@ -1,161 +1,180 @@
-<div class="max-w-4xl w-full mx-auto">
-    <p class="bg-KeyLime ml-4 px-5 py-1 w-max rounded-t-xl text-2xl">Dodaj nową usługę</p>
-    <div class="rounded-2xl border-l-8 border-b-8 border-t border-r border-KeyLime relative bg-BlackChocolate-700">
+<div class="max-w-2xl w-full mx-auto mt-4">
+    <p
+        class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white">
+        Dodaj nowe zlecenie</p>
+    <div class="rounded-md border border-KeyLime relative bg-BlackChocolate">
         <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
-        <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="mt-20 ">
-            <div class="grid grid-cols-2 justify-items-center">
-                <div class="flex flex-col gap-5 w-min">
-                    <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl pl-5 max-w-max text-xl">
-                        Dodaj nowego klienta
-                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
-                    </button>
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Klient</p>
-                        <div
-                            class="bg-Gainsboro w-80 h-44 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
-                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
-                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('client')">
-                            {{this.showDropDownService.selectedClient}}
-                        </div>
-                        <div *ngIf="showDropDownService.dropDown.client"
-                            class="max-h-96 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
-                            <div *ngFor="let client of this.clients"
-                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                (click)="onSelectClient(client)">
-                                {{client.firstName}}<br>
-                                {{client.lastName}}<br>
-                                {{client.phoneNumber}}<br>
-                                {{client.email}}
-                            </div>
-                        </div>
+        <div class="flex flex-col items-center">
+            <div class="flex mt-16 items-center gap-2">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 1" [ngClass]="{'active': page === 1}"
+                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-white text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        1</button>
+                    <div class="w-max h-max absolute mt-12">
+                        <p class=" text-white text-xs">Adres</p>
                     </div>
-                    <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl max-w-max pl-4 text-xl">
-                        Dodaj nowy adres klienta
-                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
-                    </button>
-                    <div class="">
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Adres</p>
-                        <div
-                            class="bg-Gainsboro w-80 h-28 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-4 text-xl whitespace-pre-line relative">
-                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
-                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('address')">
-                            {{this.showDropDownService.selectedAddressString}}
-                        </div>
-                        <div *ngIf="showDropDownService.dropDown.address"
-                            class="max-h-80 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
-                            <div *ngFor="let address of this.addresses"
-                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                (click)="onSelectAddress(address)">
-                                {{address.street}}<br>
-                                {{address.zipCode}}<br>
-                                {{address.city}}
-                            </div>
-                        </div>
-                    </div>
-                    <button type="button" class="h-11 text-start bg-Gainsboro rounded-3xl max-w-max pl-5 text-xl">
-                        Dodaj nowe urządzenie
-                        <img src="../../../assets/icons/plus-circle.svg" alt="ikona plusa" class="inline mx-1">
-                    </button>
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Urządzenie</p>
-                        <div
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-3 text-xl whitespace-pre-line relative">
-                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
-                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('device')">
-                            {{this.showDropDownService.selectedDevice}}
-                        </div>
-                        <!-- <div *ngIf="showDropDownService.dropDown.device"
-                            class="max-h-48 w-80 border-4 mt-1 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
-                            <div *ngFor="let device of this.showDropDownService.selectedAddress.devices;index as iDevice;"
-                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                (click)="onSelectDevice(iDevice)">
-                                {{device}}
-                            </div>
-                        </div> -->
+
+                </div>
+
+                <hr class="w-9 h-0.5 bg-KeyLime">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 2" [ngClass]="{'active': page === 2}"
+                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-white text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        2</button>
+                    <div class="w-max h-max absolute mt-12">
+                        <p class=" text-white text-xs">Klient</p>
                     </div>
                 </div>
 
+                <hr class="w-9 h-0.5 bg-KeyLime">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 3" [ngClass]="{'active': page === 3}"
+                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-white text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        3</button>
+                    <div class="w-max h-max absolute mt-12">
+                        <p class=" text-white text-xs">Firma</p>
+                    </div>
+                </div>
+                <hr class="w-9 h-0.5 bg-KeyLime">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 4" [ngClass]="{'active': page === 4}"
+                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-white text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        4</button>
+                    <div class="w-max h-max absolute mt-12">
+                        <p class=" text-white text-xs">Urządzenie</p>
+                    </div>
+                </div>
+                <hr class="w-9 h-0.5 bg-KeyLime">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 5" [ngClass]="{'active': page === 5}"
+                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-white text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        5</button>
+                    <div class="w-max h-max absolute mt-12">
+                        <p class=" text-white text-xs">Zlecenie</p>
+                    </div>
+                </div>
+                <hr class="w-9 h-0.5 bg-KeyLime">
+                <div class="flex flex-col items-center">
+                    <button type="button" (click)="this.page = 6" [ngClass]="{'active': page === 6}"
+                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-white text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                        6</button>
+                    <div class="w-max h-max absolute mt-12">
+                        <p class=" text-white text-xs">Podusmowanie</p>
+                    </div>
+                </div>
 
-
-                <div class="flex flex-col gap-5 w-min">
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Opis</p>
-                        <textarea rows="8" cols="50" id=""
-                            class="bg-Gainsboro w-80 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-3 text-xl"
-                            formControlName="description">
-                </textarea>
-                    </div>
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Data</p>
-                        <input type="date" id=""
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-xl"
-                            formControlName="date">
-                    </div>
-                    <div class="flex justify-between">
-                        <div>
-                            <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg">Rozpoczęcie</p>
-                            <input type="time" id=""
-                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                                formControlName="commencement">
+            </div>
+            
+            <form class="" autocomplete="off" [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="">
+                <div *ngIf="page ===1">
+                    <div class="mt-20">
+                        <div class="p-field-checkbox mb-8 w-80">
+                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true" inputId="binary"></p-checkbox>
+                            <label for="binary" class="text-white ml-1">Czy chcesz dodać nowy adres?</label>
                         </div>
-                        <div>
-                            <p class="bg-KeyLime ml-3 px-2 w-max rounded-t-lg">Zakończenie</p>
-                            <input type="time" id=""
-                                class="bg-Gainsboro w-36 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-2xl"
-                                formControlName="termination">
+                        <div *ngIf="this.checked===true">
+                            <span class="p-float-label mb-8">
+                                <input  id="float-input" type="text" pInputText class="w-80">
+                                <label for="float-input">Ulica i numer</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <input  id="float-input" type="text" pInputText class="w-80">
+                                <label for="float-input">Kod pocztowy</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <input  id="float-input" type="text" pInputText class="w-80">
+                                <label for="float-input">Miejscowość</label>
+                            </span>
                         </div>
                     </div>
-                    <div>
-                        <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Serwisant</p>
-                        <div
-                            class="bg-Gainsboro w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-3 text-xl whitespace-pre-line relative">
-                            <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
-                                class="absolute right-3 cursor-pointer" (click)="onClickDropDown('serviceman')">
-                            {{this.showDropDownService.selectedServiceman}}
-                        </div>
-                        <div *ngIf="showDropDownService.dropDown.serviceman"
-                            class="max-h-96 w-80 mt-1 border-4 border-KeyLime rounded-2xl overflow-y-auto absolute z-10">
-                            <div *ngFor="let serviceman of this.serviceTechnicians;"
-                                class="bg-Gainsboro w-80 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                (click)="onSelectServiceman(serviceman)">
-                                {{serviceman.name}}
-                            </div>
-                        </div>
+                </div>
+                <div *ngIf="page ===2">
+                    <div class="mt-16">
+                        <span class="p-float-label mb-8">
+                            <input formControlName="idFactory" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer fabryczny</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="serialNumber" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer seryjny</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="idFd" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer FD</label>
+                        </span>
+                        <span class="p-float-label mb-8">
+                            <input formControlName="catalogNumber" id="float-input" type="text" pInputText class="w-80">
+                            <label for="float-input">Numer katalogowy</label>
+                        </span>
                     </div>
-                    <div class="flex justify-between">
-                        <div class="">
-                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Status</p>
+                </div>
+                <div *ngIf="page === 1 || page === 2" class="flex justify-center mt-10 mb-20">
+                    <p-button label="Dalej" (click)="onClickNextPage()"></p-button>
+                </div>
+                <!-- <div *ngIf="page ===3">
+                    <div class="mt-16">
+                        <div class="w-80 relative">
+                            <p
+                                class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro text-sm">
+                                Adres</p>
                             <div
-                                class="bg-Gainsboro w-44 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none p-1 pl-2 text-xl relative">
-                                <img src="../../../assets/icons/switch-vertical.svg" alt="ikona strzałek"
-                                    class="absolute right-2 cursor-pointer" (click)="onClickDropDown('status')">
-                                {{this.showDropDownService.selectedStatus}}
-                            </div>
-                            <div *ngIf="showDropDownService.dropDown.status"
-                                class="w-min border-4 mt-1 border-KeyLime rounded-2xl absolute z-10">
-                                <div *ngFor="let status of this.statuses"
-                                    class="bg-Gainsboro w-36 h-min pl-3 text-xl hover:bg-KeyLime py-3 border-y-2 border-BlackChocolate "
-                                    (click)="onSelectStatus(status)"
-                                    >
-                                    {{status}}
+                                class="rounded-md border border-KeyLime relative bg-Gainsboro flex flex-col items-center pt-6 pb-3">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs">Ulica i numer</p>
+                                    <p class="">{{this.addressForm.get('street')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Kod pocztowy</p>
+                                    <p class="">{{this.addressForm.get('zipCode')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Miejscowość</p>
+                                    <p class="">{{this.addressForm.get('city')!.value}}</p>
                                 </div>
                             </div>
                         </div>
-                        <div>
-                            <p class="bg-KeyLime ml-3 px-3 w-max rounded-t-lg">Cena</p>
-                            <input type="text"
-                                class="bg-Gainsboro w-32 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl focus:outline-none pl-3 text-xl"
-                                formControlName="price">
+                    </div> -->
+                <!-- <div class="mt-10">
+                        <div class="w-80 relative">
+                            <p
+                                class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro text-sm">
+                                Urządzenie</p>
+                            <div
+                                class="rounded-md border border-KeyLime relative bg-Gainsboro flex flex-col items-center pt-6 pb-3">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs">Numer fabryczny</p>
+                                    <p class="">{{this.addressForm.get('idFactory')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Numer seryjny</p>
+                                    <p class="">{{this.addressForm.get('serialNumber')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Numer FD</p>
+                                    <p class="">{{this.addressForm.get('idFd')!.value}}</p>
+                                </div>
+                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
+                                <div class="w-64 py-3">
+                                    <p class="font-bold text-xs mb-1">Numer katalogowy</p>
+                                    <p class="">{{this.addressForm.get('catalogNumber')!.value}}</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                </div> -->
+                <div *ngIf="page === 3" class="flex justify-center mt-8 mb-14">
+                    <button type="submit" pButton label="Zapisz" class="p-button-success"></button>
                 </div>
-            </div>
-            <div class="min-w-max flex justify-center">
-                <button type="submit"
-                    class="bg-DarkSeaGreen w-80 h-11 border-l-4 border-b-4 border-KeyLime rounded-2xl mb-32 mt-10">
-                    <span class="font-bold text-2xl">DODAJ</span>
-                </button>
-            </div>
-        </form>
+
+
+            </form>
+
+        </div>
+
     </div>
+
 </div>
