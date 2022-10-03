@@ -12,6 +12,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { InputMaskModule } from 'primeng/inputmask';
+import {InputNumberModule} from 'primeng/inputnumber';
+
 @NgModule({
   declarations: [AddServiceComponent],
   imports: [
@@ -28,7 +30,8 @@ import { InputMaskModule } from 'primeng/inputmask';
     AutoCompleteModule,
     InputTextareaModule,
     CalendarModule,
-    InputMaskModule
+    InputMaskModule,
+    InputNumberModule
   ],
   exports: [AddServiceComponent]
 })

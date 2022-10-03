@@ -20,20 +20,20 @@ export class AddServiceComponent {
   page: number;
   checked: boolean;
   serviceForm = this.fb.group({
-    Address: this.fb.group({
+    address: this.fb.group({
       checkbox: [''],
       street: [this.addAddressService.address.street, Validators.required],
       zipCode: [this.addAddressService.address.zipCode, Validators.required],
       city: [this.addAddressService.address.city, Validators.required]
     }),
-    Customer: this.fb.group({
+    customer: this.fb.group({
       checkbox: [''],
       firstName: [this.addClientService.client.firstName, Validators.required],
       lastName: [this.addClientService.client.lastName, Validators.required],
       phoneNumber: [this.addClientService.client.phoneNumber, Validators.required],
       email: [this.addClientService.client.email, Validators.required]
     }),
-    Company: this.fb.group({
+    company: this.fb.group({
       checkbox: [''],
       name: [this.addCompanyService.company.name, Validators.required],
       tin: [this.addCompanyService.company.tin, Validators.required],
@@ -41,20 +41,20 @@ export class AddServiceComponent {
       zipCode: [this.addCompanyService.company.zipCode, Validators.required],
       city: [this.addCompanyService.company.city, Validators.required]
     }),
-    Device: this.fb.group({
+    device: this.fb.group({
       checkbox: [''],
       idFactory: [this.addDeviceService.device.idFactory, Validators.required],
       serialNumber: [this.addDeviceService.device.idFactory, Validators.required],
       idFd: [this.addDeviceService.device.idFactory, Validators.required],
       catalogNumber: [this.addDeviceService.device.catalogNumber, Validators.required]
     }),
-    Task: this.fb.group({
+    task: this.fb.group({
       description: [this.addServiceService.service.description, Validators.required],
       minPrice: [this.addServiceService.service.minPrice, Validators.required],
       maxPrice: [this.addServiceService.service.maxPrice, Validators.required],
       startTime: ['16:00:00'],
       endTime: ['17:00:00'],
-      date: ['29-07-2022', Validators.required],
+      date: ['2022-07-22', Validators.required],
       idTechnican: ['1', Validators.required]
     })
   });

@@ -65,7 +65,7 @@
             </div>
 
             <form class="" autocomplete="off" [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="">
-                <div formGroupName="Address" *ngIf="page ===1">
+                <div formGroupName="address" *ngIf="page ===1">
                     <div class="mt-16">
                         <div *ngIf="this.checked===false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź adres"></p-autoComplete>
@@ -91,7 +91,7 @@
                         </div>
                     </div>
                 </div>
-                <div formGroupName="Customer" *ngIf="page ===2">
+                <div formGroupName="customer" *ngIf="page ===2">
                     <div class="mt-16">
                         <div *ngIf="this.checked===false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź klienta"></p-autoComplete>
@@ -121,7 +121,7 @@
                         </div>
                     </div>
                 </div>
-                <div formGroupName="Company" *ngIf="page ===3">
+                <div formGroupName="company" *ngIf="page ===3">
                     <div class="mt-16">
                         <div *ngIf="this.checked===false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="NIP firmy"></p-autoComplete>
@@ -155,7 +155,7 @@
                         </div>
                     </div>
                 </div>
-                <div formGroupName="Device" *ngIf="page ===4">
+                <div formGroupName="device" *ngIf="page ===4">
                     <div class="mt-16">
                         <div *ngIf="this.checked===false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Numer katalogowy, seryjny">
@@ -187,7 +187,7 @@
                         </div>
                     </div>
                 </div>
-                <div formGroupName="Task" *ngIf="page ===5">
+                <div formGroupName="task" *ngIf="page ===5">
                     <div class="mt-16 flex flex-col gap-8">
                         <span class="p-float-label">
                             <textarea formControlName="description" id="float-input" rows="3" class="w-80" pInputTextarea
@@ -196,11 +196,11 @@
                         </span>
                         <div class="w-80 flex gap-8">
                             <span class="p-float-label">
-                                <p-inputMask formControlName="minPrice" mask="999 zł"></p-inputMask>
+                                <p-inputNumber formControlName="minPrice"></p-inputNumber>
                                 <label for="float-input">Cena min</label>
                             </span>
                             <span class="p-float-label">
-                                <p-inputMask formControlName="maxPrice" mask="999 zł"></p-inputMask>
+                                <p-inputNumber formControlName="maxPrice"></p-inputNumber>
                                 <label for="float-input">Cena max</label>
                             </span>
                         </div>
@@ -241,12 +241,12 @@
                                 <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs">Ulica i numer</p>
-                                        <p class="">{{this.serviceForm.get('Address')!.get('street')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('address')!.get('street')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Kod pocztowy i miejscowość</p>
-                                        <p class="">{{this.serviceForm.get('Address')!.get('zipCode')!.value}} {{this.serviceForm.get('Address')!.get('city')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('address')!.get('zipCode')!.value}} {{this.serviceForm.get('address')!.get('city')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -257,17 +257,17 @@
                                 <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs">Imię i nazwisko</p>
-                                        <p class="">{{this.serviceForm.get('Customer')!.get('firstName')!.value}} {{this.serviceForm.get('Customer')!.get('lastName')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('customer')!.get('firstName')!.value}} {{this.serviceForm.get('customer')!.get('lastName')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Numer telefonu</p>
-                                        <p class="">{{this.serviceForm.get('Customer')!.get('phoneNumber')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('customer')!.get('phoneNumber')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">E-mail</p>
-                                        <p class="">{{this.serviceForm.get('Customer')!.get('email')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('customer')!.get('email')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -278,22 +278,22 @@
                                 <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs">Nazwa</p>
-                                        <p class="">{{this.serviceForm.get('Company')!.get('name')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('company')!.get('name')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">NIP</p>
-                                        <p class="">{{this.serviceForm.get('Company')!.get('tin')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('company')!.get('tin')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Ulica i numer</p>
-                                        <p class="">{{this.serviceForm.get('Company')!.get('street')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('company')!.get('street')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Kod pocztowy i miejscowość</p>
-                                        <p class="">{{this.serviceForm.get('Company')!.get('zipCode')!.value}} {{this.serviceForm.get('Company')!.get('city')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('company')!.get('zipCode')!.value}} {{this.serviceForm.get('company')!.get('city')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -306,22 +306,22 @@
                                 <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs">Numer fabryczny</p>
-                                        <p class="">{{this.serviceForm.get('Device')!.get('idFactory')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('device')!.get('idFactory')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Numer seryjny</p>
-                                        <p class="">{{this.serviceForm.get('Device')!.get('serialNumber')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('device')!.get('serialNumber')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Numer FD</p>
-                                        <p class="">{{this.serviceForm.get('Device')!.get('idFd')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('device')!.get('idFd')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Numer katalogowy</p>
-                                        <p class="">{{this.serviceForm.get('Device')!.get('catalogNumber')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('device')!.get('catalogNumber')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -332,22 +332,22 @@
                                 <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs">Opis</p>
-                                        <p class="">{{this.serviceForm.get('Task')!.get('description')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('task')!.get('description')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Cena</p>
-                                        <p class="">{{this.serviceForm.get('Task')!.get('minPrice')!.value}} - {{this.serviceForm.get('Task')!.get('maxPrice')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('task')!.get('minPrice')!.value}} - {{this.serviceForm.get('task')!.get('maxPrice')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Czas</p>
-                                        <p class="">{{this.serviceForm.get('Task')!.get('startTime')!.value}} - {{this.serviceForm.get('Task')!.get('endTime')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('task')!.get('startTime')!.value}} - {{this.serviceForm.get('task')!.get('endTime')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Data</p>
-                                        <p class="">{{this.serviceForm.get('Task')!.get('date')!.value}}</p>
+                                        <p class="">{{this.serviceForm.get('task')!.get('date')!.value}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
