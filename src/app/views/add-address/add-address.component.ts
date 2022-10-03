@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ClientDetails } from 'src/app/models/client-details.model';
+import { Client } from 'src/app/models/client.model';
 import { AddClientService } from 'src/app/services/add-client.service';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms';

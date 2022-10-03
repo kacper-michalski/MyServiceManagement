@@ -6,18 +6,18 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddServiceService {
   public service: Service;
-  
+
   constructor(private http: HttpClient) {
     this.service = {
       description: "",
-      date: new Date(),
-      commencement: "",
-      termination: "",
-      status: "",
-      price: "",
+      minPrice: "",
+      maxPrice: "",
+      startTime: "",
+      endTime: ""
     }
   }
   public addService(service: Service) {
-    return this.http.post<Service>('http://localhost:3000/service', service);
+    console.log(service);
+    return this.http.post<Service>('http://localhost:8080/task/form', service);
   }
 }

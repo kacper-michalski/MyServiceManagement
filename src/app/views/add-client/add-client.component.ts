@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Validators, FormBuilder, FormArray, FormGroup } from '@angular/forms';
 import { AddClientService } from 'src/app/services/add-client.service';
-import { ClientDetails } from 'src/app/models/client-details.model';
+import { Client } from 'src/app/models/client.model';
 import { take } from "rxjs";
 import { ShowDropDownService } from 'src/app/services/show-dropdown.service';
 import { DropDown } from 'src/app/models/dropDown.model';
@@ -33,10 +33,10 @@ export class AddClientComponent {
     addressId: [""],
   };
   clientForm = this.fb.group({
-    firstName: [this.getClientDetails().firstName, [Validators.required,]],
-    lastName: [this.getClientDetails().lastName, [Validators.required,]],
-    phoneNumber: [this.getClientDetails().phoneNumber, [Validators.required, Validators.minLength(9)]],
-    email: [this.getClientDetails().email, [Validators.required, Validators.email]],
+    firstName: [this.getClient().firstName, [Validators.required,]],
+    lastName: [this.getClient().lastName, [Validators.required,]],
+    phoneNumber: [this.getClient().phoneNumber, [Validators.required, Validators.minLength(9)]],
+    email: [this.getClient().email, [Validators.required, Validators.email]],
     addressesId: this.fb.array([this.fb.group({
       addressId: [this.getAddress().street, [Validators.required]]
     })]),
@@ -56,15 +56,15 @@ export class AddClientComponent {
       ]
   }
 
-  private getClientDetails() {
-    return this.addClientService.clientDetails;
+  private getClient() {
+    return this.addClientService.client;
   }
   private getCompany(){
     return this.addCompanyService.company;
   }
 
   public onSubmit() {
-    const client = this.clientForm.value as ClientDetails;
+    const client = this.clientForm.value as Client;
     this.addClientService.addClient(client).pipe(take(1)).subscribe();
     this.clientForm.reset();
 

@@ -1,6 +1,5 @@
-<div class="max-w-2xl w-full mx-auto mt-4">
-    <p
-        class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white">
+<div [ngClass]="{'summary': page === 6}" class="max-w-2xl w-full mx-auto mt-4">
+    <p class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white">
         Dodaj nowe zlecenie</p>
     <div class="rounded-md border border-KeyLime relative bg-BlackChocolate">
         <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
@@ -64,110 +63,304 @@
                 </div>
 
             </div>
-            
+
             <form class="" autocomplete="off" [formGroup]="serviceForm" (ngSubmit)="onSubmit()" class="">
-                <div *ngIf="page ===1">
-                    <div class="mt-20">
+                <div formGroupName="Address" *ngIf="page ===1">
+                    <div class="mt-16">
+                        <div *ngIf="this.checked===false" class="mb-3">
+                            <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź adres"></p-autoComplete>
+                        </div>
                         <div class="p-field-checkbox mb-8 w-80">
-                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true" inputId="binary"></p-checkbox>
-                            <label for="binary" class="text-white ml-1">Czy chcesz dodać nowy adres?</label>
+                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
+                                inputId="binary"></p-checkbox>
+                            <label for="binary" class="text-white ml-2">Czy chcesz dodać nowy adres?</label>
                         </div>
                         <div *ngIf="this.checked===true">
                             <span class="p-float-label mb-8">
-                                <input  id="float-input" type="text" pInputText class="w-80">
+                                <input formControlName="street" id="float-input" type="text" pInputText>
                                 <label for="float-input">Ulica i numer</label>
                             </span>
                             <span class="p-float-label mb-8">
-                                <input  id="float-input" type="text" pInputText class="w-80">
+                                <p-inputMask formControlName="zipCode" mask="99-999" ></p-inputMask>
                                 <label for="float-input">Kod pocztowy</label>
                             </span>
                             <span class="p-float-label mb-8">
-                                <input  id="float-input" type="text" pInputText class="w-80">
+                                <input formControlName="city" id="float-input" type="text" pInputText>
                                 <label for="float-input">Miejscowość</label>
                             </span>
                         </div>
                     </div>
                 </div>
-                <div *ngIf="page ===2">
+                <div formGroupName="Customer" *ngIf="page ===2">
                     <div class="mt-16">
-                        <span class="p-float-label mb-8">
-                            <input formControlName="idFactory" id="float-input" type="text" pInputText class="w-80">
-                            <label for="float-input">Numer fabryczny</label>
-                        </span>
-                        <span class="p-float-label mb-8">
-                            <input formControlName="serialNumber" id="float-input" type="text" pInputText class="w-80">
-                            <label for="float-input">Numer seryjny</label>
-                        </span>
-                        <span class="p-float-label mb-8">
-                            <input formControlName="idFd" id="float-input" type="text" pInputText class="w-80">
-                            <label for="float-input">Numer FD</label>
-                        </span>
-                        <span class="p-float-label mb-8">
-                            <input formControlName="catalogNumber" id="float-input" type="text" pInputText class="w-80">
-                            <label for="float-input">Numer katalogowy</label>
-                        </span>
+                        <div *ngIf="this.checked===false" class="mb-3">
+                            <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź klienta"></p-autoComplete>
+                        </div>
+                        <div class="p-field-checkbox mb-8 w-80">
+                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
+                                inputId="binary"></p-checkbox>
+                            <label for="binary" class="text-white ml-2">Czy chcesz dodać nowego klienta?</label>
+                        </div>
+                        <div *ngIf="this.checked===true">
+                            <span class="p-float-label mb-8">
+                                <input formControlName="firstName" id="float-input" type="text" pInputText>
+                                <label for="float-input">Imię</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <input formControlName="lastName" id="float-input" type="text" pInputText>
+                                <label for="float-input">Nazwisko</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="phoneNumber" mask="(+48) 999-999-999"></p-inputMask>
+                                <label for="float-input">Numer telefonu</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <input formControlName="email" id="float-input" type="text" pInputText>
+                                <label for="float-input">E-mail</label>
+                            </span>
+                        </div>
                     </div>
                 </div>
-                <div *ngIf="page === 1 || page === 2" class="flex justify-center mt-10 mb-20">
+                <div formGroupName="Company" *ngIf="page ===3">
+                    <div class="mt-16">
+                        <div *ngIf="this.checked===false" class="mb-3">
+                            <p-autoComplete field="name" [minLength]="1" placeholder="NIP firmy"></p-autoComplete>
+                        </div>
+                        <div class="p-field-checkbox mb-8 w-80">
+                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
+                                inputId="binary"></p-checkbox>
+                            <label for="binary" class="text-white ml-2">Czy chcesz dodać nową firmę?</label>
+                        </div>
+                        <div *ngIf="this.checked===true">
+                            <span class="p-float-label mb-8">
+                                <input formControlName="name" id="float-input" type="text" pInputText>
+                                <label for="float-input">Nazwa</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="tin" mask="9999999999"></p-inputMask>
+                                <label for="float-input">NIP</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <input formControlName="street" id="float-input" type="text" pInputText>
+                                <label for="float-input">Ulica i numer</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="zipCode" mask="99-999" ></p-inputMask>
+                                <label for="float-input">Kod pocztowy</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <input formControlName="city" id="float-input" type="text" pInputText>
+                                <label for="float-input">Miejscowość</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div formGroupName="Device" *ngIf="page ===4">
+                    <div class="mt-16">
+                        <div *ngIf="this.checked===false" class="mb-3">
+                            <p-autoComplete field="name" [minLength]="1" placeholder="Numer katalogowy, seryjny">
+                            </p-autoComplete>
+                        </div>
+                        <div class="p-field-checkbox mb-8 w-80">
+                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
+                                inputId="binary"></p-checkbox>
+                            <label for="binary" class="text-white ml-2">Czy chcesz dodać nowe urządzenie?</label>
+                        </div>
+                        <div *ngIf="this.checked===true">
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="idFactory" mask="9999" ></p-inputMask>
+                                <label for="float-input">Numer fabryczny</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="serialNumber" mask="999999" ></p-inputMask>
+                                <label for="float-input">Numer seryjny</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="idFd" mask="999"></p-inputMask>
+                                <label for="float-input">Numer FD</label>
+                            </span>
+                            <span class="p-float-label mb-8">
+                                <p-inputMask formControlName="catalogNumber"mask="9999999999"></p-inputMask>
+                                <label for="float-input">Numer katalogowy</label>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+                <div formGroupName="Task" *ngIf="page ===5">
+                    <div class="mt-16 flex flex-col gap-8">
+                        <span class="p-float-label">
+                            <textarea formControlName="description" id="float-input" rows="3" class="w-80" pInputTextarea
+                                [autoResize]="true"></textarea>
+                            <label for="float-input">Opis</label>
+                        </span>
+                        <div class="w-80 flex gap-8">
+                            <span class="p-float-label">
+                                <p-inputMask formControlName="minPrice" mask="999 zł"></p-inputMask>
+                                <label for="float-input">Cena min</label>
+                            </span>
+                            <span class="p-float-label">
+                                <p-inputMask formControlName="maxPrice" mask="999 zł"></p-inputMask>
+                                <label for="float-input">Cena max</label>
+                            </span>
+                        </div>
+                        <div class="w-80 flex gap-8">
+                            <span class="p-float-label">
+                                <p-calendar formControlName="startTime" [timeOnly]="true" inputId="timeonly"></p-calendar>
+                                <label for="timeonly">Rozpoczęcie</label>
+                            </span>
+                            <span class="p-float-label">
+                                <p-calendar formControlName="endTime" [timeOnly]="true" inputId="timeonly"></p-calendar>
+                                <label for="timeonly">Zakończenie</label>
+                            </span>
+                        </div>
+                        <span class="p-float-label">
+                            <input id="disabled-input" type="text" pInputText [disabled]="true" value="{{this.date}}" />
+                            <label for="float-input">Data</label>
+                        </span>
+                        <span class="p-float-label">
+                            <input id="disabled-input" type="text" pInputText [disabled]="true"
+                                value="{{this.technican}}" />
+                            <label for="float-input">Serwisant</label>
+                        </span>
+
+                    </div>
+                </div>
+                <div *ngIf="page === 1 || page === 2 || page === 3 || page === 4 || page === 5"
+                    class="flex justify-center mt-10 mb-20">
                     <p-button label="Dalej" (click)="onClickNextPage()"></p-button>
                 </div>
-                <!-- <div *ngIf="page ===3">
-                    <div class="mt-16">
-                        <div class="w-80 relative">
-                            <p
-                                class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro text-sm">
-                                Adres</p>
-                            <div
-                                class="rounded-md border border-KeyLime relative bg-Gainsboro flex flex-col items-center pt-6 pb-3">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs">Ulica i numer</p>
-                                    <p class="">{{this.addressForm.get('street')!.value}}</p>
+
+                <div *ngIf="page === 6" class="mt-8 mb-10">
+                    <div class="mt-16 grid grid-cols-2 gap-8">
+                        <div class="flex flex-col gap-8">
+                            <div class="w-80 relative">
+                                <p
+                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white text-sm">
+                                    Adres</p>
+                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs">Ulica i numer</p>
+                                        <p class="">{{this.serviceForm.get('Address')!.get('street')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Kod pocztowy i miejscowość</p>
+                                        <p class="">{{this.serviceForm.get('Address')!.get('zipCode')!.value}} {{this.serviceForm.get('Address')!.get('city')!.value}}</p>
+                                    </div>
                                 </div>
-                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs mb-1">Kod pocztowy</p>
-                                    <p class="">{{this.addressForm.get('zipCode')!.value}}</p>
+                            </div>
+                            <div class="w-80 relative">
+                                <p
+                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white text-sm">
+                                    Klient</p>
+                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs">Imię i nazwisko</p>
+                                        <p class="">{{this.serviceForm.get('Customer')!.get('firstName')!.value}} {{this.serviceForm.get('Customer')!.get('lastName')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Numer telefonu</p>
+                                        <p class="">{{this.serviceForm.get('Customer')!.get('phoneNumber')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">E-mail</p>
+                                        <p class="">{{this.serviceForm.get('Customer')!.get('email')!.value}}</p>
+                                    </div>
                                 </div>
-                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs mb-1">Miejscowość</p>
-                                    <p class="">{{this.addressForm.get('city')!.value}}</p>
+                            </div>
+                            <div class="w-80 relative">
+                                <p
+                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white text-sm">
+                                    Firma</p>
+                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs">Nazwa</p>
+                                        <p class="">{{this.serviceForm.get('Company')!.get('name')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">NIP</p>
+                                        <p class="">{{this.serviceForm.get('Company')!.get('tin')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Ulica i numer</p>
+                                        <p class="">{{this.serviceForm.get('Company')!.get('street')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Kod pocztowy i miejscowość</p>
+                                        <p class="">{{this.serviceForm.get('Company')!.get('zipCode')!.value}} {{this.serviceForm.get('Company')!.get('city')!.value}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div> -->
-                <!-- <div class="mt-10">
-                        <div class="w-80 relative">
-                            <p
-                                class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-Gainsboro text-sm">
-                                Urządzenie</p>
-                            <div
-                                class="rounded-md border border-KeyLime relative bg-Gainsboro flex flex-col items-center pt-6 pb-3">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs">Numer fabryczny</p>
-                                    <p class="">{{this.addressForm.get('idFactory')!.value}}</p>
+                        <div class="flex flex-col gap-8">
+                            <div class="w-80 relative">
+                                <p
+                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white text-sm">
+                                    Urządzenie</p>
+                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs">Numer fabryczny</p>
+                                        <p class="">{{this.serviceForm.get('Device')!.get('idFactory')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Numer seryjny</p>
+                                        <p class="">{{this.serviceForm.get('Device')!.get('serialNumber')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Numer FD</p>
+                                        <p class="">{{this.serviceForm.get('Device')!.get('idFd')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Numer katalogowy</p>
+                                        <p class="">{{this.serviceForm.get('Device')!.get('catalogNumber')!.value}}</p>
+                                    </div>
                                 </div>
-                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs mb-1">Numer seryjny</p>
-                                    <p class="">{{this.addressForm.get('serialNumber')!.value}}</p>
-                                </div>
-                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs mb-1">Numer FD</p>
-                                    <p class="">{{this.addressForm.get('idFd')!.value}}</p>
-                                </div>
-                                <hr class="w-64 border-none h-0.5 bg-BlackChocolate">
-                                <div class="w-64 py-3">
-                                    <p class="font-bold text-xs mb-1">Numer katalogowy</p>
-                                    <p class="">{{this.addressForm.get('catalogNumber')!.value}}</p>
+                            </div>
+                            <div class="w-80 relative">
+                                <p
+                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-white text-sm">
+                                    Zlecenie</p>
+                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 text-white">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs">Opis</p>
+                                        <p class="">{{this.serviceForm.get('Task')!.get('description')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Cena</p>
+                                        <p class="">{{this.serviceForm.get('Task')!.get('minPrice')!.value}} - {{this.serviceForm.get('Task')!.get('maxPrice')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Czas</p>
+                                        <p class="">{{this.serviceForm.get('Task')!.get('startTime')!.value}} - {{this.serviceForm.get('Task')!.get('endTime')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Data</p>
+                                        <p class="">{{this.serviceForm.get('Task')!.get('date')!.value}}</p>
+                                    </div>
+                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
+                                    <div class="w-64 py-3">
+                                        <p class="font-bold text-xs mb-1">Serwisant</p>
+                                        <p class="">{{this.technican}}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div> -->
-                <div *ngIf="page === 3" class="flex justify-center mt-8 mb-14">
-                    <button type="submit" pButton label="Zapisz" class="p-button-success"></button>
+                    <div class="flex justify-center mt-10">
+                        <button type="submit" pButton label="Zapisz" class="p-button-success"></button>
+                    </div>
                 </div>
 
 

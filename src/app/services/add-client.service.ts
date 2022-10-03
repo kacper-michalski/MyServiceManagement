@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { ClientDetails } from '../models/client-details.model';
+import { Client } from '../models/client.model';
 import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
 export class AddClientService {
-  public clientDetails: ClientDetails;
+  public client: Client;
 
   constructor(private http: HttpClient) {
-    this.clientDetails = {
+    this.client = {
       firstName: "",
       lastName: "",
       phoneNumber: "",
@@ -19,6 +19,6 @@ export class AddClientService {
   public addClient(client: any) {
     console.log(client);
     const ids: string = client.addressesId.map((obj: { addressId: string; }) => obj.addressId);
-    return this.http.post<ClientDetails>('http://localhost:8080/customer', { ...client, idAddresses: ids });
+    return this.http.post<Client>('http://localhost:8080/customer', { ...client, idAddresses: ids });
   }
 }

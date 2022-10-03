@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Address } from '../models/address.model';
-import { ClientDetails } from '../models/client-details.model';
+import { Client } from '../models/client.model';
 import { Company } from '../models/company.model';
 import { DropDown } from '../models/dropDown.model';
 import { ServicemanDetails } from '../models/serviceman-details.model';
@@ -39,7 +39,7 @@ export class ShowDropDownService {
             }
         }
     }
-    public onSelectClient(client: ClientDetails) {
+    public onSelectClient(client: Client) {
         this.onClickDropDown('client');
         this.selectedAddressString = "";
         return this.selectedClient = client.firstName + ' ' + client.lastName + '\n' + client.phoneNumber + '\n' + client.email;
