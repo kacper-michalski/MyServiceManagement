@@ -9,6 +9,7 @@ import { AddAddressService } from 'src/app/services/add-address.service';
 import { AddClientService } from 'src/app/services/add-client.service';
 import { AddCompanyService } from 'src/app/services/add-company.service';
 import { AddDeviceService } from 'src/app/services/add-device.service';
+import * as dayjs from 'dayjs';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -19,6 +20,12 @@ export class AddServiceComponent {
   technican: string = 'Kacper Michalski';
   page: number;
   checked: boolean;
+  public hours: string[] = ['06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'];
+  public minutes: string[] = ['00', '15', '30', '45'];
+  public selectedHourFrom: number=6;
+  public selectedMinuteFrom: number=0;
+  public selectedHourTo: number=6;
+  public selectedMinuteTo: number=0;
   serviceForm = this.fb.group({
     address: this.fb.group({
       checkbox: [''],
@@ -50,12 +57,12 @@ export class AddServiceComponent {
     }),
     task: this.fb.group({
       description: [this.addServiceService.service.description, Validators.required],
-      minPrice: [this.addServiceService.service.minPrice, Validators.required],
-      maxPrice: [this.addServiceService.service.maxPrice, Validators.required],
-      startTime: ['16:00:00'],
-      endTime: ['17:00:00'],
+      minPrice: ['0', Validators.required],
+      maxPrice: ['500', Validators.required],
+      startTime: ['', Validators.required],
+      endTime: ['', Validators.required],
       date: ['2022-07-22', Validators.required],
-      idTechnican: ['1', Validators.required]
+      idTechnician: ['1', Validators.required]
     })
   });
   constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig) { }
@@ -73,6 +80,7 @@ export class AddServiceComponent {
     return (address.get('devices')! as FormArray).controls;
   }
   public onSubmit() {
+    console.log(dayjs(this.serviceForm.get('task')?.get('startTime')?.value).format('HH-mm'));
     const service = this.serviceForm.value as Service;
     this.addServiceService.addService(service).pipe(take(1)).subscribe();
     this.serviceForm.reset();
@@ -80,5 +88,83 @@ export class AddServiceComponent {
 
   public onClickNextPage() {
     this.page += 1;
+    if(this.page===6){
+      this.serviceForm.patchValue({
+        task:{
+          startTime: this.hours[this.selectedHourFrom]+':'+this.minutes[this.selectedMinuteFrom],
+          endTime: this.hours[this.selectedHourTo]+':'+this.minutes[this.selectedMinuteTo],
+        }
+      });
+    }
   }
+  public onClickUp(){
+    
+  }
+  public onClickChevronUpHourFrom() {
+    if (this.selectedHourFrom === 15) {
+      this.selectedHourFrom = 0;
+    }
+    else{
+      this.selectedHourFrom += 1;
+    }
+  }
+  public onClickChevronDownHourFrom() {
+    if (this.selectedHourFrom === 0) {
+      this.selectedHourFrom = 15;
+    }
+    else{
+      this.selectedHourFrom -= 1;
+    }
+  }
+  public onClickChevronUpMinuteFrom() {
+    if (this.selectedMinuteFrom === 3) {
+      this.selectedMinuteFrom = 0;
+    }
+    else{
+      this.selectedMinuteFrom += 1;
+    }
+  }
+  public onClickChevronDownMinuteFrom() {
+    if (this.selectedMinuteFrom === 0) {
+      this.selectedMinuteFrom = 3;
+    }
+    else{
+      this.selectedMinuteFrom -= 1;
+    }
+  }
+  public onClickChevronUpHourTo() {
+    if (this.selectedHourTo === 15) {
+      this.selectedHourTo = 0;
+    }
+    else{
+      this.selectedHourTo += 1;
+    }
+    
+  }
+  public onClickChevronDownHourTo() {
+    if (this.selectedHourTo ===0) {
+      this.selectedHourTo = 15;
+    }
+    else{
+      this.selectedHourTo -= 1;
+    }
+    
+  }
+  public onClickChevronUpMinuteTo() {
+    if (this.selectedMinuteTo === 3) {
+      this.selectedMinuteTo = 0;
+    }
+    else{
+      this.selectedMinuteTo += 1;
+    }
+  }
+  public onClickChevronDownMinuteTo() {
+    if (this.selectedMinuteTo === 0) {
+      this.selectedMinuteTo = 3;
+    }
+    else{
+      this.selectedMinuteTo -= 1;
+    }
+  }
+
 }
