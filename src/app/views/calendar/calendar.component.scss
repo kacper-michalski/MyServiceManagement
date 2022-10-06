@@ -1,9 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap');
-
-.custom-outline {
-    -webkit-text-stroke: 3px gainsboro;
+.active {
+    @apply bg-KeyLime text-BlackChocolate;
 }
 
-.custom-font {
-    font-family: 'Dancing Script', cursive;
+:host ::ng-deep .p-calendar .p-component {
+    @apply border border-KeyLime bg-PineTree text-white;
+}
+
+:host ::ng-deep .p-inputtext {
+    @apply h-12 w-44 text-lg #{!important};
+}
+
+:host ::ng-deep .p-calendar .p-datepicker {
+    @apply #{!important};
+
+    &-header {
+        @apply bg-PineTree #{!important};
+    }
+
+    &-title {
+        @apply text-white #{!important};
+    }
+
+}
+
+:host ::ng-deep .p-datepicker .p-datepicker-header .p-datepicker-title {
+    & .p-datepicker-month {
+        @apply text-white #{!important};
+    }
+
+    & .p-datepicker-year {
+        @apply text-white #{!important};
+    }
+}
+:host ::ng-deep .p-datepicker table td > span.p-highlight{
+    @apply bg-KeyLime text-BlackChocolate #{!important};
+}
+
+:host ::ng-deep .p-datepicker table td > span{
+    &:hover{
+        @apply bg-KeyLime text-BlackChocolate #{!important};
+    }
+}
+:host ::ng-deep .p-datepicker table td.p-datepicker-today > span{
+    @apply text-BlackChocolate bg-Gainsboro #{!important};
 }
