@@ -1,8 +1,8 @@
-<div [ngClass]="{'summary': page === 6}" class="max-w-2xl w-full mx-auto mt-4 text-white">
-    <p class="bg-BlackChocolate absolute top-0 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md">
+<div [ngClass]="{'summary': page === 6}" class="max-w-2xl w-full mx-auto mt-4 text-white relative">
+    <p class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md">
         Dodaj nowe zlecenie</p>
     <div class="rounded-md border border-KeyLime relative bg-BlackChocolate">
-        <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5">
+        <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5" (click)="hideDialog()">
         <div class="flex flex-col items-center">
             <div class="flex mt-16 items-center gap-2">
                 <div class="flex flex-col items-center">
@@ -418,7 +418,7 @@
                         </div>
                     </div>
                     <div class="flex justify-center mt-10">
-                        <button type="submit" pButton label="Zapisz" class="p-button-success"></button>
+                        <button type="submit" pButton label="Zapisz" class="p-button-success" (click)="hideDialog()"></button>
                     </div>
                 </div>
 

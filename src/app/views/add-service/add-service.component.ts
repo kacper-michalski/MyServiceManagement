@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Service } from 'src/app/models/service.model';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { take } from 'rxjs';
@@ -16,6 +16,8 @@ import * as dayjs from 'dayjs';
   styleUrls: ['./add-service.component.scss']
 })
 export class AddServiceComponent {
+  @Input() display: boolean;
+  @Output() toggle = new EventEmitter();
   date: string = '27-07-2022';
   technican: string = 'Kacper Michalski';
   page: number;
@@ -166,5 +168,8 @@ export class AddServiceComponent {
       this.selectedMinuteTo -= 1;
     }
   }
-
+  hideDialog() {
+    this.display = false;
+    this.toggle.emit(this.display);
+  }
 }
