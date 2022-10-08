@@ -196,11 +196,11 @@
                         </span>
                         <div class="w-80 flex gap-8">
                             <span class="p-float-label">
-                                <p-inputNumber [allowEmpty]="true" formControlName="minPrice"></p-inputNumber>
+                                <input formControlName="minPrice" id="float-input" type="number" [style]="{'width': '100% !important'}" pInputText>
                                 <label for="float-input">Cena min</label>
                             </span>
                             <span class="p-float-label">
-                                <p-inputNumber formControlName="maxPrice"></p-inputNumber>
+                                <input formControlName="maxPrice" id="float-input" type="number" [style]="{'width': '100% !important'}" pInputText>
                                 <label for="float-input">Cena max</label>
                             </span>
                         </div>

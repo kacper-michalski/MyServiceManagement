@@ -59,8 +59,8 @@ export class AddServiceComponent {
     }),
     task: this.fb.group({
       description: [this.addServiceService.service.description, Validators.required],
-      minPrice: ['0', Validators.required],
-      maxPrice: ['500', Validators.required],
+      minPrice: [this.addServiceService.service.minPrice, Validators.required],
+      maxPrice: [this.addServiceService.service.maxPrice, Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       date: ['2022-07-22', Validators.required],

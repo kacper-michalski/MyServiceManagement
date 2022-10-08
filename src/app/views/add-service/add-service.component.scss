@@ -47,3 +47,6 @@
 :host ::ng-deep .p-inputnumber .p-inputnumber-input{
     @apply w-full #{!important};
 }
+.p{
+    @apply break-words;
+}
