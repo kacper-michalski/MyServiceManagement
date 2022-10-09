@@ -19,7 +19,7 @@ import { ShareDateService } from 'src/app/services/share-date.service';
 export class AddServiceComponent {
   @Input() display: boolean;
   @Output() toggle = new EventEmitter();
-  date: string = '27-07-2022';
+  // date: string = '27-07-2022';
   technican: string = 'Kacper Michalski';
   page: number;
   checked: boolean;
@@ -76,8 +76,9 @@ export class AddServiceComponent {
     this.checked = false;
     this.shareDateService.selectedDate$.subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
+      this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
     });
-    this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
+    
   }
 
   private getServiceman() {
