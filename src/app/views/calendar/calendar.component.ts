@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as dayjs from 'dayjs';
 import { PrimeNGConfig } from 'primeng/api';
+import { ShareDateService } from 'src/app/services/share-date.service';
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
@@ -8,10 +9,9 @@ import { PrimeNGConfig } from 'primeng/api';
 })
 export class CalendarComponent implements OnInit {
 
-  public selectedDay: any;
+  public selectedDay: Date = new Date();
   public selectButton: boolean;
-  public calendar_pl: any;
-  constructor(private config: PrimeNGConfig) { }
+  constructor(private config: PrimeNGConfig, private shareDateService: ShareDateService) {}
 
   ngOnInit(): void {
     this.config.setTranslation({
@@ -24,7 +24,10 @@ export class CalendarComponent implements OnInit {
   }
   addMonth() {
     this.selectedDay.setDate(this.selectedDay.getDate() + 1);
-    console.log(this.selectedDay)
+    this.onSelectedDay(this.selectedDay);
+  }
+  onSelectedDay(date: Date) {
+    this.shareDateService.setDate(date);
   }
   subtractMonth() {
 

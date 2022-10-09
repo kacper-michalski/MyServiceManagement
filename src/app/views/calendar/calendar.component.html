@@ -7,8 +7,8 @@
             <div class="flex justify-between w-80">
                 <button type="button" class="w-12 h-12 bg-PineTree rounded-md"><img
                         src="../../../assets/icons/chevron-left.svg" class="w-6 h-6 m-auto"></button>
-                <p-calendar inputId="basic" [(ngModel)]="this.selectedDay" dateFormat="dd.mm.yy" [firstDayOfWeek]="1"
-                    [style]="{'width': '176px', 'font-size': '18px', 'height': '48px'}" [locale]="calendar_pl"></p-calendar>
+                <p-calendar [(ngModel)]="selectedDay" (ngModelChange)="this.onSelectedDay(selectedDay)" inputId="basic"  dateFormat="dd.mm.yy" [firstDayOfWeek]="1"
+                    [style]="{'width': '176px', 'font-size': '18px', 'height': '48px'}"></p-calendar>
                 <button type="button" class="w-12 h-12 bg-PineTree rounded-md" (click)="addMonth()"><img
                         src="../../../assets/icons/chevron-right.svg" class="w-6 h-6 m-auto"></button>
             </div>

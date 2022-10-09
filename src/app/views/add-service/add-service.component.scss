@@ -50,3 +50,6 @@
 .p{
     @apply break-words;
 }
+.p-component:read-only{
+    @apply opacity-60;
+}

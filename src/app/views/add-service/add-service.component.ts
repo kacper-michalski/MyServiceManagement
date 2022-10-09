@@ -10,6 +10,7 @@ import { AddClientService } from 'src/app/services/add-client.service';
 import { AddCompanyService } from 'src/app/services/add-company.service';
 import { AddDeviceService } from 'src/app/services/add-device.service';
 import * as dayjs from 'dayjs';
+import { ShareDateService } from 'src/app/services/share-date.service';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -28,6 +29,7 @@ export class AddServiceComponent {
   public selectedMinuteFrom: number=0;
   public selectedHourTo: number=6;
   public selectedMinuteTo: number=0;
+  public selectedDay: string;
   serviceForm = this.fb.group({
     address: this.fb.group({
       checkbox: [''],
@@ -63,16 +65,19 @@ export class AddServiceComponent {
       maxPrice: [this.addServiceService.service.maxPrice, Validators.required],
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
-      date: ['2022-07-22', Validators.required],
+      date: [''],
       idTechnician: ['1', Validators.required]
     })
   });
-  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig) { }
+  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService) { }
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.page = 1;
     this.checked = false;
-
+    this.shareDateService.selectedDate$.subscribe((value: Date)=>{
+      this.selectedDay=dayjs(value).format('YYYY-MM-DD');
+    });
+    this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
   }
 
   private getServiceman() {
@@ -90,6 +95,7 @@ export class AddServiceComponent {
 
   public onClickNextPage() {
     this.page += 1;
+    console.log(this.selectedDay);
     if(this.page===6){
       this.serviceForm.patchValue({
         task:{

@@ -271,11 +271,11 @@
                             </div>
                         </div>
                         <span class="p-float-label">
-                            <input id="disabled-input" type="text" pInputText [disabled]="true" value="{{this.date}}" />
+                            <input id="readOnly-input" type="text" pInputText formControlName="date" [readonly]="true"/>
                             <label for="float-input">Data</label>
                         </span>
                         <span class="p-float-label">
-                            <input id="disabled-input" type="text" pInputText [disabled]="true"
+                            <input id="readOnly-input" type="text" pInputText [readonly]="true"
                                 value="{{this.technican}}" />
                             <label for="float-input">Serwisant</label>
                         </span>
