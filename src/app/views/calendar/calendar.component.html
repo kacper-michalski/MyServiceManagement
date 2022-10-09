@@ -1,18 +1,19 @@
 <div class="max-w-6xl mx-auto">
         <div class="flex justify-between py-4 fixed bg-BlackChocolate max-w-6xl w-full z-50">
-            <div class="w-80">
-                <button type="button" class="w-12 h-12 bg-PineTree rounded-md"><img src="../../../assets/icons/menu.svg"
+            <div class="flex justify-between w-[368px]">
+                <button type="button" class="w-12 h-12 bg-PineTree rounded-md hover:border hover:border-KeyLime"><img src="../../../assets/icons/menu.svg"
                         class="w-6 h-6 m-auto"></button>
+                        <button type="button" class="w-20 h-12 bg-PineTree rounded-md font-bold hover:bg-KeyLime hover:text-BlackChocolate"  (click)="currentDate()">Dziś</button>
             </div>
-            <div class="flex justify-between w-80">
-                <button type="button" class="w-12 h-12 bg-PineTree rounded-md"><img
+            <div class="flex justify-between w-[368px] px-6">
+                <button type="button" class="w-12 h-12 bg-PineTree rounded-md hover:border hover:border-KeyLime" (click)="subtractDay()"><img
                         src="../../../assets/icons/chevron-left.svg" class="w-6 h-6 m-auto"></button>
                 <p-calendar [(ngModel)]="selectedDay" (ngModelChange)="this.onSelectedDay(selectedDay)" inputId="basic"  dateFormat="dd.mm.yy" [firstDayOfWeek]="1"
                     [style]="{'width': '176px', 'font-size': '18px', 'height': '48px'}"></p-calendar>
-                <button type="button" class="w-12 h-12 bg-PineTree rounded-md" (click)="addMonth()"><img
+                <button type="button" class="w-12 h-12 bg-PineTree rounded-md hover:border hover:border-KeyLime" (click)="addDay()"><img
                         src="../../../assets/icons/chevron-right.svg" class="w-6 h-6 m-auto"></button>
             </div>
-            <div class="flex justify-end w-80 font-bold">
+            <div class="flex justify-end w-[368px] font-bold">
                 <button type="button" [ngClass]="{'active': selectButton === true}"
                     (click)="this.selectButton=!this.selectButton"
                     class="w-32 h-12 bg-PineTree rounded-l-md border border-KeyLime hover:bg-KeyLime hover:text-BlackChocolate hover:bg-opacity-70">Dzień</button>

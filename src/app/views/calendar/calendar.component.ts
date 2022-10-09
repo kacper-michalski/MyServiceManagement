@@ -22,16 +22,23 @@ export class CalendarComponent implements OnInit {
     this.selectButton = true;
     this.selectedDay = new Date();
   }
-  addMonth() {
-    this.selectedDay.setDate(this.selectedDay.getDate() + 1);
+  addDay() {
+    // this.selectedDay.setDate(this.selectedDay.getDate() + 1);
+    this.selectedDay = new Date(this.selectedDay.setDate(this.selectedDay.getDate() + 1));
+    this.onSelectedDay(this.selectedDay);
+  }
+  subtractDay() {
+    this.selectedDay = new Date(this.selectedDay.setDate(this.selectedDay.getDate() - 1));
+    this.onSelectedDay(this.selectedDay);
+  }
+  currentDate(){
+    this.selectedDay = new Date();
     this.onSelectedDay(this.selectedDay);
   }
   onSelectedDay(date: Date) {
     this.shareDateService.setDate(date);
   }
-  subtractMonth() {
-
-  }
+  
   numSequence(n: number): Array<number> {
     return Array(n);
   }
