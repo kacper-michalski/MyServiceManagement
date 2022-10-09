@@ -1,6 +1,5 @@
 <div class="max-w-6xl mx-auto">
-    <div>
-        <div class="flex justify-between py-4 sticky top-0 bg-BlackChocolate">
+        <div class="flex justify-between py-4 fixed bg-BlackChocolate max-w-6xl w-full z-50">
             <div class="w-80">
                 <button type="button" class="w-12 h-12 bg-PineTree rounded-md"><img src="../../../assets/icons/menu.svg"
                         class="w-6 h-6 m-auto"></button>
@@ -22,9 +21,9 @@
                     class="w-32 h-12 bg-PineTree rounded-r-md border border-KeyLime hover:bg-KeyLime hover:text-BlackChocolate hover:bg-opacity-70">Tydzień</button>
             </div>
         </div>
-        <div class="flex">
-            <div class="w-20 text-center">
-                <div class="h-14 border border-KeyLime border-opacity-70 w-20 bg-PineTree sticky top-20"></div>
+        <div class="flex pt-[136px] relative">
+            <div class="w-20">
+                <div class="h-14 border border-KeyLime border-opacity-70 w-20 bg-PineTree fixed top-20"></div>
                 <div class="h-28 grid grid-cols-1 grid-rows-1 place-items-center border-x border-b bg-PineTree border-KeyLime border-opacity-70"
                     *ngFor="let n of numSequence(16); let i = index;">
                     {{i+6}}:00
@@ -32,6 +31,4 @@
             </div>
             <app-schedule></app-schedule>
         </div>
-    </div>
-
 </div>

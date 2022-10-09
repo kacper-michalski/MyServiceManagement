@@ -6,7 +6,7 @@
     @apply border border-KeyLime bg-PineTree text-white ring-0;
 }
 :host ::ng-deep .p-datepicker:not(.p-datepicker-inline){
-    @apply border-8 border-KeyLime #{!important};
+    @apply border-solid border border-KeyLime #{!important};
 }
 
 :host ::ng-deep .p-calendar .p-datepicker {
@@ -15,7 +15,6 @@
 
     & button {
         @apply ring-0 text-white #{!important};
-
         &:hover {
             @apply bg-KeyLime text-BlackChocolate #{!important};
 
