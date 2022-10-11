@@ -11,6 +11,8 @@ import { AddCompanyService } from 'src/app/services/add-company.service';
 import { AddDeviceService } from 'src/app/services/add-device.service';
 import * as dayjs from 'dayjs';
 import { ShareDateService } from 'src/app/services/share-date.service';
+import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
+import { ShareServicemanService } from 'src/app/services/share-serviceman.service';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -19,8 +21,6 @@ import { ShareDateService } from 'src/app/services/share-date.service';
 export class AddServiceComponent {
   @Input() display: boolean;
   @Output() toggle = new EventEmitter();
-  // date: string = '27-07-2022';
-  technican: string = 'Kacper Michalski';
   page: number;
   checked: boolean;
   public hours: string[] = ['06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'];
@@ -30,6 +30,7 @@ export class AddServiceComponent {
   public selectedHourTo: number=6;
   public selectedMinuteTo: number=0;
   public selectedDay: string;
+  public selectedServiceman: ServicemanDetails;
   serviceForm = this.fb.group({
     address: this.fb.group({
       checkbox: [''],
@@ -66,10 +67,10 @@ export class AddServiceComponent {
       startTime: ['', Validators.required],
       endTime: ['', Validators.required],
       date: [''],
-      idTechnician: ['1', Validators.required]
+      idTechnician: ['', Validators.required]
     })
   });
-  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService) { }
+  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService) { }
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.page = 1;
@@ -78,11 +79,12 @@ export class AddServiceComponent {
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
       this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
     });
+    this.shareServicemanService.selectedServiceman$.subscribe((value: ServicemanDetails)=>{
+      this.selectedServiceman=value;
+      this.serviceForm.get('task')?.get('idTechnician')?.setValue(this.selectedServiceman.id);
+    });
   }
 
-  private getServiceman() {
-    return this.addServicemanService.servicemanDetails;
-  }
   public getDevices(address: any) {
     return (address.get('devices')! as FormArray).controls;
   }

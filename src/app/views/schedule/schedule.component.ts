@@ -4,6 +4,9 @@ import { take } from 'rxjs';
 import { Services } from 'src/app/models/services.model';
 import { AddServiceService } from 'src/app/services/add-service.service';
 import { ShareDateService } from 'src/app/services/share-date.service';
+import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
+import { AddServicemanService } from 'src/app/services/add-serviceman.service';
+import { ShareServicemanService } from 'src/app/services/share-serviceman.service';
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
@@ -13,13 +16,16 @@ import { ShareDateService } from 'src/app/services/share-date.service';
 export class ScheduleComponent {
   display: boolean = false;
   serviceForm: boolean = false;
-  servicemans: string[] = ['Anna Pietrzak', 'Szymon Grabowski', 'Andrzej Luty'];
   services$ = this.addServiceService.getService();
   services: Services[];
+  servicers$ = this.addServicemanService.getServiceman();
+  servicers: ServicemanDetails[];
   selectedDay: string;
-  constructor(private addServiceService: AddServiceService, private shareDateService: ShareDateService){}
+  selectedServiceman: string;
+  constructor(private addServiceService: AddServiceService, private shareDateService: ShareDateService, private addServicemanService: AddServicemanService, private shareServicemanService: ShareServicemanService){}
   ngOnInit(){
     this.services$.pipe(take(1)).subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServiceLenght()});
+    this.servicers$.pipe(take(1)).subscribe((value: ServicemanDetails[]) => {this.servicers=value; console.log(value)});
     this.shareDateService.selectedDate$.subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
     });
@@ -37,5 +43,8 @@ export class ScheduleComponent {
   }
   countTheServiceLenght(){
     this.services.map(element => { element.length=(element.endTime.getTime()-element.startTime.getTime())/1000/60/60; element.height=(element.startTime.getTime()-(new Date(element.date+' 6:00').getTime()))/1000/60/60});
+  }
+  onSelectedServiceman(serviceman: ServicemanDetails) {
+    this.shareServicemanService.setServiceman(serviceman);
   }
 }

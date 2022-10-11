@@ -276,7 +276,7 @@
                         </span>
                         <span class="p-float-label">
                             <input id="readOnly-input" type="text" pInputText [readonly]="true"
-                                value="{{this.technican}}" />
+                                value="{{this.selectedServiceman.name}}" />
                             <label for="float-input">Serwisant</label>
                         </span>
                     </div>
@@ -411,7 +411,7 @@
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Serwisant</p>
-                                        <p class="">{{this.technican}}</p>
+                                        <p class="">{{this.selectedServiceman.name}}</p>
                                     </div>
                                 </div>
                             </div>

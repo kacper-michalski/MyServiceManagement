@@ -9,6 +9,7 @@ export class AddServicemanService {
   
   constructor(private http: HttpClient) {
     this.servicemanDetails = {
+      id: "",
       name: "",
       phoneNumber: "",
       email: ""
@@ -16,5 +17,8 @@ export class AddServicemanService {
   }
   public addServiceman(serviceman: ServicemanDetails) {
     return this.http.post<ServicemanDetails>('http://localhost:8080/technician', serviceman);
+  }
+  public getServiceman() {
+    return this.http.get<ServicemanDetails[]>('http://localhost:8080/technicians');
   }
 }
