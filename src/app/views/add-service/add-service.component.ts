@@ -78,7 +78,6 @@ export class AddServiceComponent {
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
       this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
     });
-    
   }
 
   private getServiceman() {
@@ -107,7 +106,7 @@ export class AddServiceComponent {
     }
   }
   public onClickUp(){
-    
+
   }
   public onClickChevronUpHourFrom() {
     if (this.selectedHourFrom === 15) {
@@ -148,7 +147,7 @@ export class AddServiceComponent {
     else{
       this.selectedHourTo += 1;
     }
-    
+
   }
   public onClickChevronDownHourTo() {
     if (this.selectedHourTo ===0) {
@@ -157,7 +156,7 @@ export class AddServiceComponent {
     else{
       this.selectedHourTo -= 1;
     }
-    
+
   }
   public onClickChevronUpMinuteTo() {
     if (this.selectedMinuteTo === 3) {
