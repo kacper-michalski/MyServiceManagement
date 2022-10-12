@@ -25,18 +25,18 @@ export class CalendarComponent implements OnInit {
   addDay() {
     // this.selectedDay.setDate(this.selectedDay.getDate() + 1);
     this.selectedDay = new Date(this.selectedDay.setDate(this.selectedDay.getDate() + 1));
-    this.onSelectedDay(this.selectedDay);
+    this.onSelectedDay();
   }
   subtractDay() {
     this.selectedDay = new Date(this.selectedDay.setDate(this.selectedDay.getDate() - 1));
-    this.onSelectedDay(this.selectedDay);
+    this.onSelectedDay();
   }
   currentDate(){
     this.selectedDay = new Date();
-    this.onSelectedDay(this.selectedDay);
+    this.onSelectedDay();
   }
-  onSelectedDay(date: Date) {
-    this.shareDateService.setDate(date);
+  onSelectedDay() {
+    this.shareDateService.setDate(this.selectedDay);
   }
   
   numSequence(n: number): Array<number> {

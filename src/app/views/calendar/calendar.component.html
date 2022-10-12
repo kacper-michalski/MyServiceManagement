@@ -8,7 +8,7 @@
             <div class="flex justify-between w-[368px] px-6">
                 <button type="button" class="w-12 h-12 bg-PineTree rounded-md hover:border hover:border-KeyLime" (click)="subtractDay()"><img
                         src="../../../assets/icons/chevron-left.svg" class="w-6 h-6 m-auto"></button>
-                <p-calendar [(ngModel)]="selectedDay" (ngModelChange)="this.onSelectedDay(selectedDay)" inputId="basic"  dateFormat="dd.mm.yy" [firstDayOfWeek]="1"
+                <p-calendar [(ngModel)]="selectedDay" (ngModelChange)="this.onSelectedDay()" inputId="basic"  dateFormat="dd.mm.yy" [firstDayOfWeek]="1"
                     [style]="{'width': '176px', 'font-size': '18px', 'height': '48px'}"></p-calendar>
                 <button type="button" class="w-12 h-12 bg-PineTree rounded-md hover:border hover:border-KeyLime" (click)="addDay()"><img
                         src="../../../assets/icons/chevron-right.svg" class="w-6 h-6 m-auto"></button>

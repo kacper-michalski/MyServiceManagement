@@ -271,12 +271,12 @@
                             </div>
                         </div>
                         <span class="p-float-label">
-                            <input id="readOnly-input" type="text" pInputText formControlName="date" [readonly]="true"/>
+                            <input id="readOnly-input" type="text" pInputText [readonly]="true" [value]="this.selectedDay | date: 'dd.MM.YYYY'"/>
                             <label for="float-input">Data</label>
                         </span>
                         <span class="p-float-label">
                             <input id="readOnly-input" type="text" pInputText [readonly]="true"
-                                value="{{this.selectedServiceman.name}}" />
+                                [value]="this.selectedServiceman.name" />
                             <label for="float-input">Serwisant</label>
                         </span>
                     </div>
@@ -406,7 +406,7 @@
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">
                                         <p class="font-bold text-xs mb-1">Data</p>
-                                        <p class="">{{this.serviceForm.get('task')!.get('date')!.value}}</p>
+                                        <p class="">{{this.selectedDay | date: 'dd.MM.YYYY'}}</p>
                                     </div>
                                     <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
                                     <div class="w-64 py-3">

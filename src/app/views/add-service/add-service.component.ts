@@ -14,6 +14,7 @@ import { ShareDateService } from 'src/app/services/share-date.service';
 import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
 import { ShareServicemanService } from 'src/app/services/share-serviceman.service';
 import { ScheduleComponent } from '../schedule/schedule.component';
+import { CalendarComponent } from '../calendar/calendar.component';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -71,7 +72,7 @@ export class AddServiceComponent {
       idTechnician: ['', Validators.required]
     })
   });
-  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService, private scheduleComponent: ScheduleComponent) { }
+  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService, private scheduleComponent: ScheduleComponent, private calendarComponent: CalendarComponent) { }
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.page = 1;
@@ -79,10 +80,12 @@ export class AddServiceComponent {
     this.shareDateService.selectedDate$.subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
       this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
+      console.log('ustawiono date ', this.selectedDay);
     });
     this.shareServicemanService.selectedServiceman$.subscribe((value: ServicemanDetails)=>{
       this.selectedServiceman=value;
       this.serviceForm.get('task')?.get('idTechnician')?.setValue(this.selectedServiceman.id);
+      console.log('ustawiono serwisanta ', this.selectedServiceman.name);
     });
   }
 
@@ -90,10 +93,11 @@ export class AddServiceComponent {
     return (address.get('devices')! as FormArray).controls;
   }
   public onSubmit() {
-    console.log(dayjs(this.serviceForm.get('task')?.get('startTime')?.value).format('HH-mm'));
+    // console.log(dayjs(this.serviceForm.get('task')?.get('startTime')?.value).format('HH-mm'));
     const service = this.serviceForm.value as Service;
     this.addServiceService.addService(service).pipe(take(1)).subscribe(()=>this.scheduleComponent.getServicesFromServiceService());
     this.serviceForm.reset();
+    this.calendarComponent.onSelectedDay();
   }
 
   public onClickNextPage() {
