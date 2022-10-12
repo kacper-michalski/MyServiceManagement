@@ -1,5 +1,6 @@
 :host ::ng-deep .p-button {
     @apply bg-PineTree text-white border-KeyLime px-10 ring-0;
+
     &:hover {
         @apply bg-KeyLime text-BlackChocolate;
     }
@@ -23,7 +24,7 @@
 }
 
 :host ::ng-deep .p-checkbox-box {
-    @apply w-6 h-6 border-KeyLime ring-0  bg-transparent #{!important};
+    @apply w-6 h-6 border-KeyLime ring-0 bg-transparent #{!important};
 }
 
 :host ::ng-deep .p-checkbox {
@@ -38,18 +39,30 @@
     @apply text-BlackChocolate #{!important};
 }
 
-:host ::ng-deep .p-calendar .p-inputtext{
+:host ::ng-deep .p-calendar .p-inputtext {
     @apply w-36 #{!important};
 }
-:host ::ng-deep .p-inputmask{
+
+:host ::ng-deep .p-inputmask {
     @apply w-full #{!important};
 }
-:host ::ng-deep .p-inputnumber .p-inputnumber-input{
+
+:host ::ng-deep .p-inputnumber .p-inputnumber-input {
     @apply w-full #{!important};
 }
-.p{
+
+.p {
     @apply break-words;
 }
-.p-component:read-only{
+
+.p-component:read-only {
     @apply opacity-60;
+}
+
+.dropDownShadow{
+    box-shadow: 0px 2px 4px -1px #EAEC76;
+    @apply w-32 h-12 rounded-md bg-PineTree;
+    &:hover {
+        @apply bg-KeyLime bg-opacity-20 #{!important};
+    }
 }

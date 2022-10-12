@@ -98,6 +98,7 @@ export class AddServiceComponent {
     this.addServiceService.addService(service).pipe(take(1)).subscribe(()=>this.scheduleComponent.getServicesFromServiceService());
     this.serviceForm.reset();
     this.calendarComponent.onSelectedDay();
+    this.page=1;
   }
 
   public onClickNextPage() {

@@ -283,7 +283,7 @@
                 </div>
                 <div *ngIf="page === 1 || page === 2 || page === 3 || page === 4 || page === 5"
                     class="flex justify-center mt-10 mb-20">
-                    <p-button label="Dalej" (click)="onClickNextPage()"></p-button>
+                    <button type="button" class="dropDownShadow" (click)="onClickNextPage()">Dalej</button>
                 </div>
                 <div *ngIf="page === 6" class="mt-8 mb-10">
                     <div class="mt-16 grid grid-cols-2 gap-8">
@@ -418,7 +418,8 @@
                         </div>
                     </div>
                     <div class="flex justify-center mt-10">
-                        <button type="submit" pButton label="Zapisz" class="p-button-success" (click)="hideDialog()"></button>
+                        <!-- <button type="submit" pButton label="Zapisz" class="p-button-success" (click)="hideDialog()"></button> -->
+                        <button type="submit" class="dropDownShadow" (click)="hideDialog()">Zapisz</button>
                     </div>
                 </div>
 

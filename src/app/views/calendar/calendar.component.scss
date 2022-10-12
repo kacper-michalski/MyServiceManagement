@@ -3,18 +3,23 @@
 }
 
 :host ::ng-deep .p-calendar .p-component {
-    @apply border border-KeyLime bg-PineTree text-white ring-0;
+    @apply border-none bg-PineTree text-white ring-0;
 }
-:host ::ng-deep .p-datepicker:not(.p-datepicker-inline){
+
+:host ::ng-deep .p-datepicker:not(.p-datepicker-inline) {
     @apply border-solid border border-KeyLime #{!important};
 }
 
+:host ::ng-deep #basic.p-inputtext{
+    box-shadow: 0px 2px 4px -1px #EAEC76 !important;
+    @apply text-xl font-bold text-center w-44 h-12 cursor-pointer hover:bg-KeyLime hover:bg-opacity-20 #{!important};
+}
 :host ::ng-deep .p-calendar .p-datepicker {
     @apply w-[407px] #{!important};
-    
 
     & button {
         @apply ring-0 text-white #{!important};
+
         &:hover {
             @apply bg-KeyLime text-BlackChocolate #{!important};
 
@@ -77,13 +82,23 @@
         @apply text-BlackChocolate #{!important};
     }
 }
-:host ::ng-deep .p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight{
+
+:host ::ng-deep .p-datepicker .p-monthpicker .p-monthpicker-month.p-highlight {
     @apply text-BlackChocolate bg-Gainsboro #{!important};
 }
+
 :host ::ng-deep .p-datepicker .p-yearpicker .p-yearpicker-year.p-highlight {
     @apply text-BlackChocolate bg-Gainsboro #{!important};
 }
 
-:host ::ng-deep .p-datepicker table td.p-datepicker-today > span {
+:host ::ng-deep .p-datepicker table td.p-datepicker-today>span {
     @apply text-BlackChocolate bg-Gainsboro #{!important};
+}
+
+.dropDownShadow {
+    box-shadow: 0px 2px 4px -1px #EAEC76;
+
+    &:hover {
+        @apply bg-KeyLime bg-opacity-20 #{!important};
+    }
 }
