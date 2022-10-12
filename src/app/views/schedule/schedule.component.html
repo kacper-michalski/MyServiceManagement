@@ -11,10 +11,10 @@
         [ngClass]="{'bg-opacity-70': iServiceman % 2 === 0}" *ngFor="let n of numSequence(16); let i = index;"
         (click)="this.serviceForm=true; this.onSelectedServiceman(serviceman)">
       </button>
-      <div *ngFor="let service of this.services; let iService = index" [style]="{'top': service.height*112+2+'px'}"
+      <div *ngFor="let service of this.services; let iService = index" [style]="{'top': service.top+'px'}"
       class="absolute z-10">
       <div *ngIf="service.date===this.selectedDay && service.idTechnician   === serviceman.id" class="w-36 bg-KeyLime text-BlackChocolate rounded-md ml-4"
-        [style]="{'height': service.length*108+'px'}">
+        [style]="{'height': service.height+'px'}">
         <div class="w-28 mx-auto ">
           <div>
             <p class="text-BlackChocolate w-max mx-auto pt-1">{{service.startTime | date: 'HH:mm'}} - {{service.endTime |

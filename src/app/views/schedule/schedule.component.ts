@@ -24,8 +24,8 @@ export class ScheduleComponent {
   selectedServiceman: string;
   constructor(private addServiceService: AddServiceService, private shareDateService: ShareDateService, private addServicemanService: AddServicemanService, private shareServicemanService: ShareServicemanService){}
   ngOnInit(){
-    this.services$.pipe(take(1)).subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServiceLenght()});
-    this.servicers$.pipe(take(1)).subscribe((value: ServicemanDetails[]) => {this.servicers=value; console.log(value)});
+    this.services$.pipe(take(1)).subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServicePosition()});
+    this.servicers$.pipe(take(1)).subscribe((value: ServicemanDetails[]) => {this.servicers=value});
     this.shareDateService.selectedDate$.subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
     });
@@ -41,10 +41,23 @@ export class ScheduleComponent {
   mergeDateWithTime(){
     this.services.map(element => {element.startTime= new Date(element.date+' '+element.startTime); element.endTime=new Date(element.date+' '+element.endTime)});
   }
-  countTheServiceLenght(){
-    this.services.map(element => { element.length=(element.endTime.getTime()-element.startTime.getTime())/1000/60/60; element.height=(element.startTime.getTime()-(new Date(element.date+' 6:00').getTime()))/1000/60/60});
+  countTheServicePosition(){
+    this.services.map(element => {
+      element.height=(element.endTime.getTime()-element.startTime.getTime())/1000/60/60;
+      if (element.height - element.height%1 >1) {
+        element.height=element.height*107+5*(element.height-element.height%1-1);
+      }
+      else{
+        element.height*=107;
+      };
+      element.top=(element.startTime.getTime()-(new Date(element.date+' 6:00').getTime()))/1000/60/60*112+5;
+    });
   }
   onSelectedServiceman(serviceman: ServicemanDetails) {
     this.shareServicemanService.setServiceman(serviceman);
+  }
+  getServicesFromServiceService(){
+    this.services$ = this.addServiceService.getService();
+    this.services$.subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServicePosition()});
   }
 }

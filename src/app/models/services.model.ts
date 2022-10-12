@@ -13,6 +13,6 @@ export interface Services {
         idCustomer: string,
         idAddress: string,
         idDevice: string,
-        length: number,
-        height: number
+        height: number,
+        top: number
 }

@@ -13,6 +13,7 @@ import * as dayjs from 'dayjs';
 import { ShareDateService } from 'src/app/services/share-date.service';
 import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
 import { ShareServicemanService } from 'src/app/services/share-serviceman.service';
+import { ScheduleComponent } from '../schedule/schedule.component';
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
@@ -70,7 +71,7 @@ export class AddServiceComponent {
       idTechnician: ['', Validators.required]
     })
   });
-  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService) { }
+  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService, private scheduleComponent: ScheduleComponent) { }
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.page = 1;
@@ -91,13 +92,12 @@ export class AddServiceComponent {
   public onSubmit() {
     console.log(dayjs(this.serviceForm.get('task')?.get('startTime')?.value).format('HH-mm'));
     const service = this.serviceForm.value as Service;
-    this.addServiceService.addService(service).pipe(take(1)).subscribe();
+    this.addServiceService.addService(service).pipe(take(1)).subscribe(()=>this.scheduleComponent.getServicesFromServiceService());
     this.serviceForm.reset();
   }
 
   public onClickNextPage() {
     this.page += 1;
-    console.log(this.selectedDay);
     if(this.page===6){
       this.serviceForm.patchValue({
         task:{
