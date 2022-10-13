@@ -2,7 +2,8 @@
     <p class="bg-BlackChocolate absolute -top-4 ml-7 z-10 px-5 py-1 w-max border border-KeyLime rounded-md">
         Dodaj nowe zlecenie</p>
     <div class="rounded-md border border-KeyLime relative bg-BlackChocolate">
-        <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5" (click)="hideDialog()">
+        <img src="../../../assets/icons/x.svg" alt="ikona zamykania" class="absolute right-0 cursor-pointer mt-5 mr-5"
+            (click)="hideDialog()">
         <div class="flex flex-col items-center">
             <div class="flex mt-16 items-center gap-2">
                 <div class="flex flex-col items-center">
@@ -67,15 +68,14 @@
             <form class="" autocomplete="off" [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
                 <div formGroupName="address" *ngIf="page ===1">
                     <div class="mt-16">
-                        <div *ngIf="this.checked===false" class="mb-3">
+                        <div *ngIf="this.serviceForm.get('address')?.get('checkbox')?.value === false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź adres"></p-autoComplete>
                         </div>
                         <div class="p-field-checkbox mb-8 w-80">
-                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
-                                inputId="binary"></p-checkbox>
+                            <p-checkbox formControlName="checkbox" [binary]="true" inputId="binary"></p-checkbox>
                             <label for="binary" class=" ml-2">Czy chcesz dodać nowy adres?</label>
                         </div>
-                        <div *ngIf="this.checked===true">
+                        <div *ngIf="this.serviceForm.get('address')?.get('checkbox')?.value === true">
                             <span class="p-float-label mb-8">
                                 <input formControlName="street" id="float-input" type="text" pInputText>
                                 <label for="float-input">Ulica i numer</label>
@@ -90,18 +90,22 @@
                             </span>
                         </div>
                     </div>
+                    <div class="flex justify-center mt-10 mb-20">
+                        <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
+                            [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('address')?.valid}">Dalej</button>
+                    </div>
                 </div>
-                <div formGroupName="customer" *ngIf="page ===2">
+                <div formGroupName="customer" *ngIf="page === 2">
                     <div class="mt-16">
-                        <div *ngIf="this.checked===false" class="mb-3">
+                        <div *ngIf="this.serviceForm.get('customer')?.get('checkbox')?.value === false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź klienta"></p-autoComplete>
                         </div>
                         <div class="p-field-checkbox mb-8 w-80">
-                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
+                            <p-checkbox formControlName="checkbox" formControlName="checkbox" [binary]="true"
                                 inputId="binary"></p-checkbox>
                             <label for="binary" class=" ml-2">Czy chcesz dodać nowego klienta?</label>
                         </div>
-                        <div *ngIf="this.checked===true">
+                        <div *ngIf="this.serviceForm.get('customer')?.get('checkbox')?.value === true">
                             <span class="p-float-label mb-8">
                                 <input formControlName="firstName" id="float-input" type="text" pInputText>
                                 <label for="float-input">Imię</label>
@@ -120,18 +124,21 @@
                             </span>
                         </div>
                     </div>
+                    <div class="flex justify-center mt-10 mb-20">
+                        <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
+                            [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('customer')?.valid}">Dalej</button>
+                    </div>
                 </div>
                 <div formGroupName="company" *ngIf="page ===3">
                     <div class="mt-16">
-                        <div *ngIf="this.checked===false" class="mb-3">
+                        <div *ngIf="this.serviceForm.get('company')?.get('checkbox')?.value === false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="NIP firmy"></p-autoComplete>
                         </div>
                         <div class="p-field-checkbox mb-8 w-80">
-                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
-                                inputId="binary"></p-checkbox>
+                            <p-checkbox formControlName="checkbox" [binary]="true" inputId="binary"></p-checkbox>
                             <label for="binary" class=" ml-2">Czy chcesz dodać nową firmę?</label>
                         </div>
-                        <div *ngIf="this.checked===true">
+                        <div *ngIf="this.serviceForm.get('company')?.get('checkbox')?.value === true">
                             <span class="p-float-label mb-8">
                                 <input formControlName="name" id="float-input" type="text" pInputText>
                                 <label for="float-input">Nazwa</label>
@@ -154,19 +161,25 @@
                             </span>
                         </div>
                     </div>
+                    <div class="flex justify-between mt-10 mb-20">
+                            <button type="button" class="w-32 h-12 rounded-md border border-KeyLime border-opacity-20 hover:bg-KeyLime hover:bg-opacity-20" (click)="onClickNextPage(); onClickSkipCompany()">Pomiń</button>
+                            <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
+                            [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('company')?.valid}">Dalej</button>
+                        </div>
                 </div>
-                <div formGroupName="device" *ngIf="page ===4">
+                <div formGroupName="device" *ngIf="page === 4">
                     <div class="mt-16">
-                        <div *ngIf="this.checked===false" class="mb-3">
+                        <div *ngIf="this.serviceForm.get('device')?.get('checkbox')?.value === false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Numer katalogowy, seryjny">
                             </p-autoComplete>
                         </div>
-                        <div class="p-field-checkbox mb-8 w-80">
-                            <p-checkbox formControlName="checkbox" [(ngModel)]="this.checked" [binary]="true"
-                                inputId="binary"></p-checkbox>
-                            <label for="binary" class=" ml-2">Czy chcesz dodać nowe urządzenie?</label>
+                        <div class="p-field-checkbox mb-8 w-80 flex">
+                            <div>
+                                <p-checkbox formControlName="checkbox" [binary]="true" inputId="binary"></p-checkbox>
+                            </div>
+                            <label for="binary" class="ml-2">Czy chcesz dodać nowe urządzenie?</label>
                         </div>
-                        <div *ngIf="this.checked===true">
+                        <div *ngIf="this.serviceForm.get('device')?.get('checkbox')?.value === true">
                             <span class="p-float-label mb-8">
                                 <p-inputMask formControlName="idFactory" mask="9999"></p-inputMask>
                                 <label for="float-input">Numer fabryczny</label>
@@ -186,6 +199,10 @@
 
                         </div>
                     </div>
+                    <div class="flex justify-center mt-10 mb-20">
+                        <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
+                            [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('device')?.valid}">Dalej</button>
+                    </div>
                 </div>
                 <div formGroupName="task" *ngIf="page ===5">
                     <div class="mt-16 flex flex-col gap-8">
@@ -196,11 +213,13 @@
                         </span>
                         <div class="w-80 flex gap-8">
                             <span class="p-float-label">
-                                <input formControlName="minPrice" id="float-input" type="number" [style]="{'width': '100% !important'}" pInputText>
+                                <input formControlName="minPrice" id="float-input"
+                                    [style]="{'width': '100% !important'}" pInputText>
                                 <label for="float-input">Cena min</label>
                             </span>
                             <span class="p-float-label">
-                                <input formControlName="maxPrice" id="float-input" type="number" [style]="{'width': '100% !important'}" pInputText>
+                                <input formControlName="maxPrice" id="float-input"
+                                    [style]="{'width': '100% !important'}" pInputText>
                                 <label for="float-input">Cena max</label>
                             </span>
                         </div>
@@ -271,7 +290,8 @@
                             </div>
                         </div>
                         <span class="p-float-label">
-                            <input id="readOnly-input" type="text" pInputText [readonly]="true" [value]="this.selectedDay | date: 'dd.MM.YYYY'"/>
+                            <input id="readOnly-input" type="text" pInputText [readonly]="true"
+                                [value]="this.selectedDay | date: 'dd.MM.YYYY'" />
                             <label for="float-input">Data</label>
                         </span>
                         <span class="p-float-label">
@@ -280,11 +300,15 @@
                             <label for="float-input">Serwisant</label>
                         </span>
                     </div>
+                    <div class="flex justify-center mt-10 mb-20">
+                        <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
+                            [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('task')?.valid}">Dalej</button>
+                    </div>
                 </div>
-                <div *ngIf="page === 1 || page === 2 || page === 3 || page === 4 || page === 5"
+                <!-- <div *ngIf="page === 1 || page === 2 || page === 3 || page === 4 || page === 5"
                     class="flex justify-center mt-10 mb-20">
-                    <button type="button" class="dropDownShadow" (click)="onClickNextPage()">Dalej</button>
-                </div>
+                    <button type="button" class="dropDownShadow" (click)="onClickNextPage()" [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('address')?.valid}">Dalej</button>
+                </div> -->
                 <div *ngIf="page === 6" class="mt-8 mb-10">
                     <div class="mt-16 grid grid-cols-2 gap-8">
                         <div class="flex flex-col gap-8">
@@ -327,7 +351,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-80 relative">
+                            <div class="w-80 relative" *ngIf="this.serviceForm?.get('company')!.valid">
                                 <p
                                     class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm">
                                     Firma</p>

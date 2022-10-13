@@ -1,10 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Service } from 'src/app/models/service.model';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { take } from 'rxjs';
+import { Observable, take } from 'rxjs';
 import { PrimeNGConfig } from 'primeng/api';
 import { AddServiceService } from 'src/app/services/add-service.service';
-import { AddServicemanService } from 'src/app/services/add-serviceman.service';
 import { AddAddressService } from 'src/app/services/add-address.service';
 import { AddClientService } from 'src/app/services/add-client.service';
 import { AddCompanyService } from 'src/app/services/add-company.service';
@@ -24,7 +23,6 @@ export class AddServiceComponent {
   @Input() display: boolean;
   @Output() toggle = new EventEmitter();
   page: number;
-  checked: boolean;
   public hours: string[] = ['06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'];
   public minutes: string[] = ['00', '15', '30', '45'];
   public selectedHourFrom: number=6;
@@ -33,50 +31,53 @@ export class AddServiceComponent {
   public selectedMinuteTo: number=0;
   public selectedDay: string;
   public selectedServiceman: ServicemanDetails;
+  public disabled: boolean = false;
   serviceForm = this.fb.group({
     address: this.fb.group({
-      checkbox: [''],
+      checkbox: [false],
       street: [this.addAddressService.address.street, Validators.required],
-      zipCode: [this.addAddressService.address.zipCode, Validators.required],
-      city: [this.addAddressService.address.city, Validators.required]
+      zipCode: [this.addAddressService.address.zipCode, [Validators.required,Validators.pattern('[0-9]{2}-[0-9]{3}')]],
+      city: [this.addAddressService.address.city, [Validators.required,Validators.pattern('[a-zA-Z ]*')]]
     }),
     customer: this.fb.group({
-      checkbox: [''],
-      firstName: [this.addClientService.client.firstName, Validators.required],
-      lastName: [this.addClientService.client.lastName, Validators.required],
+      checkbox: [false],
+      firstName: [this.addClientService.client.firstName, [Validators.required,Validators.pattern('[a-zA-Z]*')]],
+      lastName: [this.addClientService.client.lastName, [Validators.required,Validators.pattern('[a-zA-Z]*')]],
       phoneNumber: [this.addClientService.client.phoneNumber, Validators.required],
-      email: [this.addClientService.client.email, Validators.required]
+      email: [this.addClientService.client.email, [Validators.required, Validators.email]]
     }),
     company: this.fb.group({
-      checkbox: [''],
+      checkbox: [false],
       name: [this.addCompanyService.company.name, Validators.required],
-      tin: [this.addCompanyService.company.tin, Validators.required],
+      tin: [this.addCompanyService.company.tin, [Validators.required,Validators.pattern('[0-9]{10}')]],
       street: [this.addCompanyService.company.street, Validators.required],
-      zipCode: [this.addCompanyService.company.zipCode, Validators.required],
-      city: [this.addCompanyService.company.city, Validators.required]
+      zipCode: [this.addCompanyService.company.zipCode, [Validators.required,Validators.pattern('[0-9]{2}-[0-9]{3}')]],
+      city: [this.addCompanyService.company.city, [Validators.required,Validators.pattern('[a-zA-Z ]*')]]
     }),
     device: this.fb.group({
-      checkbox: [''],
-      idFactory: [this.addDeviceService.device.idFactory, Validators.required],
-      serialNumber: [this.addDeviceService.device.idFactory, Validators.required],
-      idFd: [this.addDeviceService.device.idFactory, Validators.required],
-      catalogNumber: [this.addDeviceService.device.catalogNumber, Validators.required]
+      checkbox: [false],
+      idFactory: [this.addDeviceService.device.idFactory,  [Validators.required,Validators.pattern('[0-9]{4}')]],
+      serialNumber: [this.addDeviceService.device.idFactory,  [Validators.required,Validators.pattern('[0-9]{6}')]],
+      idFd: [this.addDeviceService.device.idFactory,  [Validators.required,Validators.pattern('[0-9]{3}')]],
+      catalogNumber: [this.addDeviceService.device.catalogNumber, [Validators.required,Validators.pattern('[0-9]{10}')]]
     }),
     task: this.fb.group({
       description: [this.addServiceService.service.description, Validators.required],
-      minPrice: [this.addServiceService.service.minPrice, Validators.required],
-      maxPrice: [this.addServiceService.service.maxPrice, Validators.required],
-      startTime: ['', Validators.required],
-      endTime: ['', Validators.required],
+      minPrice: [this.addServiceService.service.minPrice, [Validators.required ,Validators.pattern('[0-9]*')]],
+      maxPrice: [this.addServiceService.service.maxPrice, Validators.pattern('[0-9]*')],
+      startTime: [''],
+      endTime: [''],
       date: [''],
-      idTechnician: ['', Validators.required]
+      idTechnician: ['']
     })
   });
-  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService, private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService, private addServicemanService: AddServicemanService, private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService, private scheduleComponent: ScheduleComponent, private calendarComponent: CalendarComponent) { }
+  constructor(private fb: FormBuilder, private addAddressService: AddAddressService, private addClientService: AddClientService,
+     private addCompanyService: AddCompanyService, private addDeviceService: AddDeviceService, private addServiceService: AddServiceService,
+     private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService,
+     private scheduleComponent: ScheduleComponent, private calendarComponent: CalendarComponent) {}
   ngOnInit() {
     this.primengConfig.ripple = true;
     this.page = 1;
-    this.checked = false;
     this.shareDateService.selectedDate$.subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
       this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
@@ -87,13 +88,13 @@ export class AddServiceComponent {
       this.serviceForm.get('task')?.get('idTechnician')?.setValue(this.selectedServiceman.id);
       console.log('ustawiono serwisanta ', this.selectedServiceman.name);
     });
+    
   }
 
   public getDevices(address: any) {
     return (address.get('devices')! as FormArray).controls;
   }
   public onSubmit() {
-    // console.log(dayjs(this.serviceForm.get('task')?.get('startTime')?.value).format('HH-mm'));
     const service = this.serviceForm.value as Service;
     this.addServiceService.addService(service).pipe(take(1)).subscribe(()=>this.scheduleComponent.getServicesFromServiceService());
     this.serviceForm.reset();
@@ -111,9 +112,21 @@ export class AddServiceComponent {
         }
       });
     }
+    if (this.serviceForm.get('address')?.valid){
+      console.log("prawidlowy")
+    }
   }
-  public onClickUp(){
-
+  public onClickSkipCompany(){
+    this.serviceForm.patchValue({
+      company: {
+        checkbox: false,
+        name: '',
+        tin: '',
+        street: '',
+        zipCode: '',
+        city: ''
+      }
+    });
   }
   public onClickChevronUpHourFrom() {
     if (this.selectedHourFrom === 15) {
