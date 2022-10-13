@@ -14,24 +14,33 @@ import { ServicemanDetails } from 'src/app/models/serviceman-details.model';
 import { ShareServicemanService } from 'src/app/services/share-serviceman.service';
 import { ScheduleComponent } from '../schedule/schedule.component';
 import { CalendarComponent } from '../calendar/calendar.component';
+
+interface Time{
+  from :{
+    hours: number,
+    minutes: number
+  },
+  to :{
+    hours: number,
+    minutes: number
+  }
+}
 @Component({
   selector: 'app-add-service',
   templateUrl: './add-service.component.html',
   styleUrls: ['./add-service.component.scss']
 })
+
 export class AddServiceComponent {
   @Input() display: boolean;
   @Output() toggle = new EventEmitter();
   page: number;
   public hours: string[] = ['06', '07', '08', '09', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'];
   public minutes: string[] = ['00', '15', '30', '45'];
-  public selectedHourFrom: number=6;
-  public selectedMinuteFrom: number=0;
-  public selectedHourTo: number=6;
-  public selectedMinuteTo: number=0;
   public selectedDay: string;
   public selectedServiceman: ServicemanDetails;
   public disabled: boolean = false;
+  public time: Time;
   serviceForm = this.fb.group({
     address: this.fb.group({
       checkbox: [false],
@@ -76,6 +85,15 @@ export class AddServiceComponent {
      private primengConfig: PrimeNGConfig, private shareDateService: ShareDateService, private shareServicemanService: ShareServicemanService,
      private scheduleComponent: ScheduleComponent, private calendarComponent: CalendarComponent) {}
   ngOnInit() {
+    this.time ={
+      from :{
+        hours: 6,
+        minutes: 0
+      },
+      to :{
+        hours: 6,
+        minutes: 0
+      }};
     this.primengConfig.ripple = true;
     this.page = 1;
     this.shareDateService.selectedDate$.subscribe((value: Date)=>{
@@ -88,9 +106,7 @@ export class AddServiceComponent {
       this.serviceForm.get('task')?.get('idTechnician')?.setValue(this.selectedServiceman.id);
       console.log('ustawiono serwisanta ', this.selectedServiceman.name);
     });
-    
   }
-
   public getDevices(address: any) {
     return (address.get('devices')! as FormArray).controls;
   }
@@ -101,19 +117,15 @@ export class AddServiceComponent {
     this.calendarComponent.onSelectedDay();
     this.page=1;
   }
-
   public onClickNextPage() {
     this.page += 1;
     if(this.page===6){
       this.serviceForm.patchValue({
         task:{
-          startTime: this.hours[this.selectedHourFrom]+':'+this.minutes[this.selectedMinuteFrom],
-          endTime: this.hours[this.selectedHourTo]+':'+this.minutes[this.selectedMinuteTo],
+          startTime: this.hours[this.time.from.hours]+':'+this.minutes[this.time.from.minutes],
+          endTime: this.hours[this.time.to.hours]+':'+this.minutes[this.time.to.minutes],
         }
       });
-    }
-    if (this.serviceForm.get('address')?.valid){
-      console.log("prawidlowy")
     }
   }
   public onClickSkipCompany(){
@@ -128,70 +140,22 @@ export class AddServiceComponent {
       }
     });
   }
-  public onClickChevronUpHourFrom() {
-    if (this.selectedHourFrom === 15) {
-      this.selectedHourFrom = 0;
+  public onClickChevron(directionChevron: 'up' | 'down',directionTime: 'from' | 'to', keyTime: 'hours' | 'minutes') {
+    if (directionChevron==='down') {
+      if(this.time[directionTime][keyTime]===this[keyTime].length-1){
+        this.time[directionTime][keyTime]=0;
+      }
+      else{
+        this.time[directionTime][keyTime]+=1;
+      }
     }
     else{
-      this.selectedHourFrom += 1;
-    }
-  }
-  public onClickChevronDownHourFrom() {
-    if (this.selectedHourFrom === 0) {
-      this.selectedHourFrom = 15;
-    }
-    else{
-      this.selectedHourFrom -= 1;
-    }
-  }
-  public onClickChevronUpMinuteFrom() {
-    if (this.selectedMinuteFrom === 3) {
-      this.selectedMinuteFrom = 0;
-    }
-    else{
-      this.selectedMinuteFrom += 1;
-    }
-  }
-  public onClickChevronDownMinuteFrom() {
-    if (this.selectedMinuteFrom === 0) {
-      this.selectedMinuteFrom = 3;
-    }
-    else{
-      this.selectedMinuteFrom -= 1;
-    }
-  }
-  public onClickChevronUpHourTo() {
-    if (this.selectedHourTo === 15) {
-      this.selectedHourTo = 0;
-    }
-    else{
-      this.selectedHourTo += 1;
-    }
-
-  }
-  public onClickChevronDownHourTo() {
-    if (this.selectedHourTo ===0) {
-      this.selectedHourTo = 15;
-    }
-    else{
-      this.selectedHourTo -= 1;
-    }
-
-  }
-  public onClickChevronUpMinuteTo() {
-    if (this.selectedMinuteTo === 3) {
-      this.selectedMinuteTo = 0;
-    }
-    else{
-      this.selectedMinuteTo += 1;
-    }
-  }
-  public onClickChevronDownMinuteTo() {
-    if (this.selectedMinuteTo === 0) {
-      this.selectedMinuteTo = 3;
-    }
-    else{
-      this.selectedMinuteTo -= 1;
+      if(this.time[directionTime][keyTime]===0){
+        this.time[directionTime][keyTime]=this[keyTime].length-1;
+      }
+      else{
+        this.time[directionTime][keyTime]-=1;
+      }
     }
   }
   hideDialog() {

@@ -230,12 +230,12 @@
                                     <div class="flex my-auto">
                                         <div class="w-7 flex flex-col">
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronUpHourFrom()"><img
+                                                (click)="onClickChevron('up','from','hours')"><img
                                                     src="../../../assets/icons/chevron-up.svg"
                                                     alt="strzałka w górę"></button>
-                                            <p class="mx-auto w-max">{{this.hours[selectedHourFrom]}}</p>
+                                            <p class="mx-auto w-max">{{this.hours[time.from.hours]}}</p>
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronDownHourFrom()"><img
+                                                (click)="onClickChevron('down','from','hours')"><img
                                                     src="../../../assets/icons/chevron-down.svg"
                                                     alt="strzałka w dół"></button>
                                         </div>
@@ -244,12 +244,12 @@
                                         </div>
                                         <div class="w-7 flex flex-col">
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronUpMinuteFrom()"><img
+                                                (click)="onClickChevron('up','from','minutes')"><img
                                                     src="../../../assets/icons/chevron-up.svg"
                                                     alt="strzałka w górę"></button>
-                                            <p class="mx-auto w-max">{{this.minutes[selectedMinuteFrom]}}</p>
+                                            <p class="mx-auto w-max">{{this.minutes[time.from.minutes]}}</p>
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronDownMinuteFrom()"><img
+                                                (click)="onClickChevron('down','from','minutes')"><img
                                                     src="../../../assets/icons/chevron-down.svg"
                                                     alt="strzałka w dół"></button>
                                         </div>
@@ -262,12 +262,12 @@
                                     <div class="flex my-auto">
                                         <div class="w-7 flex flex-col">
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronUpHourTo()"><img
+                                                (click)="onClickChevron('up','to','hours')"><img
                                                     src="../../../assets/icons/chevron-up.svg"
                                                     alt="strzałka w górę"></button>
-                                            <p class="mx-auto w-max">{{this.hours[selectedHourTo]}}</p>
+                                            <p class="mx-auto w-max">{{this.hours[time.to.hours]}}</p>
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronDownHourTo()"><img
+                                                (click)="onClickChevron('down','to','hours')"><img
                                                     src="../../../assets/icons/chevron-down.svg"
                                                     alt="strzałka w dół"></button>
                                         </div>
@@ -276,12 +276,12 @@
                                         </div>
                                         <div class="w-7 flex flex-col">
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronUpMinuteTo()"><img
+                                                (click)="onClickChevron('up','to','minutes')"><img
                                                     src="../../../assets/icons/chevron-up.svg"
                                                     alt="strzałka w górę"></button>
-                                            <p class="mx-auto w-max">{{this.minutes[selectedMinuteTo]}}</p>
+                                            <p class="mx-auto w-max">{{this.minutes[time.to.minutes]}}</p>
                                             <button type="button" class="w-7 h-7"
-                                                (click)="onClickChevronDownMinuteTo()"><img
+                                                (click)="onClickChevron('down','to','minutes')"><img
                                                     src="../../../assets/icons/chevron-down.svg"
                                                     alt="strzałka w dół"></button>
                                         </div>
