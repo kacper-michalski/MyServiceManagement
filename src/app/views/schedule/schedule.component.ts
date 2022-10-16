@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as dayjs from 'dayjs';
-import { take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { Services } from 'src/app/models/services.model';
 import { AddServiceService } from 'src/app/services/add-service.service';
 import { ShareDateService } from 'src/app/services/share-date.service';
@@ -13,7 +13,8 @@ import { ShareServicemanService } from 'src/app/services/share-serviceman.servic
   styleUrls: ['./schedule.component.scss']
 })
 
-export class ScheduleComponent {
+export class ScheduleComponent implements OnDestroy, OnInit{
+  private ngUnsubscribe = new Subject<void>();
   display: boolean = false;
   serviceForm: boolean = false;
   services$ = this.addServiceService.getService();
@@ -26,10 +27,14 @@ export class ScheduleComponent {
   ngOnInit(){
     this.services$.pipe(take(1)).subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServicePosition()});
     this.servicers$.pipe(take(1)).subscribe((value: ServicemanDetails[]) => {this.servicers=value});
-    this.shareDateService.selectedDate$.subscribe((value: Date)=>{
+    this.shareDateService.selectedDate$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
     });
   }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+}
   numSequence(n: number): Array<number> {
     return Array(n);
   }

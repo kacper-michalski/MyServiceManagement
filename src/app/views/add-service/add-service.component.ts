@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Service } from 'src/app/models/service.model';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { Observable, take } from 'rxjs';
+import { Subject, take, takeUntil } from 'rxjs';
 import { PrimeNGConfig } from 'primeng/api';
 import { AddServiceService } from 'src/app/services/add-service.service';
 import { AddAddressService } from 'src/app/services/add-address.service';
@@ -31,7 +31,8 @@ interface Time{
   styleUrls: ['./add-service.component.scss']
 })
 
-export class AddServiceComponent {
+export class AddServiceComponent implements OnDestroy, OnInit {
+  private ngUnsubscribe = new Subject<void>();
   @Input() display: boolean;
   @Output() toggle = new EventEmitter();
   page: number;
@@ -43,20 +44,20 @@ export class AddServiceComponent {
   public time: Time;
   serviceForm = this.fb.group({
     address: this.fb.group({
-      checkbox: [false],
+      checkbox: [false,{nonNullable: true}],
       street: [this.addAddressService.address.street, Validators.required],
       zipCode: [this.addAddressService.address.zipCode, [Validators.required,Validators.pattern('[0-9]{2}-[0-9]{3}')]],
       city: [this.addAddressService.address.city, [Validators.required,Validators.pattern('[a-zA-Z ]*')]]
     }),
     customer: this.fb.group({
-      checkbox: [false],
+      checkbox: [false, {nonNullable: true}],
       firstName: [this.addClientService.client.firstName, [Validators.required,Validators.pattern('[a-zA-Z]*')]],
       lastName: [this.addClientService.client.lastName, [Validators.required,Validators.pattern('[a-zA-Z]*')]],
       phoneNumber: [this.addClientService.client.phoneNumber, Validators.required],
       email: [this.addClientService.client.email, [Validators.required, Validators.email]]
     }),
     company: this.fb.group({
-      checkbox: [false],
+      checkbox: [false, {nonNullable: true}],
       name: [this.addCompanyService.company.name, Validators.required],
       tin: [this.addCompanyService.company.tin, [Validators.required,Validators.pattern('[0-9]{10}')]],
       street: [this.addCompanyService.company.street, Validators.required],
@@ -64,7 +65,7 @@ export class AddServiceComponent {
       city: [this.addCompanyService.company.city, [Validators.required,Validators.pattern('[a-zA-Z ]*')]]
     }),
     device: this.fb.group({
-      checkbox: [false],
+      checkbox: [false, {nonNullable: true}],
       idFactory: [this.addDeviceService.device.idFactory,  [Validators.required,Validators.pattern('[0-9]{4}')]],
       serialNumber: [this.addDeviceService.device.idFactory,  [Validators.required,Validators.pattern('[0-9]{6}')]],
       idFd: [this.addDeviceService.device.idFactory,  [Validators.required,Validators.pattern('[0-9]{3}')]],
@@ -96,16 +97,20 @@ export class AddServiceComponent {
       }};
     this.primengConfig.ripple = true;
     this.page = 1;
-    this.shareDateService.selectedDate$.subscribe((value: Date)=>{
+    this.shareDateService.selectedDate$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
       this.serviceForm.get('task')?.get('date')?.setValue(this.selectedDay);
       console.log('ustawiono date ', this.selectedDay);
     });
-    this.shareServicemanService.selectedServiceman$.subscribe((value: ServicemanDetails)=>{
+    this.shareServicemanService.selectedServiceman$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: ServicemanDetails)=>{
       this.selectedServiceman=value;
       this.serviceForm.get('task')?.get('idTechnician')?.setValue(this.selectedServiceman.id);
       console.log('ustawiono serwisanta ', this.selectedServiceman.name);
     });
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
   public getDevices(address: any) {
     return (address.get('devices')! as FormArray).controls;
@@ -116,6 +121,7 @@ export class AddServiceComponent {
     this.serviceForm.reset();
     this.calendarComponent.onSelectedDay();
     this.page=1;
+    console.log(this.serviceForm.get('address')?.get('checkbox')?.value)
   }
   public onClickNextPage() {
     this.page += 1;
