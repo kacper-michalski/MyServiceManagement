@@ -23,22 +23,6 @@
     @apply text-white;
 }
 
-:host ::ng-deep .p-checkbox-box {
-    @apply w-6 h-6 border-KeyLime ring-0 bg-transparent #{!important};
-}
-
-:host ::ng-deep .p-checkbox {
-    @apply w-6 h-6 #{!important};
-}
-
-:host ::ng-deep .p-highlight {
-    @apply text-BlackChocolate bg-KeyLime #{!important};
-}
-
-:host ::ng-deep .p-checkbox-icon {
-    @apply text-BlackChocolate #{!important};
-}
-
 :host ::ng-deep .p-calendar .p-inputtext {
     @apply w-36 #{!important};
 }

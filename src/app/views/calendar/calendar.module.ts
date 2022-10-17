@@ -5,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ScheduleModule } from '../schedule/schedule.module';
 import { CalendarModule as CalendarModulePrimeNg } from 'primeng/calendar';
 import { FormsModule } from '@angular/forms';
-
+import { SidebarModule } from 'primeng/sidebar';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [CalendarComponent],
@@ -14,7 +15,9 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     ScheduleModule,
     CalendarModulePrimeNg,
-    FormsModule
+    FormsModule,
+    SidebarModule,
+    CheckboxModule
   ],
   exports: [CalendarComponent]
 })

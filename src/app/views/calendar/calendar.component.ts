@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as dayjs from 'dayjs';
 import { PrimeNGConfig } from 'primeng/api';
 import { ShareDateService } from 'src/app/services/share-date.service';
 @Component({
@@ -8,7 +7,7 @@ import { ShareDateService } from 'src/app/services/share-date.service';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit {
-
+  public visibleSidebar: boolean;
   public selectedDay: Date = new Date();
   public selectButton: boolean;
   constructor(private config: PrimeNGConfig, private shareDateService: ShareDateService) {}
@@ -23,7 +22,6 @@ export class CalendarComponent implements OnInit {
     this.selectedDay = new Date();
   }
   addDay() {
-    // this.selectedDay.setDate(this.selectedDay.getDate() + 1);
     this.selectedDay = new Date(this.selectedDay.setDate(this.selectedDay.getDate() + 1));
     this.onSelectedDay();
   }
@@ -38,7 +36,6 @@ export class CalendarComponent implements OnInit {
   onSelectedDay() {
     this.shareDateService.setDate(this.selectedDay);
   }
-  
   numSequence(n: number): Array<number> {
     return Array(n);
   }

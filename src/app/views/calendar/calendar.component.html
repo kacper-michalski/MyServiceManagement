@@ -1,38 +1,55 @@
-<div class="max-w-6xl mx-auto">
-    <div class="flex justify-between py-4 fixed bg-BlackChocolate max-w-6xl w-full z-50">
-        <div class="flex justify-between w-[368px]">
-            <button type="button" class="w-12 h-12 bg-PineTree rounded-md dropDownShadow"><img
-                    src="../../../assets/icons/menu.svg" class="w-6 h-6 m-auto"></button>
-            <button type="button"
-                class="w-20 h-12 bg-PineTree rounded-md  dropDownShadow hover:bg-KeyLime hover:stroke-BlackChocolate hover:bg-opacity-60"
-                (click)="currentDate()">Dziś</button>
+<p-sidebar [(visible)]="visibleSidebar" [baseZIndex]="10000">
+    <button type="button" class="customButton mt-4"  (click)="visibleSidebar = false"><img
+        src="../../../assets/icons/menu.svg" class="customIcon"></button>
+    <!-- <div class="w-80 relative mt-4">
+        <p
+            class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm">
+            Serwisanci</p>
+        <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3">
+            <button class="w-max h-10 bg-PineTree-600 px-2 flex items-center rounded-md"> <p-checkbox [binary]="true" inputId="binary"></p-checkbox><p class="pl-2">Andrzej luty</p></button>
         </div>
-        <div class="flex justify-between w-[368px] px-6">
-            <button type="button" class="w-12 h-12 bg-PineTree rounded-md dropDownShadow"
-                (click)="subtractDay()"><img src="../../../assets/icons/chevron-left.svg"
-                    class="w-6 h-6 m-auto"></button>
+    </div> -->
+</p-sidebar>
+<div>
+    <div class="flex justify-between py-4 px-5 fixed bg-PineTree w-full z-50 border-b border-KeyLime">
+        <div class="w-max">
+            <button type="button" class="customButton" (click)="visibleSidebar = true"><img
+                    src="../../../assets/icons/menu.svg" class="customIcon"></button>
+        </div>
+        <div class="flex gap-6 w-max">
+            <button type="button"
+                class="customButton ml-20"
+                (click)="currentDate()">Dziś</button>
+            <button type="button" class="customButton" (click)="subtractDay()"><img
+                    src="../../../assets/icons/chevron-left.svg" class="customIcon"></button>
             <p-calendar [(ngModel)]="selectedDay" (ngModelChange)="this.onSelectedDay()" inputId="basic"
                 dateFormat="dd.mm.yy" [firstDayOfWeek]="1" [readonlyInput]="true"></p-calendar>
-            <button type="button" class="w-12 h-12 bg-PineTree rounded-md dropDownShadow"
-                (click)="addDay()"><img src="../../../assets/icons/chevron-right.svg" class="w-6 h-6 m-auto"></button>
+            <button type="button" class="customButton" (click)="addDay()"><img
+                    src="../../../assets/icons/chevron-right.svg" class="customIcon"></button>
         </div>
-        <div class="flex justify-end w-[368px]">
-            <button type="button" [ngClass]="{'active': selectButton === true}"
-                (click)="this.selectButton=!this.selectButton"
-                class="w-24 h-12 bg-PineTree rounded-l-md border border-KeyLime hover:bg-KeyLime hover:text-BlackChocolate hover:bg-opacity-70">Dzień</button>
-            <button type="button" [ngClass]="{'active': selectButton === false}"
-                (click)="this.selectButton=!this.selectButton"
-                class="w-24 h-12 bg-PineTree rounded-r-md border border-KeyLime hover:bg-KeyLime hover:text-BlackChocolate hover:bg-opacity-70">Tydzień</button>
+        <div class="w-max">
+            <div class="rounded-md bg-PineTree-600">
+                <button type="button" [ngClass]="{'toggleButtonActive': selectButton === true}"
+                    (click)="this.selectButton=!this.selectButton"
+                    class="toggleButton">Dzień</button>
+                <button type="button" [ngClass]="{'toggleButtonActive': selectButton === false}"
+                    (click)="this.selectButton=!this.selectButton"
+                    class="toggleButton">Tydzień</button>
+            </div>
         </div>
     </div>
-    <div class="flex pt-[136px] relative">
+    <div class="flex pt-20 relative max-w-6xl mx-auto">
         <div class="w-20">
-            <div class="h-14 border border-KeyLime border-opacity-70 w-20 bg-PineTree fixed top-20"></div>
-            <div class="h-28 grid grid-cols-1 grid-rows-1 place-items-center border-x border-b bg-PineTree border-KeyLime border-opacity-70"
+            <div class="h-12 w-20 border-r border-KeyLime bg-PineTree fixed top-20"></div>
+            <div class="h-28 w-20 flex justify-center items-center border-r border-KeyLime bg-PineTree"
                 *ngFor="let n of numSequence(16); let i = index;">
                 {{i+6}}:00
             </div>
+            <div class="h-14 border-r border-KeyLime bg-PineTree">
+            </div>
         </div>
-        <app-schedule></app-schedule>
+        <div class="mt-14">
+            <app-schedule></app-schedule>
+        </div>
     </div>
 </div>

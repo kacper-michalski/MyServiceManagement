@@ -15,8 +15,7 @@ import { ShareServicemanService } from 'src/app/services/share-serviceman.servic
 
 export class ScheduleComponent implements OnDestroy, OnInit{
   private ngUnsubscribe = new Subject<void>();
-  display: boolean = false;
-  serviceForm: boolean = false;
+  visibleServiceForm: boolean = false;
   services$ = this.addServiceService.getService();
   services: Services[];
   servicers$ = this.addServicemanService.getServiceman();
@@ -25,7 +24,7 @@ export class ScheduleComponent implements OnDestroy, OnInit{
   selectedServiceman: string;
   constructor(private addServiceService: AddServiceService, private shareDateService: ShareDateService, private addServicemanService: AddServicemanService, private shareServicemanService: ShareServicemanService){}
   ngOnInit(){
-    this.services$.pipe(take(1)).subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServicePosition()});
+    this.services$.pipe(take(1)).subscribe((value: Services[]) => {this.services=value; this.mergeDateWithTime(); this.countTheServicePosition()});
     this.servicers$.pipe(take(1)).subscribe((value: ServicemanDetails[]) => {this.servicers=value});
     this.shareDateService.selectedDate$.pipe(takeUntil(this.ngUnsubscribe)).subscribe((value: Date)=>{
       this.selectedDay=dayjs(value).format('YYYY-MM-DD');
@@ -38,18 +37,13 @@ export class ScheduleComponent implements OnDestroy, OnInit{
   numSequence(n: number): Array<number> {
     return Array(n);
   }
-
-  showDialog() {
-    this.display = true;
-  }
-
   mergeDateWithTime(){
     this.services.map(element => {element.startTime= new Date(element.date+' '+element.startTime); element.endTime=new Date(element.date+' '+element.endTime)});
   }
   countTheServicePosition(){
     this.services.map(element => {
       element.height=(element.endTime.getTime()-element.startTime.getTime())/1000/60/60;
-      if (element.height - element.height%1 >1) {
+      if (element.height - element.height % 1 > 1) {
         element.height=element.height*107+5*(element.height-element.height%1-1);
       }
       else{
@@ -63,6 +57,6 @@ export class ScheduleComponent implements OnDestroy, OnInit{
   }
   getServicesFromServiceService(){
     this.services$ = this.addServiceService.getService();
-    this.services$.subscribe((value: Services[]) => {this.services=value; console.log(value); this.mergeDateWithTime(); this.countTheServicePosition()});
+    this.services$.subscribe((value: Services[]) => {this.services=value; this.mergeDateWithTime(); this.countTheServicePosition()});
   }
 }
