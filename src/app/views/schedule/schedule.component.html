@@ -2,7 +2,7 @@
   <div class="flex relative">
     <div class="w-44 text-center flex flex-col" *ngFor="let serviceman of this.servicers; let iServiceman = index;">
       <div
-        class="h-14 w-44 flex justify-center items-center border-b border-r border-KeyLime border-opacity-50 bg-PineTree fixed top-20 z-20"
+        class="h-14 w-44 flex justify-center items-center border-b border-r border-KeyLime border-opacity-50 bg-PineTree fixed top-16 z-20"
         [ngClass]="{'bg-PineTree-600': iServiceman % 2 === 0}">
         {{serviceman.name}}
       </div>

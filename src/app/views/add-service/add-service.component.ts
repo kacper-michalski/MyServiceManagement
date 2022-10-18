@@ -126,13 +126,16 @@ export class AddServiceComponent implements OnDestroy, OnInit {
   public onClickNextPage() {
     this.page += 1;
     if(this.page===6){
-      this.serviceForm.patchValue({
-        task:{
-          startTime: this.hours[this.time.from.hours]+':'+this.minutes[this.time.from.minutes],
-          endTime: this.hours[this.time.to.hours]+':'+this.minutes[this.time.to.minutes],
-        }
-      });
+     this.setSelectedTime();
     }
+  }
+  public setSelectedTime(){
+    this.serviceForm.patchValue({
+      task:{
+        startTime: this.hours[this.time.from.hours]+':'+this.minutes[this.time.from.minutes],
+        endTime: this.hours[this.time.to.hours]+':'+this.minutes[this.time.to.minutes],
+      }
+    });
   }
   public onClickSkipCompany(){
     this.serviceForm.patchValue({

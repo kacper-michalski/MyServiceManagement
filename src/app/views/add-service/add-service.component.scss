@@ -8,10 +8,60 @@
 
 .summary {
     @apply max-w-4xl #{!important};
+
+    &-element {
+        @apply w-80 relative;
+
+        &-header {
+            @apply bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm;
+        }
+
+        &-body {
+            @apply rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3;
+
+            &-group {
+                @apply w-64 py-3;
+
+                &-header {
+                    @apply font-bold text-xs mb-1;
+                }
+            }
+
+            & hr {
+                @apply w-64 border-none h-0.5 bg-KeyLime opacity-20;
+            }
+        }
+    }
 }
 
-.active {
+.activeStep {
     @apply bg-KeyLime text-BlackChocolate;
+}
+
+.disabledStep {
+    @apply border-red-600;
+}
+
+.enabledStep {
+    @apply bg-green-500 text-BlackChocolate;
+}
+
+.step {
+    @apply flex flex-col items-center;
+
+    & button {
+        @apply w-11 h-11 border border-KeyLime rounded-full text-xl font-bold flex justify-center items-center;
+    }
+
+    & div {
+        @apply w-max h-max absolute mt-12;
+
+        & p {
+            @apply text-xs;
+        }
+    }
+
+
 }
 
 :host ::ng-deep .p-inputtext {
@@ -23,9 +73,6 @@
     @apply text-white;
 }
 
-:host ::ng-deep .p-calendar .p-inputtext {
-    @apply w-36 #{!important};
-}
 
 :host ::ng-deep .p-inputmask {
     @apply w-full #{!important};
@@ -43,14 +90,15 @@
     @apply opacity-60;
 }
 
-.dropDownShadow{
+.dropDownShadow {
     box-shadow: 0px 2px 4px -1px #EAEC76;
     @apply w-32 h-12 rounded-md bg-PineTree;
+
     &:hover {
         @apply bg-KeyLime bg-opacity-20 #{!important};
     }
 }
 
-.dropDownShadowDisabled{
+.dropDownShadowDisabled {
     @apply w-32 h-12 rounded-md bg-PineTree opacity-60 shadow-none pointer-events-none #{!important};
 }

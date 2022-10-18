@@ -6,67 +6,70 @@
             (click)="hideDialog()">
         <div class="flex flex-col items-center">
             <div class="flex mt-16 items-center gap-2">
-                <div class="flex flex-col items-center">
-                    <button type="button" (click)="this.page = 1" [ngClass]="{'active': page === 1}"
-                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
-                        1</button>
-                    <div class="w-max h-max absolute mt-12">
-                        <p class="  text-xs">Adres</p>
+                <div class="step">
+                    <button type="button" (click)="this.page = 1" [ngClass]="{'activeStep': page === 1}"
+                        class="hover:bg-KeyLime hover:text-BlackChocolate">
+                        1
+                        <!-- <img src="../../../assets/icons/check.svg"
+                            alt="ikona wyboru" *ngIf="page>1" class="w-6 h-6"> -->
+                    </button>
+                    <div>
+                        <p>Adres</p>
                     </div>
-
                 </div>
-
                 <hr class="w-9 h-0.5 bg-KeyLime">
-                <div class="flex flex-col items-center">
-                    <button type="button" (click)="this.page = 2" [ngClass]="{'active': page === 2}"
-                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                <div class="step" [ngClass]="{'opacity-30': !this.serviceForm.get('address')?.valid}">
+                    <button type="button" (click)="this.page = 2"
+                        [ngClass]="{'activeStep': page === 2 , 'hover:bg-KeyLime': this.serviceForm.get('address')?.valid, 'hover:text-BlackChocolate':this.serviceForm.get('address')?.valid }"
+                        [disabled]="!this.serviceForm.get('address')?.valid">
                         2</button>
-                    <div class="w-max h-max absolute mt-12">
-                        <p class="  text-xs">Klient</p>
+                    <div>
+                        <p>Klient</p>
                     </div>
                 </div>
-
                 <hr class="w-9 h-0.5 bg-KeyLime">
-                <div class="flex flex-col items-center">
-                    <button type="button" (click)="this.page = 3" [ngClass]="{'active': page === 3}"
-                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                <div class="step" [ngClass]="{'opacity-30': !this.serviceForm.get('customer')?.valid}">
+                    <button type="button" (click)="this.page = 3"
+                        [ngClass]="{'activeStep': page === 3, 'hover:bg-KeyLime': this.serviceForm.get('customer')?.valid, 'hover:text-BlackChocolate':this.serviceForm.get('customer')?.valid }"
+                        [disabled]="!this.serviceForm.get('customer')?.valid">
                         3</button>
-                    <div class="w-max h-max absolute mt-12">
-                        <p class="text-xs">Firma</p>
+                    <div>
+                        <p>Firma</p>
                     </div>
                 </div>
                 <hr class="w-9 h-0.5 bg-KeyLime">
-                <div class="flex flex-col items-center">
-                    <button type="button" (click)="this.page = 4" [ngClass]="{'active': page === 4}"
-                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                <div class="step" [ngClass]="{'opacity-30': !this.serviceForm.get('customer')?.valid}">
+                    <button type="button" (click)="this.page = 4"
+                        [ngClass]="{'activeStep': page === 4, 'hover:bg-KeyLime': this.serviceForm.get('customer')?.valid, 'hover:text-BlackChocolate':this.serviceForm.get('customer')?.valid }"
+                        [disabled]="!this.serviceForm.get('customer')?.valid">
                         4</button>
-                    <div class="w-max h-max absolute mt-12">
-                        <p class="text-xs">Urządzenie</p>
+                    <div>
+                        <p>Urządzenie</p>
                     </div>
                 </div>
                 <hr class="w-9 h-0.5 bg-KeyLime">
-                <div class="flex flex-col items-center">
-                    <button type="button" (click)="this.page = 5" [ngClass]="{'active': page === 5}"
-                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                <div class="step" [ngClass]="{'opacity-30': !this.serviceForm.get('device')?.valid}">
+                    <button type="button" (click)="this.page = 5"
+                        [ngClass]="{'activeStep': page === 5, 'hover:bg-KeyLime': this.serviceForm.get('device')?.valid, 'hover:text-BlackChocolate':this.serviceForm.get('device')?.valid }"
+                        [disabled]="!this.serviceForm.get('device')?.valid">
                         5</button>
-                    <div class="w-max h-max absolute mt-12">
-                        <p class="text-xs">Zlecenie</p>
+                    <div>
+                        <p>Zlecenie</p>
                     </div>
                 </div>
                 <hr class="w-9 h-0.5 bg-KeyLime">
-                <div class="flex flex-col items-center">
-                    <button type="button" (click)="this.page = 6" [ngClass]="{'active': page === 6}"
-                        class="w-11 h-11 border border-KeyLime rounded-full bg-BlackChocolate text-xl font-bold flex justify-center items-center hover:bg-KeyLime hover:text-BlackChocolate">
+                <div class="step" [ngClass]="{'opacity-30': !this.serviceForm.get('task')?.valid}">
+                    <button type="button" (click)="this.page = 6; setSelectedTime()"
+                        [ngClass]="{'activeStep': page === 6, 'hover:bg-KeyLime': this.serviceForm.get('task')?.valid, 'hover:text-BlackChocolate':this.serviceForm.get('task')?.valid }"
+                        [disabled]="!this.serviceForm.get('task')?.valid">
                         6</button>
-                    <div class="w-max h-max absolute mt-12">
-                        <p class="text-xs">Podusmowanie</p>
+                    <div>
+                        <p>Podusmowanie</p>
                     </div>
                 </div>
-
             </div>
-
-            <form class="" autocomplete="off" [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
-                <div formGroupName="address" *ngIf="page ===1">
+            <form autocomplete="off" [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+                <div formGroupName="address" *ngIf="page === 1">
                     <div class="mt-16">
                         <div *ngIf="this.serviceForm.get('address')?.get('checkbox')?.value === false" class="mb-3">
                             <p-autoComplete field="name" [minLength]="1" placeholder="Znajdź adres"></p-autoComplete>
@@ -75,16 +78,17 @@
                             <p-checkbox formControlName="checkbox" [binary]="true" inputId="binary"></p-checkbox>
                             <label for="binary" class=" ml-2">Czy chcesz dodać nowy adres?</label>
                         </div>
-                        <div *ngIf="this.serviceForm.get('address')?.get('checkbox')?.value === true">
-                            <span class="p-float-label mb-8">
+                        <div *ngIf="this.serviceForm.get('address')?.get('checkbox')?.value === true"
+                            class="flex flex-col gap-8">
+                            <span class="p-float-label">
                                 <input formControlName="street" id="float-input" type="text" pInputText>
                                 <label for="float-input">Ulica i numer</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="zipCode" mask="99-999"></p-inputMask>
                                 <label for="float-input">Kod pocztowy</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <input formControlName="city" id="float-input" type="text" pInputText>
                                 <label for="float-input">Miejscowość</label>
                             </span>
@@ -105,20 +109,21 @@
                                 inputId="binary"></p-checkbox>
                             <label for="binary" class=" ml-2">Czy chcesz dodać nowego klienta?</label>
                         </div>
-                        <div *ngIf="this.serviceForm.get('customer')?.get('checkbox')?.value === true">
-                            <span class="p-float-label mb-8">
+                        <div *ngIf="this.serviceForm.get('customer')?.get('checkbox')?.value === true"
+                            class="flex flex-col gap-8">
+                            <span class="p-float-label">
                                 <input formControlName="firstName" id="float-input" type="text" pInputText>
                                 <label for="float-input">Imię</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <input formControlName="lastName" id="float-input" type="text" pInputText>
                                 <label for="float-input">Nazwisko</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="phoneNumber" mask="(+48) 999-999-999"></p-inputMask>
                                 <label for="float-input">Numer telefonu</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <input formControlName="email" id="float-input" type="text" pInputText>
                                 <label for="float-input">E-mail</label>
                             </span>
@@ -138,34 +143,37 @@
                             <p-checkbox formControlName="checkbox" [binary]="true" inputId="binary"></p-checkbox>
                             <label for="binary" class=" ml-2">Czy chcesz dodać nową firmę?</label>
                         </div>
-                        <div *ngIf="this.serviceForm.get('company')?.get('checkbox')?.value === true">
-                            <span class="p-float-label mb-8">
+                        <div *ngIf="this.serviceForm.get('company')?.get('checkbox')?.value === true"
+                            class="flex flex-col gap-8">
+                            <span class="p-float-label">
                                 <input formControlName="name" id="float-input" type="text" pInputText>
                                 <label for="float-input">Nazwa</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="tin" mask="9999999999"></p-inputMask>
                                 <label for="float-input">NIP</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <input formControlName="street" id="float-input" type="text" pInputText>
                                 <label for="float-input">Ulica i numer</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="zipCode" mask="99-999"></p-inputMask>
                                 <label for="float-input">Kod pocztowy</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <input formControlName="city" id="float-input" type="text" pInputText>
                                 <label for="float-input">Miejscowość</label>
                             </span>
                         </div>
                     </div>
                     <div class="flex justify-between mt-10 mb-20">
-                            <button type="button" class="w-32 h-12 rounded-md border border-KeyLime border-opacity-20 hover:bg-KeyLime hover:bg-opacity-20" (click)="onClickNextPage(); onClickSkipCompany()">Pomiń</button>
-                            <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
+                        <button type="button"
+                            class="w-32 h-12 rounded-md border border-KeyLime border-opacity-20 hover:bg-KeyLime hover:bg-opacity-20"
+                            (click)="onClickNextPage(); onClickSkipCompany()">Pomiń</button>
+                        <button type="button" class="dropDownShadow" (click)="onClickNextPage()"
                             [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('company')?.valid}">Dalej</button>
-                        </div>
+                    </div>
                 </div>
                 <div formGroupName="device" *ngIf="page === 4">
                     <div class="mt-16">
@@ -179,20 +187,21 @@
                             </div>
                             <label for="binary" class="ml-2">Czy chcesz dodać nowe urządzenie?</label>
                         </div>
-                        <div *ngIf="this.serviceForm.get('device')?.get('checkbox')?.value === true">
-                            <span class="p-float-label mb-8">
+                        <div *ngIf="this.serviceForm.get('device')?.get('checkbox')?.value === true"
+                            class="flex flex-col gap-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="idFactory" mask="9999"></p-inputMask>
                                 <label for="float-input">Numer fabryczny</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="serialNumber" mask="999999"></p-inputMask>
                                 <label for="float-input">Numer seryjny</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="idFd" mask="999"></p-inputMask>
                                 <label for="float-input">Numer FD</label>
                             </span>
-                            <span class="p-float-label mb-8">
+                            <span class="p-float-label">
                                 <p-inputMask formControlName="catalogNumber" mask="9999999999"></p-inputMask>
                                 <label for="float-input">Numer katalogowy</label>
                             </span>
@@ -305,153 +314,138 @@
                             [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('task')?.valid}">Dalej</button>
                     </div>
                 </div>
-                <!-- <div *ngIf="page === 1 || page === 2 || page === 3 || page === 4 || page === 5"
-                    class="flex justify-center mt-10 mb-20">
-                    <button type="button" class="dropDownShadow" (click)="onClickNextPage()" [ngClass]="{'dropDownShadowDisabled': !this.serviceForm.get('address')?.valid}">Dalej</button>
-                </div> -->
                 <div *ngIf="page === 6" class="mt-8 mb-10">
                     <div class="mt-16 grid grid-cols-2 gap-8">
                         <div class="flex flex-col gap-8">
-                            <div class="w-80 relative">
-                                <p
-                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md  text-sm">
+                            <div class="summary-element">
+                                <p class="summary-element-header">
                                     Adres</p>
-                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 ">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs">Ulica i numer</p>
-                                        <p class="">{{this.serviceForm.get('address')!.get('street')!.value}}</p>
+                                <div class="summary-element-body">
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Ulica i numer</p>
+                                        <p>{{this.serviceForm.get('address')!.get('street')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Kod pocztowy i miejscowość</p>
-                                        <p class="">{{this.serviceForm.get('address')!.get('zipCode')!.value}}
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Kod pocztowy i miejscowość</p>
+                                        <p>{{this.serviceForm.get('address')!.get('zipCode')!.value}}
                                             {{this.serviceForm.get('address')!.get('city')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-80 relative">
-                                <p
-                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm">
+                            <div class="summary-element">
+                                <p class="summary-element-header">
                                     Klient</p>
-                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 ">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs">Imię i nazwisko</p>
-                                        <p class="">{{this.serviceForm.get('customer')!.get('firstName')!.value}}
+                                <div class="summary-element-body">
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Imię i nazwisko</p>
+                                        <p>{{this.serviceForm.get('customer')!.get('firstName')!.value}}
                                             {{this.serviceForm.get('customer')!.get('lastName')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Numer telefonu</p>
-                                        <p class="">{{this.serviceForm.get('customer')!.get('phoneNumber')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Numer telefonu</p>
+                                        <p>{{this.serviceForm.get('customer')!.get('phoneNumber')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">E-mail</p>
-                                        <p class="">{{this.serviceForm.get('customer')!.get('email')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">E-mail</p>
+                                        <p>{{this.serviceForm.get('customer')!.get('email')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-80 relative" *ngIf="this.serviceForm?.get('company')!.valid">
-                                <p
-                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm">
+                            <div class="summary-element" *ngIf="this.serviceForm?.get('company')!.valid">
+                                <p class="summary-element-header">
                                     Firma</p>
-                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3 ">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs">Nazwa</p>
-                                        <p class="">{{this.serviceForm.get('company')!.get('name')!.value}}</p>
+                                <div class="summary-element-body">
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Nazwa</p>
+                                        <p>{{this.serviceForm.get('company')!.get('name')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">NIP</p>
-                                        <p class="">{{this.serviceForm.get('company')!.get('tin')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">NIP</p>
+                                        <p>{{this.serviceForm.get('company')!.get('tin')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Ulica i numer</p>
-                                        <p class="">{{this.serviceForm.get('company')!.get('street')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Ulica i numer</p>
+                                        <p>{{this.serviceForm.get('company')!.get('street')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Kod pocztowy i miejscowość</p>
-                                        <p class="">{{this.serviceForm.get('company')!.get('zipCode')!.value}}
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Kod pocztowy i miejscowość</p>
+                                        <p>{{this.serviceForm.get('company')!.get('zipCode')!.value}}
                                             {{this.serviceForm.get('company')!.get('city')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="flex flex-col gap-8">
-                            <div class="w-80 relative">
-                                <p
-                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm">
+                            <div class="summary-element">
+                                <p class="summary-element-header">
                                     Urządzenie</p>
-                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs">Numer fabryczny</p>
-                                        <p class="">{{this.serviceForm.get('device')!.get('idFactory')!.value}}</p>
+                                <div class="summary-element-body">
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Numer fabryczny</p>
+                                        <p>{{this.serviceForm.get('device')!.get('idFactory')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Numer seryjny</p>
-                                        <p class="">{{this.serviceForm.get('device')!.get('serialNumber')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Numer seryjny</p>
+                                        <p>{{this.serviceForm.get('device')!.get('serialNumber')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Numer FD</p>
-                                        <p class="">{{this.serviceForm.get('device')!.get('idFd')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Numer FD</p>
+                                        <p>{{this.serviceForm.get('device')!.get('idFd')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Numer katalogowy</p>
-                                        <p class="">{{this.serviceForm.get('device')!.get('catalogNumber')!.value}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Numer katalogowy</p>
+                                        <p>{{this.serviceForm.get('device')!.get('catalogNumber')!.value}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <div class="w-80 relative">
-                                <p
-                                    class="bg-BlackChocolate absolute -top-4 ml-3 z-10 px-5 py-1 w-max border border-KeyLime rounded-md text-sm">
+                            <div class="summary-element">
+                                <p class="summary-element-header">
                                     Zlecenie</p>
-                                <div class="rounded-md bg-PineTree flex flex-col items-center pt-6 pb-3">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs">Opis</p>
-                                        <p class="">{{this.serviceForm.get('task')!.get('description')!.value}}</p>
+                                <div class="summary-element-body">
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Opis</p>
+                                        <p class="break-words">{{this.serviceForm.get('task')!.get('description')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Cena</p>
-                                        <p class="">{{this.serviceForm.get('task')!.get('minPrice')!.value}} -
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Cena</p>
+                                        <p>{{this.serviceForm.get('task')!.get('minPrice')!.value}} -
                                             {{this.serviceForm.get('task')!.get('maxPrice')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Czas</p>
-                                        <p class="">{{this.serviceForm.get('task')!.get('startTime')!.value}} -
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Czas</p>
+                                        <p>{{this.serviceForm.get('task')!.get('startTime')!.value}} -
                                             {{this.serviceForm.get('task')!.get('endTime')!.value}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Data</p>
-                                        <p class="">{{this.selectedDay | date: 'dd.MM.YYYY'}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Data</p>
+                                        <p>{{this.selectedDay | date: 'dd.MM.YYYY'}}</p>
                                     </div>
-                                    <hr class="w-64 border-none h-0.5 bg-KeyLime opacity-20">
-                                    <div class="w-64 py-3">
-                                        <p class="font-bold text-xs mb-1">Serwisant</p>
-                                        <p class="">{{this.selectedServiceman.name}}</p>
+                                    <hr>
+                                    <div class="summary-element-body-group">
+                                        <p class="summary-element-body-group-header">Serwisant</p>
+                                        <p>{{this.selectedServiceman.name}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="flex justify-center mt-10">
-                        <!-- <button type="submit" pButton label="Zapisz" class="p-button-success" (click)="hideDialog()"></button> -->
                         <button type="submit" class="dropDownShadow" (click)="hideDialog()">Zapisz</button>
                     </div>
                 </div>
-
-
             </form>
-
         </div>
-
     </div>
-
 </div>
